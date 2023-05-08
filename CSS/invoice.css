@@ -1,0 +1,147 @@
+#invoice {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
+}
+
+#invoiceDate {
+  position: absolute;
+  top: 128px;
+  left: 591px;
+  width: 85px;
+  height: 23px;
+}
+
+#invoiceNo {
+  position: absolute;
+  top: 128px;
+  left: 685px;
+  width: 70px;
+  height: 23px;
+  text-align: center;
+}
+
+#billingAddress {
+  position: absolute;
+  top: 220px;
+  left: 65px;
+  width: 260px;
+  height: 90px;
+}
+
+#shippingAddress {
+  position: absolute;
+  top: 220px;
+  left: 455px;
+  width: 260px;
+  height: 90px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+#poNo {
+  position: absolute;
+  top: 395px;
+  left: 65px;
+  width: 85px;
+  height: 23px;
+  text-align: center;
+}
+#shipDate {
+  position: absolute;
+  top: 395px;
+  left: 345px;
+  width: 85px;
+  height: 23px;
+}
+#ItemQuantity {
+  position: absolute;
+  top: 460px;
+  left: 65px;
+  width: 45px;
+  height: 400px;
+  text-align: right;
+}
+#ItemCode {
+  position: absolute;
+  top: 460px;
+  left: 160px;
+  width: 100px;
+  height: 400px;
+}
+
+#ItemDescription {
+  position: absolute;
+  top: 460px;
+  left: 280px;
+  width: 230px;
+  height: 400px;
+}
+
+#ItemSalesPrice {
+  position: absolute;
+  top: 460px;
+  left: 530px;
+  width: 85px;
+  height: 400px;
+  text-align: right;
+}
+
+#finalAmount {
+  position: absolute;
+  top: 460px;
+  left: 655px;
+  width: 85px;
+  height: 400px;
+  text-align: right;
+}
+#finalPrice {
+  position: absolute;
+  top: 885px;
+  left: 600px;
+  width: 160px;
+  height: 30px;
+  text-align: right;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+#InvoicePhone {
+  position: absolute;
+  top: 940px;
+  left: 65px;
+  width: 180px;
+  height: 30px;
+  text-align: center;
+}
+#InvoiceEmail {
+  position: absolute;
+  top: 940px;
+  left: 275px;
+  width: 220px;
+  height: 30px;
+  text-align: center;
+}
+
+#invoiceDate,
+#invoiceNo,
+#billingAddress,
+/* #shippingAddress, */
+#poNo,
+#shipDate,
+#ItemQuantity,
+#ItemCode,
+#ItemDescription,
+#ItemSalesPrice,
+#finalAmount,
+#finalPrice,
+#InvoicePhone,
+#InvoiceEmail {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  /* word-wrap: break-word !important; */
+  white-space: nowrap;
+  font-family: 'Times New Roman', Times, serif;
+  /* background-color: #e59500;
+  opacity: 0.5; */
+}

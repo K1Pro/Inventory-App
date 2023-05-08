@@ -1,0 +1,26 @@
+table {
+  table-layout: fixed;
+  white-space: nowrap;
+}
+
+th,
+td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+}
+.tdCenter {
+  text-align: center;
+}
+
+.table-striped > tbody > tr:nth-child(even) > td,
+.table-striped > tbody > tr:nth-child(even) > th {
+  background-color: white;
+}
+
+th {
+  position: sticky;
+  top: 0; /* Don't forget this, required for the stickiness */
+  background-color: #212529 !important;
+  color: white !important;
+}
