@@ -24,7 +24,6 @@
 
         
         // Performing insert query execution
-        // FInished here
         $sql = "UPDATE customers SET 
         business_name = '".$businessName."', 
         first_name = '".$firstName."', 

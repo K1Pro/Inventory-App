@@ -4,7 +4,54 @@ $customersSQL = "SELECT * FROM customers WHERE customers_id = '".$id."'";
 $customers = mysqli_query($conn, $customersSQL);
 foreach ($customers as $customerValues) {};
 
-print_r($_POST);
+// echo strlen($_POST['submit']) . '<br>';
+// print_r($_POST['submit']);
+
+$businessName =  $_POST['businessName'] ? $_POST['businessName'] : '';
+$firstName =  $_POST['firstName'] ? $_POST['firstName'] : '';
+$lastName = $_POST['lastName'] ? $_POST['lastName'] : '';
+$address = $_POST['address'] ? $_POST['address'] : '';
+$address2 = $_POST['address2'] ? $_POST['address2'] : '';
+$city = $_POST['city'] ? $_POST['city'] : '';
+$state =  $_POST['state'] ? $_POST['state'] : '';
+$zip = $_POST['zip'] ? $_POST['zip'] : '';
+$country = $_POST['country'] ? $_POST['country'] : '';
+$phone =  $_POST['phone'] ? $_POST['phone'] : '';
+$fax =  $_POST['fax'] ? $_POST['fax'] : '';
+$email =  $_POST['email'] ? $_POST['email'] : '';
+
+if (strlen($_POST['submit']) && strlen($id)) {
+  // Performing update query execution
+  $sql = "UPDATE customers SET 
+  business_name = '".$businessName."', 
+  first_name = '".$firstName."', 
+  last_name = '".$lastName."', 
+  address = '".$address."', 
+  address2 = '".$address2."', 
+  city = '".$city."', 
+  state = '".$state."',
+  zip = '".$zip."',
+  country = '".$country."',
+  phone = '".$phone."',
+  fax = '".$fax."',
+  email = '".$email."'
+  WHERE customers_id = ".$id;
+
+  if(mysqli_query($conn, $sql)){
+      echo "<h3>Modified customer successfully.</h3>";
+
+      // echo nl2br("\n$itemName\n $subitemOf\n "
+      //     . "$manufacturersPart\n $descOnPurchTrans\n $cost");
+      ?> 
+      <script>
+      setTimeout(function () {window.location.href= './index.php?page=View-Customers';},1000);
+      </script>
+      <?php   
+  } else{
+      echo "ERROR: Hush! Sorry $sql. "
+          . mysqli_error($conn);
+  }
+}
 
 ?>
 
