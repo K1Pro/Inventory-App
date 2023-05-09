@@ -2,8 +2,6 @@
   <div class="d-flex justify-content-center text-center">
     <center>
         <?php
-        require_once "config.php";
-
         $id = htmlspecialchars($_GET["id"]);
         $selectedDB = htmlspecialchars($_GET["db"]);
 
@@ -20,8 +18,6 @@
                 . mysqli_error($conn);
         }
         
-        // Close connection
-        mysqli_close($conn);
         ?>
     </center>
   </div>

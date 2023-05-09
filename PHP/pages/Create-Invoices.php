@@ -1,7 +1,5 @@
 
 <?php
-    require_once "config.php";
-
     // SQL query
     $strSQL = "SELECT customers_id, business_name FROM customers ORDER BY business_name ASC";
     $inventorySQL = "SELECT inventory_id, descOnPurchTrans FROM inventory ORDER BY descOnPurchTrans ASC";
@@ -504,10 +502,6 @@
     </ul> -->
   </footer>
 </div>
-
-<?php
-    $conn->close();
-?>
 <script>
 let date = new Date().toJSON();
   document.getElementById("invoiceDate").value=date.slice(0,10);

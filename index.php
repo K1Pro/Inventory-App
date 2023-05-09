@@ -7,6 +7,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
+require_once "config.php";
 ?>
 
 <!DOCTYPE html>
@@ -37,3 +38,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     ?>
   </body>
 </html>
+
+<?php 
+// Close connection
+mysqli_close($conn);
+?>

@@ -1,8 +1,4 @@
 <?php
- 
-// Include config file
-require_once "config.php";
- 
 // Define variables and initialize with empty values
 $new_password = $confirm_password = "";
 $new_password_err = $confirm_password_err = "";
@@ -58,9 +54,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             mysqli_stmt_close($stmt);
         }
     }
-    
-    // Close connection
-    mysqli_close($conn);
 }
 ?>
  

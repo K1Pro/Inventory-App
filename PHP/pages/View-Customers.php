@@ -20,8 +20,6 @@
   </tr>
 
 <?php
-    require_once "config.php";
-
     // SQL query
     $strSQL = "SELECT business_name, first_name, address, phone, email, customers_id FROM customers ORDER BY business_name ASC";
 
@@ -74,8 +72,6 @@
 
         echo "</tr>";
     }
-
-    $conn->close();
 ?>
 
 </table>

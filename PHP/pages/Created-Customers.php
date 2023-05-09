@@ -2,8 +2,6 @@
   <div class="d-flex justify-content-center text-center">
     <center>
         <?php
-        require_once "config.php";
-        
         $businessName =  $_REQUEST['businessName'];
         $firstName =  $_REQUEST['firstName'];
         $lastName = $_REQUEST['lastName'];
@@ -31,8 +29,6 @@
                 . mysqli_error($conn);
         }
         
-        // Close connection
-        mysqli_close($conn);
         ?>
     </center>
   </div>

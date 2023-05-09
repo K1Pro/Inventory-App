@@ -1,6 +1,4 @@
 <?php
-require_once "config.php";
-
 $id = htmlspecialchars($_GET["id"]);
 // Selecting the data
 $usersSQL = "SELECT * FROM users WHERE users_id = '".$id."'";

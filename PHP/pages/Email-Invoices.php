@@ -1,7 +1,4 @@
 <?php
-
-require_once "config.php";
-
 $usersSQL = "SELECT email FROM users WHERE users_id = '".$_SESSION["users_id"]."'";
 $users = mysqli_query($conn, $usersSQL);
 foreach ($users as $dbValues) {}

@@ -1,6 +1,4 @@
 <?php
-require_once "config.php";
-
 $id = htmlspecialchars($_GET["id"]);
 $customersSQL = "SELECT * FROM customers WHERE customers_id = '".$id."'";
 $customers = mysqli_query($conn, $customersSQL);

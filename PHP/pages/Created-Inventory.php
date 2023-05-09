@@ -2,8 +2,6 @@
   <div class="d-flex justify-content-center text-center">
     <center>
         <?php
-        require_once "config.php";
-        
         $itemName =  $_REQUEST['itemName'];
         $subitemOf =  $_REQUEST['subitemOf'];
         $manufacturersPart = $_REQUEST['manufacturersPart'];
@@ -31,8 +29,6 @@
                 . mysqli_error($conn);
         }
         
-        // Close connection
-        mysqli_close($conn);
         ?>
     </center>
   </div>

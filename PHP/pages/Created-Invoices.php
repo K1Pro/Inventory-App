@@ -2,8 +2,6 @@
   <div class="d-flex justify-content-center text-center">
     <center>
         <?php
-        require_once "config.php";
-        
         // Taking all 5 values from the form data(input)
         $bill_id =  $_REQUEST['bill_id'];
 
@@ -216,8 +214,6 @@
                 . mysqli_error($conn);
         }
         
-        // Close connection
-        mysqli_close($conn);
         ?>
     </center>
   </div>

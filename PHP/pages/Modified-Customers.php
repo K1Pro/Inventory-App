@@ -2,8 +2,6 @@
   <div class="d-flex justify-content-center text-center">
     <center>
         <?php
-        require_once "config.php";
-
         $id = htmlspecialchars($_GET["id"]);
         
         // Taking all 5 values from the form data(input)
@@ -51,9 +49,6 @@
             echo "ERROR: Hush! Sorry $sql. "
                 . mysqli_error($conn);
         }
-        
-        // Close connection
-        mysqli_close($conn);
         ?>
     </center>
   </div>

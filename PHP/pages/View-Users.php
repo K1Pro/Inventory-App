@@ -14,7 +14,6 @@
   </tr>
 
 <?php
-    require_once "config.php";
     // SQL query
     $strSQL = "SELECT username, email, phone, type, created_at, users_id FROM users";
     // Execute the query
@@ -61,8 +60,6 @@
 
         echo "</tr>";
     }
-
-    $conn->close();
 ?>
 
 </table>

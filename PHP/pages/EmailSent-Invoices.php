@@ -3,8 +3,6 @@
     <center>
 
 <?php 
-    require_once "config.php";
-
     $id = htmlspecialchars($_GET["id"]);
     $invoicesSQL = "SELECT * FROM invoices WHERE invoices_id = '".$id."'";
     $invoices = mysqli_query($conn, $invoicesSQL);

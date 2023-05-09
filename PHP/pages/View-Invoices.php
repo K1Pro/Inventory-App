@@ -25,8 +25,6 @@
   </tr>
 
 <?php
-    require_once "config.php";
-
     // SQL query
     $strSQL = "SELECT * FROM invoices ORDER BY invoices_id DESC";
     
@@ -94,9 +92,6 @@
 
         echo "</tr>";
     }
-
-
-    $conn->close();
 ?>
 
 </table>

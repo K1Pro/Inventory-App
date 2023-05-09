@@ -1,6 +1,4 @@
 <?php
-require_once "config.php";
-
 $id = htmlspecialchars($_GET["id"]);
 $inventorySQL = "SELECT * FROM inventory WHERE inventory_id = '".$id."'";
 $inventory = mysqli_query($conn, $inventorySQL);

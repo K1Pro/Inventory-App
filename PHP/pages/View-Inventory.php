@@ -19,8 +19,6 @@
   </tr>
 
 <?php
-    require_once "config.php";
-
     // SQL query
     $strSQL = "SELECT itemName, subitemOf, descOnPurchTrans, cost, preferredVendor, salesPrice, inventory_id FROM inventory ORDER BY descOnPurchTrans ASC";
 
@@ -76,8 +74,6 @@
 
         echo "</tr>";
     }
-
-    $conn->close();
 ?>
 
 </table>

@@ -1,7 +1,4 @@
 <?php
-// Include config file
-require_once "config.php";
- 
 // Define variables and initialize with empty values
 $username = $password = $confirm_password = $email = $phone = $type = "";
 $username_err = $password_err = $confirm_password_err = $email_err = $phone_err = $type_err = "";
@@ -118,9 +115,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             mysqli_stmt_close($stmt);
         }
     }
-    
-    // Close connection
-    mysqli_close($conn);
 }
 ?>
  

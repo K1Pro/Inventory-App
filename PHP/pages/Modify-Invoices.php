@@ -1,6 +1,4 @@
 <?php
-require_once "config.php";
-
 $id = htmlspecialchars($_GET["id"]);
 $selectedDB = htmlspecialchars($_GET["db"]);
 // Selecting the data
@@ -204,10 +202,6 @@ foreach ($inventory as $inventoryValues) {}
     </ul> -->
   </footer>
 </div>
-
-<?php
-    $conn->close();
-?>
 
 <!-- <script>
   const deleteQueryString = window.location.search;
