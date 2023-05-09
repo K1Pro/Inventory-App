@@ -32,7 +32,7 @@
         
         // Link to Modifying Inventory
         echo '<td class="tdCenter">';
-            echo '<a href="./index.php?page=Modify-Inventory&id='.$dbValues['inventory_id'].'">';
+            echo '<a href="./index.php?page=Manage-Inventory&id='.$dbValues['inventory_id'].'">';
                 echo '<img src="./icons/modify.png" alt="Invoice" width="30" height="30">';
             echo '</a>';
         echo "</td>";

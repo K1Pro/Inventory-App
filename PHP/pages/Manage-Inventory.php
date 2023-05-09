@@ -12,7 +12,7 @@ foreach ($inventory as $inventoryValues) {};
 
     <div class="row g-5 justify-content-center">
       <div class="col-md-7 col-lg-8">
-        <h4 class="mb-3 text-center">Modify inventory part</h4>
+        <h4 class="mb-3 text-center"><?php echo strlen($id) ? "Modify inventory part" : "Create inventory part"; ?></h4>
         <form class="needs-validation" novalidate  action='./index.php?page=Modified-Inventory&id=<?php echo $id; ?>' method="post">
           <div class="row g-3">
 
@@ -108,7 +108,7 @@ foreach ($inventory as $inventoryValues) {};
 
           <hr class="my-4">
 
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Modify Inventory Part</button>
+          <button class="w-100 btn btn-primary btn-lg" type="submit"><?php echo strlen($id) ? "Modify inventory part" : "Create inventory part"; ?></button>
         </form>
       </div>
     </div>

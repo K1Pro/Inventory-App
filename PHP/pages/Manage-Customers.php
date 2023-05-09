@@ -12,7 +12,7 @@ foreach ($customers as $customerValues) {};
 
     <div class="row g-5 justify-content-center">
       <div class="col-md-7 col-lg-8">
-        <h4 class="mb-3 text-center">Modify customer</h4>
+        <h4 class="mb-3 text-center"><?php echo strlen($id) ? "Modify customer" : "Create Customer"; ?></h4>
         <form class="needs-validation" novalidate  action='./index.php?page=Modified-Customers&id=<?php echo $id; ?>' method="post">
           <div class="row g-3">
 
@@ -168,7 +168,7 @@ foreach ($customers as $customerValues) {};
           </div>
           <hr class="my-4">
 
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Modify Customer</button>
+          <button class="w-100 btn btn-primary btn-lg" type="submit"><?php echo strlen($id) ? "Modify customer" : "Create Customer"; ?></button>
         </form>
       </div>
     </div>

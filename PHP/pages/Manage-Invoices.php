@@ -16,7 +16,7 @@
 
     <div class="row g-5 justify-content-center">
       <div class="col-md-7 col-lg-8">
-        <h4 class="mb-3 text-center">Create an invoice</h4>
+        <h4 class="mb-3 text-center">Create invoice</h4>
         <form class="needs-validation" novalidate action="./index.php?page=Created-Invoices" method="post">
           <div class="row g-3">
 

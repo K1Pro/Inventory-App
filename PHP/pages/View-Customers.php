@@ -33,7 +33,7 @@
         
         // Link to Modifying a customer
         echo '<td class="tdCenter">';
-            echo '<a href="./index.php?page=Modify-Customers&id='.$dbValues['customers_id'].'">';
+            echo '<a href="./index.php?page=Manage-Customers&id='.$dbValues['customers_id'].'">';
                 echo '<img src="./icons/modify.png" alt="Invoice" width="30" height="30">';
             echo '</a>';
         echo "</td>";
