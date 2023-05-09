@@ -4,6 +4,8 @@ $customersSQL = "SELECT * FROM customers WHERE customers_id = '".$id."'";
 $customers = mysqli_query($conn, $customersSQL);
 foreach ($customers as $customerValues) {};
 
+print_r($_POST);
+
 ?>
 
 <!-- <div style="overflow-y: scroll"></div> -->
@@ -13,7 +15,8 @@ foreach ($customers as $customerValues) {};
     <div class="row g-5 justify-content-center">
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3 text-center"><?php echo strlen($id) ? "Modify customer" : "Create Customer"; ?></h4>
-        <form class="needs-validation" novalidate  action='./index.php?page=Modified-Customers&id=<?php echo $id; ?>' method="post">
+        <form class="needs-validation" novalidate  action='./index.php?page=Manage-Customers&id=<?php echo $id; ?>' method="post">
+        <!-- action='./index.php?page=Modified-Customers&id= -->
           <div class="row g-3">
 
             <div class="col-12">
@@ -167,8 +170,7 @@ foreach ($customers as $customerValues) {};
             </div>
           </div>
           <hr class="my-4">
-
-          <button class="w-100 btn btn-primary btn-lg" type="submit"><?php echo strlen($id) ? "Modify customer" : "Create Customer"; ?></button>
+          <input class="w-100 btn btn-primary btn-lg" name="submit" type="submit" value ="Submit"></input>
         </form>
       </div>
     </div>
