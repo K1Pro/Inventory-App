@@ -22,7 +22,7 @@ $email =  $_POST['email'] ? $_POST['email'] : '';
 
 if (strlen($_POST['submit']) && strlen($id)) {
   // Performing update query execution
-  $sql = "UPDATE customers SET 
+  $updateCustomerSQL = "UPDATE customers SET 
   business_name = '".$businessName."', 
   first_name = '".$firstName."', 
   last_name = '".$lastName."', 
@@ -37,18 +37,13 @@ if (strlen($_POST['submit']) && strlen($id)) {
   email = '".$email."'
   WHERE customers_id = ".$id;
 
-  if(mysqli_query($conn, $sql)){
-      echo "<h3>Modified customer successfully.</h3>";
-
-      // echo nl2br("\n$itemName\n $subitemOf\n "
-      //     . "$manufacturersPart\n $descOnPurchTrans\n $cost");
-      ?> 
-      <script>
-      setTimeout(function () {window.location.href= './index.php?page=View-Customers';},1000);
-      </script>
-      <?php   
+  if(mysqli_query($conn, $updateCustomerSQL)){
+      ?><script>
+        snackbar(`Customer successfully updated`);
+        setTimeout(function () {window.location.href= './index.php?page=View-Customers';},1000);
+      </script><?php   
   } else{
-      echo "ERROR: Hush! Sorry $sql. "
+      echo "ERROR: Hush! Sorry $updateCustomerSQL. "
           . mysqli_error($conn);
   }
 }

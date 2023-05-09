@@ -16,6 +16,8 @@ require_once "config.php";
     require("./PHP/components/defaultHeader.php");
   ?>
   <body class="bg-secondary-subtle">
+    <div id="snackbar"></div>
+    <script src="./JS/snackbar.js"></script>
     <?php
       // This was included in the Bootstrap Sidebars Modules, not needed for now
       // require("./HTML/Bootstrap/SideBarsThemeSymbols.html");

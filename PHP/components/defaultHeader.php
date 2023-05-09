@@ -21,4 +21,5 @@
     <!-- Custom styles for this template -->
     <link href="./CSS/sidebars.css" rel="stylesheet">
     <link href="./CSS/table.css" rel="stylesheet">
+    <link href="./CSS/snackbar.css" rel="stylesheet">
   </head>
