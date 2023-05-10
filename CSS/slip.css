@@ -54,6 +54,14 @@
   width: 85px;
   height: 23px;
 }
+#terms {
+  position: absolute;
+  top: 395px;
+  left: 165px;
+  width: 85px;
+  height: 23px;
+  text-align: center;
+}
 #ItemQuantity {
   position: absolute;
   top: 460px;

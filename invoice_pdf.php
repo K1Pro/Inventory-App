@@ -25,7 +25,7 @@
             // $pdf->Output();
 
 
-            require('fpdf.php');
+            require('./PHP/components/fpdf.php');
 
         class PDF extends FPDF
         {

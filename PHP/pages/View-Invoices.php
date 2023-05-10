@@ -39,7 +39,7 @@
 
             // Link to Invoice 
             echo '<td class="tdCenter">';
-                echo '<a href="invoice.php?id='.$dbValuesOne['invoices_id'].'&pin='.$dbValuesOne['bill_zip'].'" target="_blank">'; 
+                echo '<a href="invoice_pdf.php?id='.$dbValuesOne['invoices_id'].'&pin='.$dbValuesOne['bill_zip'].'" target="_blank">'; 
                     echo '<img src="./icons/invoice.png" alt="Invoice" width="30" height="30">';
                 echo '</a>';
             echo "</td>";

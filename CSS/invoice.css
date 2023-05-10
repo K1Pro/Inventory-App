@@ -47,6 +47,16 @@
   height: 23px;
   text-align: center;
 }
+
+#terms {
+  position: absolute;
+  top: 395px;
+  left: 165px;
+  width: 85px;
+  height: 23px;
+  text-align: center;
+}
+
 #shipDate {
   position: absolute;
   top: 395px;
