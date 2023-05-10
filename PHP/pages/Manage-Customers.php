@@ -4,9 +4,7 @@ $customersSQL = "SELECT * FROM customers WHERE customers_id = '".$id."'";
 $customers = mysqli_query($conn, $customersSQL);
 foreach ($customers as $customerValues) {};
 
-// echo strlen($_POST['submit']) . '<br>';
-// print_r($_POST['submit']);
-
+// If customer was modified, import posted modifications
 $businessName =  $_POST['businessName'] ? $_POST['businessName'] : '';
 $firstName =  $_POST['firstName'] ? $_POST['firstName'] : '';
 $lastName = $_POST['lastName'] ? $_POST['lastName'] : '';
@@ -44,6 +42,19 @@ if (strlen($_POST['submit']) && strlen($id)) {
       </script><?php   
   } else{
       echo "ERROR: Hush! Sorry $updateCustomerSQL. "
+          . mysqli_error($conn);
+  }
+} else if (strlen($_POST['submit'])) {
+  // Performing insert query execution
+  $insertCustomerSQL = "INSERT INTO customers VALUES (customers_id, '$businessName', '$firstName', '$lastName','$address','$address2', '$city', '$state', '$zip', '$country', '$phone', '$fax', '$email')";
+  
+  if(mysqli_query($conn, $insertCustomerSQL)){
+    ?><script>
+    snackbar(`Customer successfully created`);
+    setTimeout(function () {window.location.href= './index.php?page=View-Customers';},1000);
+  </script><?php   
+  } else{
+      echo "ERROR: Hush! Sorry $insertCustomerSQL. "
           . mysqli_error($conn);
   }
 }
@@ -196,7 +207,7 @@ if (strlen($_POST['submit']) && strlen($id)) {
 
             <div class="col-sm-6">
               <label for="fax" class="form-label">Fax</label>
-              <input type="text" class="form-control" name="fax" id="fax" placeholder="###-###-####" value="<?php print_r($customerValues['fax']);?>" required>
+              <input type="text" class="form-control" name="fax" id="fax" placeholder="###-###-####" value="<?php print_r($customerValues['fax']);?>">
               <div class="invalid-feedback">
                 Fax is optional.
               </div>

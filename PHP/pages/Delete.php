@@ -9,10 +9,9 @@
         $deleteInvoiceSQL = "DELETE FROM ".$selectedDB." WHERE ".$selectedDB."_id = '".$id."'";
 
         if(mysqli_query($conn, $deleteInvoiceSQL)){
-            echo "<h3>Deleted successfully.";
-
-            // echo nl2br("\n$billTo\n $invoiceDate\n "
-            //     . "$part1Item\n $part2Item\n $part3Item");
+          ?><script>
+          snackbar(`Successfully deleted`);
+        </script><?php   
         } else{
             echo "ERROR: Hush! Sorry $sql. "
                 . mysqli_error($conn);

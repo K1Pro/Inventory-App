@@ -2,7 +2,7 @@
 <?php
     // SQL query
     $strSQL = "SELECT customers_id, business_name FROM customers ORDER BY business_name ASC";
-    $inventorySQL = "SELECT inventory_id, descOnPurchTrans FROM inventory ORDER BY descOnPurchTrans ASC";
+    $inventorySQL = "SELECT inventory_id, descOnPurchTrans, quantityOnHand FROM inventory ORDER BY descOnPurchTrans ASC";
 
     // Execute the query
     $rs = mysqli_query($conn, $strSQL);
@@ -71,7 +71,7 @@
               <?php 
                   foreach ($inventory as $dbValues) {
                     echo '<option value="';
-                    print_r($dbValues['inventory_id']);
+                    echo $dbValues['inventory_id'] . "-" . $dbValues['quantityOnHand'];
                     echo '">';
                     print_r($dbValues['descOnPurchTrans']);
                     echo "</option>";

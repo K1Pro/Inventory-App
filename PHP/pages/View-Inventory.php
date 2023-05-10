@@ -9,10 +9,10 @@
     <!-- <th>manufacturersPart</th> -->
     <th>Desc. On Purch. Trans.</th>
     <!-- <th>descOnSalesTrans</th> -->
-    <th>Cost</th>
+    <th width="75px">Price</th>
     <!-- <th>COGSaccount</th> -->
     <th>Preferred Vendor</th>
-    <th>Sales Price</th>
+    <th>Quantity</th>
     <!-- <th>incomeAccount</th> -->
     <!-- <th>assetAccount</th> -->
     <!-- <th>reorderPoint</th> -->
@@ -20,7 +20,7 @@
 
 <?php
     // SQL query
-    $strSQL = "SELECT itemName, subitemOf, descOnPurchTrans, cost, preferredVendor, salesPrice, inventory_id FROM inventory ORDER BY descOnPurchTrans ASC";
+    $strSQL = "SELECT itemName, subitemOf, descOnPurchTrans, salesPrice, preferredVendor, quantityOnHand, inventory_id FROM inventory ORDER BY descOnPurchTrans ASC";
 
     // Execute the query
     $rs = mysqli_query($conn, $strSQL);
@@ -59,8 +59,8 @@
             print_r($dbValues['descOnPurchTrans']);
         echo "</td>";
 
-        echo "<td>";
-            print_r($dbValues['cost']);
+        echo "<td>$";
+            print_r($dbValues['salesPrice']);
         echo "</td>";
 
         echo "<td>";
@@ -68,7 +68,7 @@
         echo "</td>";
 
         echo "<td>";
-            print_r($dbValues['salesPrice']);
+            print_r($dbValues['quantityOnHand']);
         echo "</td>";
 
 
