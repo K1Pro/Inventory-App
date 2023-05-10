@@ -33,7 +33,7 @@ if (strlen($_POST['submit']) && strlen($id)) {
   salesPrice = '".$salesPrice."',
   incomeAccount = '".$incomeAccount."',
   assetAccount = '".$assetAccount."',
-  reorderPoint = '".$reorderPoint."'
+  reorderPoint = '".$reorderPoint."',
   quantityOnHand = '".$quantityOnHand."'
   WHERE inventory_id = ".$id;
 

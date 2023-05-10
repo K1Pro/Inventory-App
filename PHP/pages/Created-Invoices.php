@@ -20,12 +20,15 @@
           $bill_email =  $dbValues['email'];
         }
 
+        print_r($_POST);
+        echo '<br>' . strtok($_POST['part1ItemNo'], '-');
+
         $shipTo =  $_REQUEST['shipTo'];
 
         $invoiceDate = $_REQUEST['invoiceDate'];
         $shipDate = $_REQUEST['shipDate'];
 
-        $part1ItemNo = $_REQUEST['part1ItemNo'];
+        $part1ItemNo = strtok($_POST['part1ItemNo'], '-');
         $part1Quantity = $_REQUEST['part1Quantity'] ? $_REQUEST['part1Quantity'] : 0;
         $inventorySQL = "SELECT itemName, descOnPurchTrans, salesPrice FROM inventory WHERE inventory_id = '".$part1ItemNo ."'";
         $inventory = mysqli_query($conn, $inventorySQL);
@@ -35,7 +38,7 @@
           $part1SalesPrice = $dbValues['salesPrice'] ? $dbValues['salesPrice'] : 0;
         }
 
-        $part2ItemNo = $_REQUEST['part2ItemNo'];
+        $part2ItemNo = strtok($_POST['part2ItemNo'], '-');
         $part2Quantity =  $_REQUEST['part2Quantity'] ? $_REQUEST['part2Quantity'] : 0;
         $inventorySQL = "SELECT itemName, descOnPurchTrans, salesPrice FROM inventory WHERE inventory_id = '".$part2ItemNo ."'";
         $inventory = mysqli_query($conn, $inventorySQL);
@@ -45,7 +48,7 @@
           $part2SalesPrice = $dbValues['salesPrice'] ? $dbValues['salesPrice'] : 0;
         }
 
-        $part3ItemNo = $_REQUEST['part3ItemNo'];
+        $part3ItemNo = strtok($_POST['part3ItemNo'], '-');
         $part3Quantity = $_REQUEST['part3Quantity'] ? $_REQUEST['part3Quantity'] : 0;
         $inventorySQL = "SELECT itemName, descOnPurchTrans, salesPrice FROM inventory WHERE inventory_id = '".$part3ItemNo ."'";
         $inventory = mysqli_query($conn, $inventorySQL);
@@ -55,7 +58,7 @@
           $part3SalesPrice = $dbValues['salesPrice'] ? $dbValues['salesPrice'] : 0;
         }
 
-        $part4ItemNo = $_REQUEST['part4ItemNo'];
+        $part4ItemNo = strtok($_POST['part4ItemNo'], '-');
         $part4Quantity = $_REQUEST['part4Quantity'] ? $_REQUEST['part4Quantity'] : 0;
         $inventorySQL = "SELECT itemName, descOnPurchTrans, salesPrice FROM inventory WHERE inventory_id = '".$part4ItemNo ."'";
         $inventory = mysqli_query($conn, $inventorySQL);
@@ -65,7 +68,7 @@
           $part4SalesPrice = $dbValues['salesPrice'] ? $dbValues['salesPrice'] : 0;
         }
 
-        $part5ItemNo = $_REQUEST['part5ItemNo'];
+        $part5ItemNo = strtok($_POST['part5ItemNo'], '-');
         $part5Quantity = $_REQUEST['part5Quantity'] ? $_REQUEST['part5Quantity'] : 0;
         $inventorySQL = "SELECT itemName, descOnPurchTrans, salesPrice FROM inventory WHERE inventory_id = '".$part5ItemNo ."'";
         $inventory = mysqli_query($conn, $inventorySQL);
@@ -75,7 +78,7 @@
           $part5SalesPrice = $dbValues['salesPrice'] ? $dbValues['salesPrice'] : 0;
         }
 
-        $part6ItemNo = $_REQUEST['part6ItemNo'];
+        $part6ItemNo = strtok($_POST['part6ItemNo'], '-');
         $part6Quantity = $_REQUEST['part6Quantity'] ? $_REQUEST['part6Quantity'] : 0;
         $inventorySQL = "SELECT itemName, descOnPurchTrans, salesPrice FROM inventory WHERE inventory_id = '".$part6ItemNo ."'";
         $inventory = mysqli_query($conn, $inventorySQL);
@@ -85,7 +88,7 @@
           $part6SalesPrice = $dbValues['salesPrice'] ? $dbValues['salesPrice'] : 0;
         }
 
-        $part7ItemNo = $_REQUEST['part7ItemNo'];
+        $part7ItemNo = strtok($_POST['part7ItemNo'], '-');
         $part7Quantity = $_REQUEST['part7Quantity'] ? $_REQUEST['part7Quantity'] : 0;
         $inventorySQL = "SELECT itemName, descOnPurchTrans, salesPrice FROM inventory WHERE inventory_id = '".$part7ItemNo ."'";
         $inventory = mysqli_query($conn, $inventorySQL);
@@ -95,7 +98,7 @@
           $part7SalesPrice = $dbValues['salesPrice'] ? $dbValues['salesPrice'] : 0;
         }
 
-        $part8ItemNo = $_REQUEST['part8ItemNo'];
+        $part8ItemNo = strtok($_POST['part8ItemNo'], '-');
         $part8Quantity = $_REQUEST['part8Quantity'] ? $_REQUEST['part8Quantity'] : 0;
         $inventorySQL = "SELECT itemName, descOnPurchTrans, salesPrice FROM inventory WHERE inventory_id = '".$part8ItemNo ."'";
         $inventory = mysqli_query($conn, $inventorySQL);
@@ -105,7 +108,7 @@
           $part8SalesPrice = $dbValues['salesPrice'] ? $dbValues['salesPrice'] : 0;
         }
 
-        $part9ItemNo = $_REQUEST['part9ItemNo'];
+        $part9ItemNo = strtok($_POST['part9ItemNo'], '-');
         $part9Quantity = $_REQUEST['part9Quantity'] ? $_REQUEST['part9Quantity'] : 0;
         $inventorySQL = "SELECT itemName, descOnPurchTrans, salesPrice FROM inventory WHERE inventory_id = '".$part9ItemNo ."'";
         $inventory = mysqli_query($conn, $inventorySQL);
@@ -115,7 +118,7 @@
           $part9SalesPrice = $dbValues['salesPrice'] ? $dbValues['salesPrice'] : 0;
         }
 
-        $part10ItemNo = $_REQUEST['part10ItemNo'];
+        $part10ItemNo = strtok($_POST['part10ItemNo'], '-');
         $part10Quantity = $_REQUEST['part10Quantity'] ? $_REQUEST['part10Quantity'] : 0;
         $inventorySQL = "SELECT itemName, descOnPurchTrans, salesPrice FROM inventory WHERE inventory_id = '".$part10ItemNo ."'";
         $inventory = mysqli_query($conn, $inventorySQL);
@@ -125,7 +128,7 @@
           $part10SalesPrice = $dbValues['salesPrice'] ? $dbValues['salesPrice'] : 0;
         }
 
-        $part11ItemNo = $_REQUEST['part11ItemNo'];
+        $part11ItemNo = strtok($_POST['part11ItemNo'], '-');
         $part11Quantity = $_REQUEST['part11Quantity'] ? $_REQUEST['part11Quantity'] : 0;
         $inventorySQL = "SELECT itemName, descOnPurchTrans, salesPrice FROM inventory WHERE inventory_id = '".$part11ItemNo ."'";
         $inventory = mysqli_query($conn, $inventorySQL);
@@ -135,7 +138,7 @@
           $part11SalesPrice = $dbValues['salesPrice'] ? $dbValues['salesPrice'] : 0;
         }
 
-        $part12ItemNo = $_REQUEST['part12ItemNo'];
+        $part12ItemNo = strtok($_POST['part12ItemNo'], '-');
         $part12Quantity = $_REQUEST['part12Quantity'] ? $_REQUEST['part12Quantity'] : 0;
         $inventorySQL = "SELECT itemName, descOnPurchTrans, salesPrice FROM inventory WHERE inventory_id = '".$part12ItemNo ."'";
         $inventory = mysqli_query($conn, $inventorySQL);
@@ -145,7 +148,7 @@
           $part12SalesPrice = $dbValues['salesPrice'] ? $dbValues['salesPrice'] : 0;
         }
 
-        $part13ItemNo = $_REQUEST['part13ItemNo'];
+        $part13ItemNo = strtok($_POST['part13ItemNo'], '-');
         $part13Quantity = $_REQUEST['part13Quantity'] ? $_REQUEST['part13Quantity'] : 0;
         $inventorySQL = "SELECT itemName, descOnPurchTrans, salesPrice FROM inventory WHERE inventory_id = '".$part13ItemNo ."'";
         $inventory = mysqli_query($conn, $inventorySQL);
@@ -155,7 +158,7 @@
           $part13SalesPrice = $dbValues['salesPrice'] ? $dbValues['salesPrice'] : 0;
         }
 
-        $part14ItemNo = $_REQUEST['part14ItemNo'];
+        $part14ItemNo = strtok($_POST['part14ItemNo'], '-');
         $part14Quantity = $_REQUEST['part14Quantity'] ? $_REQUEST['part14Quantity'] : 0;
         $inventorySQL = "SELECT itemName, descOnPurchTrans, salesPrice FROM inventory WHERE inventory_id = '".$part14ItemNo ."'";
         $inventory = mysqli_query($conn, $inventorySQL);
@@ -165,7 +168,7 @@
           $part14SalesPrice = $dbValues['salesPrice'] ? $dbValues['salesPrice'] : 0;
         }
 
-        $part15ItemNo = $_REQUEST['part15ItemNo'];
+        $part15ItemNo = strtok($_POST['part15ItemNo'], '-');
         $part15Quantity = $_REQUEST['part15Quantity'] ? $_REQUEST['part15Quantity'] : 0;
         $inventorySQL = "SELECT itemName, descOnPurchTrans, salesPrice FROM inventory WHERE inventory_id = '".$part15ItemNo ."'";
         $inventory = mysqli_query($conn, $inventorySQL);
@@ -218,6 +221,6 @@
     </center>
   </div>
 </div>
-<script>
+<!-- <script>
   setTimeout(function () {window.location.href= './index.php?page=View-Invoices';},1000);
-</script>
+</script> -->

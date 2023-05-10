@@ -79,27 +79,27 @@
                 ?>
               </select>
               <div class="invalid-feedback">
-                Please select a part item
+                Invalid part item
               </div>
             </div>
 
             <div class="col-md-2">
               <label for="part1Quantity" class="form-label">Quantity</label>
-              <input type="number" class="form-control" name="part1Quantity" id="part1Quantity" required>
+              <input type="number" step="1" min="1" class="form-control" name="part1Quantity" id="part1Quantity" required>
               <div class="invalid-feedback">
-                Please enter a quantity
+                Invalid quantity
               </div>
             </div>
 
             <!-- Part 2 -->
             <div class="col-md-6">
               <label for="part2ItemNo" class="form-label">Part 2 Item</label>
-              <select class="form-select" name="part2ItemNo" id="part2ItemNo" >
+              <select class="form-select" name="part2ItemNo" id="part2ItemNo" disabled>
               <option value="">Choose...</option>
               <?php 
                   foreach ($inventory as $dbValues) {
                     echo '<option value="';
-                    print_r($dbValues['inventory_id']);
+                    echo $dbValues['inventory_id'] . "-" . $dbValues['quantityOnHand'];
                     echo '">';
                     print_r($dbValues['descOnPurchTrans']);
                     echo "</option>";
@@ -107,27 +107,27 @@
                 ?>
               </select>
               <div class="invalid-feedback">
-                Please select a part item
+                Invalid part item
               </div>
             </div>
 
             <div class="col-md-2">
               <label for="part2Quantity" class="form-label">Quantity</label>
-              <input type="number" class="form-control" name="part2Quantity" id="part2Quantity">
+              <input type="number" step="1" min="1" class="form-control" name="part2Quantity" id="part2Quantity" disabled>
               <div class="invalid-feedback">
-                Please enter a quantity
+                Invalid quantity
               </div>
             </div>
 
             <!-- Part 3 -->
             <div class="col-md-6">
               <label for="part3ItemNo" class="form-label">Part 3 Item</label>
-              <select class="form-select" name="part3ItemNo" id="part3ItemNo" >
+              <select class="form-select" name="part3ItemNo" id="part3ItemNo" disabled>
               <option value="">Choose...</option>
               <?php 
                   foreach ($inventory as $dbValues) {
                     echo '<option value="';
-                    print_r($dbValues['inventory_id']);
+                    echo $dbValues['inventory_id'] . "-" . $dbValues['quantityOnHand'];
                     echo '">';
                     print_r($dbValues['descOnPurchTrans']);
                     echo "</option>";
@@ -135,27 +135,27 @@
                 ?>
               </select>
               <div class="invalid-feedback">
-                Please select a part item
+                Invalid part item
               </div>
             </div>
 
             <div class="col-md-2">
               <label for="part3Quantity" class="form-label">Quantity</label>
-              <input type="number" class="form-control" name="part3Quantity" id="part3Quantity">
+              <input type="number" step="1" min="1" class="form-control" name="part3Quantity" id="part3Quantity" disabled>
               <div class="invalid-feedback">
-                Please enter a quantity
+                Invalid quantity
               </div>
             </div>
 
             <!-- Part 4 -->
             <div class="col-md-6">
               <label for="part4ItemNo" class="form-label">Part 4 Item</label>
-              <select class="form-select" name="part4ItemNo" id="part4ItemNo" >
+              <select class="form-select" name="part4ItemNo" id="part4ItemNo" disabled>
               <option value="">Choose...</option>
               <?php 
                   foreach ($inventory as $dbValues) {
                     echo '<option value="';
-                    print_r($dbValues['inventory_id']);
+                    echo $dbValues['inventory_id'] . "-" . $dbValues['quantityOnHand'];
                     echo '">';
                     print_r($dbValues['descOnPurchTrans']);
                     echo "</option>";
@@ -163,27 +163,27 @@
                 ?>
               </select>
               <div class="invalid-feedback">
-                Please select a part item
+                Invalid part item
               </div>
             </div>
 
             <div class="col-md-2">
               <label for="part4Quantity" class="form-label">Quantity</label>
-              <input type="number" class="form-control" name="part4Quantity" id="part4Quantity">
+              <input type="number" step="1" min="1" class="form-control" name="part4Quantity" id="part4Quantity" disabled>
               <div class="invalid-feedback">
-                Please enter a quantity
+                Invalid quantity
               </div>
             </div>
             
             <!-- Part 5 -->
             <div class="col-md-6">
               <label for="part5ItemNo" class="form-label">Part 5 Item</label>
-              <select class="form-select" name="part5ItemNo" id="part5ItemNo" >
+              <select class="form-select" name="part5ItemNo" id="part5ItemNo" disabled>
               <option value="">Choose...</option>
               <?php 
                   foreach ($inventory as $dbValues) {
                     echo '<option value="';
-                    print_r($dbValues['inventory_id']);
+                    echo $dbValues['inventory_id'] . "-" . $dbValues['quantityOnHand'];
                     echo '">';
                     print_r($dbValues['descOnPurchTrans']);
                     echo "</option>";
@@ -191,27 +191,27 @@
                 ?>
               </select>
               <div class="invalid-feedback">
-                Please select a part item
+                Invalid part item
               </div>
             </div>
 
             <div class="col-md-2">
               <label for="part5Quantity" class="form-label">Quantity</label>
-              <input type="number" class="form-control" name="part5Quantity" id="part5Quantity">
+              <input type="number" step="1" min="1" class="form-control" name="part5Quantity" id="part5Quantity" disabled>
               <div class="invalid-feedback">
-                Please enter a quantity
+                Invalid quantity
               </div>
             </div>
             
             <!-- Part 6 -->
             <div class="col-md-6">
               <label for="part6ItemNo" class="form-label">Part 6 Item</label>
-              <select class="form-select" name="part6ItemNo" id="part6ItemNo" >
+              <select class="form-select" name="part6ItemNo" id="part6ItemNo" disabled>
               <option value="">Choose...</option>
               <?php 
                   foreach ($inventory as $dbValues) {
                     echo '<option value="';
-                    print_r($dbValues['inventory_id']);
+                    echo $dbValues['inventory_id'] . "-" . $dbValues['quantityOnHand'];
                     echo '">';
                     print_r($dbValues['descOnPurchTrans']);
                     echo "</option>";
@@ -219,27 +219,27 @@
                 ?>
               </select>
               <div class="invalid-feedback">
-                Please select a part item
+                Invalid part item
               </div>
             </div>
 
             <div class="col-md-2">
               <label for="part6Quantity" class="form-label">Quantity</label>
-              <input type="number" class="form-control" name="part6Quantity" id="part6Quantity">
+              <input type="number" step="1" min="1" class="form-control" name="part6Quantity" id="part6Quantity" disabled>
               <div class="invalid-feedback">
-                Please enter a quantity
+                Invalid quantity
               </div>
             </div>
             
             <!-- Part 7 -->
             <div class="col-md-6">
               <label for="part7ItemNo" class="form-label">Part 7 Item</label>
-              <select class="form-select" name="part7ItemNo" id="part7ItemNo" >
+              <select class="form-select" name="part7ItemNo" id="part7ItemNo" disabled>
               <option value="">Choose...</option>
               <?php 
                   foreach ($inventory as $dbValues) {
                     echo '<option value="';
-                    print_r($dbValues['inventory_id']);
+                    echo $dbValues['inventory_id'] . "-" . $dbValues['quantityOnHand'];
                     echo '">';
                     print_r($dbValues['descOnPurchTrans']);
                     echo "</option>";
@@ -247,15 +247,15 @@
                 ?>
               </select>
               <div class="invalid-feedback">
-                Please select a part item
+                Invalid part item
               </div>
             </div>
 
             <div class="col-md-2">
               <label for="part7Quantity" class="form-label">Quantity</label>
-              <input type="number" class="form-control" name="part7Quantity" id="part7Quantity">
+              <input type="number" step="1" min="1" class="form-control" name="part7Quantity" id="part7Quantity" disabled>
               <div class="invalid-feedback">
-                Please enter a quantity
+                Invalid quantity
               </div>
             </div>
 
@@ -263,12 +263,12 @@
             <!-- Part 8 -->
             <div class="col-md-6">
               <label for="part8ItemNo" class="form-label">Part 8 Item</label>
-              <select class="form-select" name="part8ItemNo" id="part8ItemNo" >
+              <select class="form-select" name="part8ItemNo" id="part8ItemNo" disabled>
               <option value="">Choose...</option>
               <?php 
                   foreach ($inventory as $dbValues) {
                     echo '<option value="';
-                    print_r($dbValues['inventory_id']);
+                    echo $dbValues['inventory_id'] . "-" . $dbValues['quantityOnHand'];
                     echo '">';
                     print_r($dbValues['descOnPurchTrans']);
                     echo "</option>";
@@ -276,15 +276,15 @@
                 ?>
               </select>
               <div class="invalid-feedback">
-                Please select a part item
+                Invalid part item
               </div>
             </div>
 
             <div class="col-md-2">
               <label for="part8Quantity" class="form-label">Quantity</label>
-              <input type="number" class="form-control" name="part8Quantity" id="part8Quantity">
+              <input type="number" step="1" min="1" class="form-control" name="part8Quantity" id="part8Quantity" disabled>
               <div class="invalid-feedback">
-                Please enter a quantity
+                Invalid quantity
               </div>
             </div>
 
@@ -292,12 +292,12 @@
             <!-- Part 9 -->
             <div class="col-md-6">
               <label for="part9ItemNo" class="form-label">Part 9 Item</label>
-              <select class="form-select" name="part9ItemNo" id="part9ItemNo" >
+              <select class="form-select" name="part9ItemNo" id="part9ItemNo" disabled>
               <option value="">Choose...</option>
               <?php 
                   foreach ($inventory as $dbValues) {
                     echo '<option value="';
-                    print_r($dbValues['inventory_id']);
+                    echo $dbValues['inventory_id'] . "-" . $dbValues['quantityOnHand'];
                     echo '">';
                     print_r($dbValues['descOnPurchTrans']);
                     echo "</option>";
@@ -305,27 +305,27 @@
                 ?>
               </select>
               <div class="invalid-feedback">
-                Please select a part item
+                Invalid part item
               </div>
             </div>
 
             <div class="col-md-2">
               <label for="part9Quantity" class="form-label">Quantity</label>
-              <input type="number" class="form-control" name="part9Quantity" id="part9Quantity">
+              <input type="number" step="1" min="1" class="form-control" name="part9Quantity" id="part9Quantity" disabled>
               <div class="invalid-feedback">
-                Please enter a quantity
+                Invalid quantity
               </div>
             </div>
 
             <!-- Part 10 -->
             <div class="col-md-6">
               <label for="part10ItemNo" class="form-label">Part 10 Item</label>
-              <select class="form-select" name="part10ItemNo" id="part10ItemNo" >
+              <select class="form-select" name="part10ItemNo" id="part10ItemNo" disabled>
               <option value="">Choose...</option>
               <?php 
                   foreach ($inventory as $dbValues) {
                     echo '<option value="';
-                    print_r($dbValues['inventory_id']);
+                    echo $dbValues['inventory_id'] . "-" . $dbValues['quantityOnHand'];
                     echo '">';
                     print_r($dbValues['descOnPurchTrans']);
                     echo "</option>";
@@ -333,27 +333,27 @@
                 ?>
               </select>
               <div class="invalid-feedback">
-                Please select a part item
+                Invalid part item
               </div>
             </div>
 
             <div class="col-md-2">
               <label for="part10Quantity" class="form-label">Quantity</label>
-              <input type="number" class="form-control" name="part10Quantity" id="part10Quantity">
+              <input type="number" step="1" min="1" class="form-control" name="part10Quantity" id="part10Quantity" disabled>
               <div class="invalid-feedback">
-                Please enter a quantity
+                Invalid quantity
               </div>
             </div>
 
             <!-- Part 11 -->
             <div class="col-md-6">
               <label for="part11ItemNo" class="form-label">Part 11 Item</label>
-              <select class="form-select" name="part11ItemNo" id="part11ItemNo" >
+              <select class="form-select" name="part11ItemNo" id="part11ItemNo" disabled>
               <option value="">Choose...</option>
               <?php 
                   foreach ($inventory as $dbValues) {
                     echo '<option value="';
-                    print_r($dbValues['inventory_id']);
+                    echo $dbValues['inventory_id'] . "-" . $dbValues['quantityOnHand'];
                     echo '">';
                     print_r($dbValues['descOnPurchTrans']);
                     echo "</option>";
@@ -361,27 +361,27 @@
                 ?>
               </select>
               <div class="invalid-feedback">
-                Please select a part item
+                Invalid part item
               </div>
             </div>
 
             <div class="col-md-2">
               <label for="part11Quantity" class="form-label">Quantity</label>
-              <input type="number" class="form-control" name="part11Quantity" id="part11Quantity">
+              <input type="number" step="1" min="1" class="form-control" name="part11Quantity" id="part11Quantity" disabled>
               <div class="invalid-feedback">
-                Please enter a quantity
+                Invalid quantity
               </div>
             </div>
             
             <!-- Part 12 -->
             <div class="col-md-6">
               <label for="part12ItemNo" class="form-label">Part 12 Item</label>
-              <select class="form-select" name="part12ItemNo" id="part12ItemNo" >
+              <select class="form-select" name="part12ItemNo" id="part12ItemNo" disabled>
               <option value="">Choose...</option>
               <?php 
                   foreach ($inventory as $dbValues) {
                     echo '<option value="';
-                    print_r($dbValues['inventory_id']);
+                    echo $dbValues['inventory_id'] . "-" . $dbValues['quantityOnHand'];
                     echo '">';
                     print_r($dbValues['descOnPurchTrans']);
                     echo "</option>";
@@ -389,27 +389,27 @@
                 ?>
               </select>
               <div class="invalid-feedback">
-                Please select a part item
+                Invalid part item
               </div>
             </div>
 
             <div class="col-md-2">
               <label for="part12Quantity" class="form-label">Quantity</label>
-              <input type="number" class="form-control" name="part12Quantity" id="part12Quantity">
+              <input type="number" step="1" min="1" class="form-control" name="part12Quantity" id="part12Quantity" disabled>
               <div class="invalid-feedback">
-                Please enter a quantity
+                Invalid quantity
               </div>
             </div>
             
             <!-- Part 13 -->
             <div class="col-md-6">
               <label for="part13ItemNo" class="form-label">Part 13 Item</label>
-              <select class="form-select" name="part13ItemNo" id="part13ItemNo" >
+              <select class="form-select" name="part13ItemNo" id="part13ItemNo" disabled>
               <option value="">Choose...</option>
               <?php 
                   foreach ($inventory as $dbValues) {
                     echo '<option value="';
-                    print_r($dbValues['inventory_id']);
+                    echo $dbValues['inventory_id'] . "-" . $dbValues['quantityOnHand'];
                     echo '">';
                     print_r($dbValues['descOnPurchTrans']);
                     echo "</option>";
@@ -417,27 +417,27 @@
                 ?>
               </select>
               <div class="invalid-feedback">
-                Please select a part item
+                Invalid part item
               </div>
             </div>
 
             <div class="col-md-2">
               <label for="part13Quantity" class="form-label">Quantity</label>
-              <input type="number" class="form-control" name="part13Quantity" id="part13Quantity">
+              <input type="number" step="1" min="1" class="form-control" name="part13Quantity" id="part13Quantity" disabled>
               <div class="invalid-feedback">
-                Please enter a quantity
+                Invalid quantity
               </div>
             </div>
             
             <!-- Part 14 -->
             <div class="col-md-6">
               <label for="part14ItemNo" class="form-label">Part 14 Item</label>
-              <select class="form-select" name="part14ItemNo" id="part14ItemNo" >
+              <select class="form-select" name="part14ItemNo" id="part14ItemNo" disabled>
               <option value="">Choose...</option>
               <?php 
                   foreach ($inventory as $dbValues) {
                     echo '<option value="';
-                    print_r($dbValues['inventory_id']);
+                    echo $dbValues['inventory_id'] . "-" . $dbValues['quantityOnHand'];
                     echo '">';
                     print_r($dbValues['descOnPurchTrans']);
                     echo "</option>";
@@ -445,27 +445,27 @@
                 ?>
               </select>
               <div class="invalid-feedback">
-                Please select a part item
+                Invalid part item
               </div>
             </div>
 
             <div class="col-md-2">
               <label for="part14Quantity" class="form-label">Quantity</label>
-              <input type="number" class="form-control" name="part14Quantity" id="part14Quantity">
+              <input type="number" step="1" min="1" class="form-control" name="part14Quantity" id="part14Quantity" disabled>
               <div class="invalid-feedback">
-                Please enter a quantity
+                Invalid quantity
               </div>
             </div>
             
             <!-- Part 15 -->
             <div class="col-md-6">
               <label for="part15ItemNo" class="form-label">Part 15 Item</label>
-              <select class="form-select" name="part15ItemNo" id="part15ItemNo" >
+              <select class="form-select" name="part15ItemNo" id="part15ItemNo" disabled>
               <option value="">Choose...</option>
               <?php 
                   foreach ($inventory as $dbValues) {
                     echo '<option value="';
-                    print_r($dbValues['inventory_id']);
+                    echo $dbValues['inventory_id'] . "-" . $dbValues['quantityOnHand'];
                     echo '">';
                     print_r($dbValues['descOnPurchTrans']);
                     echo "</option>";
@@ -473,15 +473,15 @@
                 ?>
               </select>
               <div class="invalid-feedback">
-                Please select a part item
+                Invalid part item
               </div>
             </div>
 
             <div class="col-md-2">
               <label for="part15Quantity" class="form-label">Quantity</label>
-              <input type="number" class="form-control" name="part15Quantity" id="part15Quantity">
+              <input type="number" step="1" min="1" class="form-control" name="part15Quantity" id="part15Quantity" disabled>
               <div class="invalid-feedback">
-                Please enter a quantity
+                Invalid quantity
               </div>
             </div>
 
@@ -507,3 +507,4 @@ let date = new Date().toJSON();
   document.getElementById("invoiceDate").value=date.slice(0,10);
   document.getElementById("shipDate").value=date.slice(0,10);
 </script>
+<script src="./JS/InvoicePartQuantityValidation.js"></script>
