@@ -67,7 +67,7 @@ if (strlen($_POST['submit']) && strlen($id)) {
 
     <div class="row g-5 justify-content-center">
       <div class="col-md-7 col-lg-8">
-        <h4 class="mb-3 text-center"><?php echo strlen($id) ? "Modify customer" : "Create Customer"; ?></h4>
+        <h4 class="mb-3 text-center"><?php echo strlen($id) ? "Modify customer" : "Create customer"; ?></h4>
         <form class="needs-validation" novalidate  action='./index.php?page=Manage-Customers&id=<?php echo $id; ?>' method="post">
         <!-- action='./index.php?page=Modified-Customers&id= -->
           <div class="row g-3">

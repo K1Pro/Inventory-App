@@ -121,7 +121,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
  <div class="container bg-secondary-subtle">
   <div class="d-flex justify-content-center text-center">
   <center>
-    <h4 class="mb-3 text-center">Create a user</h4>
+    <h4 class="mb-3 text-center">Create user</h4>
     <!-- <p>Please fill this form to create an account.</p> -->
     <form action="./index.php?page=Create-Users" method="post">
     <?php

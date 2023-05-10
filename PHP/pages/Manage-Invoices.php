@@ -44,7 +44,7 @@
                 <textarea class="form-control" aria-label="Ship To" rows="3" name="shipTo" id="shipTo"></textarea>
             </div>
 
-            <div class="col-sm-6">
+            <div class="col-sm-4">
               <label for="invoiceDate" class="form-label">Invoice Date</label>
               <input type="date" class="form-control" name="invoiceDate" id="invoiceDate" required>
               <div class="invalid-feedback">
@@ -52,11 +52,25 @@
               </div>
             </div>
 
-            <div class="col-sm-6">
+            <div class="col-sm-4">
               <label for="shipDate" class="form-label">Ship Date</label>
               <input type="date" class="form-control" name="shipDate" id="shipDate" required>
               <div class="invalid-feedback">
                 Please enter a ship date
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <label for="shipDate" class="form-label">Terms</label>
+              <input list="termsList" class="form-control" name="terms" id="terms" required>
+                <datalist id="termsList">
+                  <option value="Due on receipt">
+                  <option value="Net 15">
+                  <option value="Net 30">
+                </datalist>
+
+              <div class="invalid-feedback">
+                Invalid terms
               </div>
             </div>
 
@@ -487,7 +501,7 @@
 
           <hr class="my-4">
 
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Create Invoice</button>
+          <button class="w-100 btn btn-primary btn-lg" type="submit">Submit</button>
         </form>
       </div>
     </div>
