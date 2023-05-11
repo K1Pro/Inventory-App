@@ -47,7 +47,7 @@
 
             // Link to Packaging Slip
             echo '<td class="tdCenter">';
-                echo '<a href="./index.php?page=Modify-Invoices&id='.$dbValuesOne['invoices_id'].'&pin='.$dbValuesOne['bill_zip'].'" target="_blank">'; 
+                echo '<a href="./index.php?page=Modify-Invoices&id='.$dbValuesOne['invoices_id'].'&pin='.$dbValuesOne['bill_zip'].'">'; 
                     echo '<img src="./icons/modify.png" alt="Invoice" width="30" height="30">';
                 echo '</a>';
             echo "</td>";

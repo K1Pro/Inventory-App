@@ -9,9 +9,19 @@
     <title>L&M Hardware Invoice</title>
 </head>
 <body> -->
+<link href="./CSS/invoice-modify.css" rel="stylesheet">
+<div style="overflow-y: auto; overflow-x: auto; width:100vw">
+<!-- <div class="container bg-secondary-subtle">
+  <div class="d-flex justify-content-center text-center"> -->
+    <form class="needs-validation" novalidate  action='./index.php?page=Manage-Inventory&id=<?php echo $id; ?>' method="post">
+        <input class="btn btn-primary btn-lg m-2" name="submit" type="submit" value ="Modify Invoice"></input>
+
+<!-- </div>
+</div> -->
     <div id="invoice">
         <img src="./images/blankInvoice.jpg" alt="Invoice">
     </div>
+
         <?php
         // require_once "config.php";
         $id = htmlspecialchars($_GET["id"]);
@@ -26,9 +36,16 @@
         $noOfItems =  15;
 
         foreach ($rs as $dbValues) {
-            echo '<div id="invoiceDate">';
-                echo date('m/d/Y', strtotime($dbValues['invoiceDate']));
-            echo "</div>";
+            // echo '<div id="invoiceDate">';
+            //     echo date('m/d/Y', strtotime($dbValues['invoiceDate']));
+            // echo "</div>";
+            ?><div class="col-sm-4" id="invoiceDateGroup">
+                <!-- <label for="invoiceDate" class="form-label">Invoice Date</label> -->
+                <input type="date" class="form-control" name="invoiceDate" id="invoiceDate" value="<?php echo date('Y-m-d', strtotime($dbValues['invoiceDate'])); ?>"required>
+                <div class="invalid-feedback">
+                    Please enter an invoice date
+                </div>
+            </div><?php
 
             echo '<div id="invoiceNo">';
                 echo $dbValues['invoices_id'];
@@ -46,15 +63,17 @@
                 echo $dbValues['bill_zip'];
             echo "</div>";
 
-            echo "<pre>";
+            
                 echo '<div id="shippingAddress">';
                     if ($dbValues['shipTo']) {
-                        echo $dbValues['shipTo'];
+                        echo "<pre>";
+                            echo $dbValues['shipTo'];
+                        echo "</pre>";
                     } else {
                         echo "SAME AS BILL TO";
                     }
                 echo "</div>";
-            echo "</pre>";
+            
 
             echo '<div id="poNo">';
                 echo $dbValues['invoices_id'];
@@ -115,7 +134,8 @@
         // Close connection
         // mysqli_close($conn);
         ?>
-
+    </form>
+</div>
 <!-- <script> window.print();</script> -->
 <!-- 
 </body>
