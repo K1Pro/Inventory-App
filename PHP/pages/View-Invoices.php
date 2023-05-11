@@ -4,7 +4,8 @@
   <tr>
     <!-- <th>invoices_id</th> -->
     <th width="75px">Invoice</th>
-    <th width="50px">Slip</th>
+    <!-- <th width="50px">Slip</th> -->
+    <th width="75px">Modify</th>
     <th width="60px">Email</th>
     <!-- <th width="75px">Modify</th> -->
     <th width="70px">Delete</th>
@@ -46,8 +47,8 @@
 
             // Link to Packaging Slip
             echo '<td class="tdCenter">';
-                echo '<a href="slip.php?id='.$dbValuesOne['invoices_id'].'&pin='.$dbValuesOne['bill_zip'].'" target="_blank">'; 
-                    echo '<img src="./icons/slip.png" alt="Invoice" width="30" height="30">';
+                echo '<a href="./index.php?page=Modify-Invoices&id='.$dbValuesOne['invoices_id'].'&pin='.$dbValuesOne['bill_zip'].'" target="_blank">'; 
+                    echo '<img src="./icons/modify.png" alt="Invoice" width="30" height="30">';
                 echo '</a>';
             echo "</td>";
 

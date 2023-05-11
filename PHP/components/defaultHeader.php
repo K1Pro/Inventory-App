@@ -23,4 +23,5 @@
     <link href="./CSS/sidebars.css" rel="stylesheet">
     <link href="./CSS/table.css" rel="stylesheet">
     <link href="./CSS/snackbar.css" rel="stylesheet">
+    <link href="./CSS/invoice-modify.css" rel="stylesheet">
   </head>

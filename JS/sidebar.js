@@ -4,8 +4,6 @@ const page = urlParams.get('page') ? urlParams.get('page') : 'View-Home';
 
 document.querySelectorAll('.nav-link').forEach((navLink) => {
   navLink.classList.remove('active');
-  console.log(navLink.textContent.replace(/\s/g, '').slice(-4));
-  console.log(page.slice(-4));
   // if (`View-${navLink.textContent.replace(/\s/g, '')}` == page) {
   if (navLink.textContent.replace(/\s/g, '').slice(-4) == page.slice(-4)) {
     navLink.classList.add('active');
