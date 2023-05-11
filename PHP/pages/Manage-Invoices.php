@@ -62,7 +62,7 @@
 
             <div class="col-sm-4">
               <label for="shipDate" class="form-label">Terms</label>
-              <input list="termsList" class="form-control" name="terms" id="terms" required>
+              <input list="termsList" class="form-control" name="terms" id="terms">
                 <datalist id="termsList">
                   <option value="Due on receipt">
                   <option value="Net 15">
