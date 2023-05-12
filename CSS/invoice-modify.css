@@ -1,7 +1,5 @@
 #invoice {
   position: relative;
-  /* top: 0px;
-  left: 0px; */
   z-index: -1;
 }
 
@@ -17,7 +15,6 @@
   top: -881px;
   left: 65px;
   width: 270px;
-  /* height: 90px; */
 }
 
 #shippingAddress {
@@ -25,14 +22,13 @@
   top: -982px;
   left: 455px;
   width: 300px;
-  /* height: 90px; */
-  /* font-family: 'Times New Roman', Times, serif; */
   z-index: 1;
 }
 
 #invoiceOptions {
   position: relative;
   top: -914px;
+  left: 65px;
   width: 750px;
 }
 
@@ -62,10 +58,13 @@
   width: 453px;
 }
 
-.no-outline {
+.fill-in {
   background-color: #d1d1d1;
   font-size: 13px;
-  /* border: none; */
+}
+
+.no-outline {
+  border: none;
 }
 
 #invoiceDateAndNo,

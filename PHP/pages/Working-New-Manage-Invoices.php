@@ -46,10 +46,10 @@
 
         echo '<div id="Items">';
             for ($i = 1; $i <= $noOfItems; $i++) {
-                echo '<input type="text" class="fill-in" id="part'.$i.'Quantity" name="part'.$i.'Quantity" value="'.$invoice['part'.$i.'Quantity'].'"       style="width:85px">';
-                echo '<input type="text" class="fill-in" id="part'.$i.'Item"    name="part'.$i.'Item"       value="'.$invoice['part'.$i.'Item'].'"          style="margin-left:10px; width:100px">';
-                echo '<input type="text" class="fill-in" id="part'.$i.'ItemDesc" name="part'.$i.'ItemDesc"  value="'.$invoice['part'.$i.'ItemDesc'].'"      style="margin-left:10px; width:248px">';
-                echo '<input type="text" class="fill-in" id="part'.$i.'SalesPrice" name="part'.$i.'SalesPrice" value="'.$invoice['part'.$i.'SalesPrice'].'" style="margin-left:10px; margin-right:20px; width:120px">';
+                echo '<input type="text" class="fill-in" name="part'.$i.'Quantity" value="'.$invoice['part'.$i.'Quantity'].'" style="width:85px">';
+                echo '<input type="text" class="fill-in" name="part'.$i.'Item" value="'.$invoice['part'.$i.'Item'].'" style="margin-left:10px; width:100px">';
+                echo '<input type="text" class="fill-in" name="part'.$i.'ItemDesc" value="'.$invoice['part'.$i.'ItemDesc'].'" style="margin-left:10px; width:248px">';
+                echo '<input type="text" class="fill-in" name="part'.$i.'SalesPrice" value="'.$invoice['part'.$i.'SalesPrice'].'" style="margin-left:10px; margin-right:20px; width:120px">';
                 if ($invoice['part'.$i.'SalesPrice'] != 0) {
                     echo "$" . number_format((($invoice['part'.$i.'SalesPrice'] * $invoice['part'.$i.'Quantity'])),2) . "<br>";} else {echo "<br>";
                 }
@@ -67,7 +67,6 @@
         ?>
     </form>
 </div>
-<script src="./JS/InvoicePartQuantityValidation.js"></script>
 <!-- <script> window.print();</script> -->
 <!-- 
 </body>
