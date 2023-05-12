@@ -4,175 +4,77 @@
   left: 0px; */
   z-index: -1;
 }
-#invoiceDate {
+
+#invoiceDateAndNo {
   position: relative;
   top: -943px;
   left: 589px;
-}
-
-#invoiceNo {
-  position: relative;
-  top: -968px;
-  left: 685px;
-  width: 70px;
-  height: 23px;
-  text-align: center;
+  width: 178px;
 }
 
 #billingAddress {
   position: relative;
-  top: -906px;
+  top: -881px;
   left: 65px;
-  /* width: 260px;
-  height: 90px; */
+  width: 270px;
+  /* height: 90px; */
 }
 
 #shippingAddress {
   position: relative;
-  top: -1010px;
+  top: -982px;
   left: 455px;
-  /* width: 260px;
-  height: 90px; */
+  width: 300px;
+  /* height: 90px; */
   /* font-family: 'Times New Roman', Times, serif; */
   z-index: 1;
 }
 
-#poNo {
+#invoiceOptions {
   position: relative;
-  top: -937px;
-  left: 58px;
-  width: 85px;
-  height: 23px;
-  text-align: center;
+  top: -914px;
+  width: 750px;
 }
 
-#terms {
+#Items {
   position: relative;
-  top: -962px;
-  left: 160px;
-  /* width: 85px;
-  height: 23px; */
-  /* text-align: left; */
-}
-
-#rep {
-  position: relative;
-  top: -988px;
-  left: 266px;
-  /* width: 85px;
-  height: 23px; */
-  /* text-align: left; */
-}
-
-#shipDate {
-  position: relative;
-  top: -1014px;
-  left: 345px;
-  /* width: 85px;
-  height: 23px; */
-}
-
-#via {
-  position: relative;
-  top: -1039px;
-  left: 436px;
-}
-
-#fob {
-  position: relative;
-  top: -1065px;
-  left: 526px;
-}
-
-#project {
-  position: relative;
-  top: -1091px;
-  left: 656px;
-}
-
-#ItemQuantity {
-  position: relative;
-  top: -1050px;
+  top: -870px;
   left: 65px;
-}
-#ItemCode {
-  position: relative;
-  top: -1438px;
-  left: 160px;
+  width: 700px;
 }
 
-#ItemDescription {
-  position: relative;
-  top: -1825px;
-  left: 270px;
-}
-
-#ItemSalesPrice {
-  position: relative;
-  top: -2212px;
-  left: 526px;
-  width: 85px;
-  height: 400px;
-  text-align: right;
-}
-
-#finalAmount {
-  position: relative;
-  top: -2600px;
-  left: 655px;
-  width: 85px;
-  height: 400px;
-  text-align: right;
-}
 #finalPrice {
   position: relative;
-  top: -2586px;
+  top: -830px;
   left: 600px;
   width: 160px;
   height: 30px;
   text-align: right;
   font-size: 22px;
   font-weight: bold;
+  background-color: white;
 }
 
-#InvoicePhone {
+#phoneAndEmail {
   position: relative;
-  top: -2555px;
+  margin-top: -800px;
   left: 65px;
-  width: 180px;
-  height: 30px;
-  text-align: center;
+  width: 453px;
 }
-#InvoiceEmail {
-  position: relative;
-  /* top: -2585px; */
-  left: 275px;
-  width: 220px;
-  height: 30px;
-  text-align: center;
-  margin-top: -2585px;
-}
+
 .no-outline {
   background-color: #d1d1d1;
   font-size: 13px;
   /* border: none; */
 }
 
-#invoiceDate,
-#invoiceNo,
+#invoiceDateAndNo,
 #billingAddress,
 #shippingAddress,
-#poNo,
-#terms,
-#shipDate,
-#ItemQuantity,
-#ItemCode,
-#ItemDescription,
-#ItemSalesPrice,
-#finalAmount,
+#invoiceOptions,
+#Items,
 #finalPrice,
-#InvoicePhone,
-#InvoiceEmail {
+#phoneAndEmail {
   /* overflow: hidden !important;
   text-overflow: ellipsis !important; */
   /* word-wrap: break-word !important; */
