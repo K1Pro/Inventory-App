@@ -13,7 +13,7 @@
 <div style="overflow-y: auto; overflow-x: auto; width:100vw">
 <!-- <div class="container bg-secondary-subtle">
   <div class="d-flex justify-content-center text-center"> -->
-    <form class="needs-validation" novalidate  action='./index.php?page=Manage-Inventory&id=<?php echo $id; ?>' method="post">
+    <form class="needs-validation" novalidate  action='./index.php?page=View-Invoices' method="post">
         <input class="btn btn-primary btn-lg m-2" name="submit" type="submit" value ="Modify Invoice"></input>
 
 <!-- </div>
@@ -36,78 +36,81 @@
         $noOfItems =  15;
 
         foreach ($rs as $dbValues) {
-            // echo '<div id="invoiceDate">';
-            //     echo date('m/d/Y', strtotime($dbValues['invoiceDate']));
-            // echo "</div>";
-            ?><div class="col-sm-4" id="invoiceDateGroup">
-                <!-- <label for="invoiceDate" class="form-label">Invoice Date</label> -->
-                <input type="date" class="form-control" name="invoiceDate" id="invoiceDate" value="<?php echo date('Y-m-d', strtotime($dbValues['invoiceDate'])); ?>"required>
-                <div class="invalid-feedback">
-                    Please enter an invoice date
-                </div>
-            </div><?php
+            echo '<div id="invoiceDate">';
+                echo '<input type="date" class="no-outline" name="invoiceDate" value="'.date('Y-m-d', strtotime($dbValues['invoiceDate'])).'" style="width:82px" required>';
+            echo "</div>";
 
             echo '<div id="invoiceNo">';
                 echo $dbValues['invoices_id'];
             echo "</div>";
 
             echo '<div id="billingAddress">';
-                echo $dbValues['bill_business_name'];
+                echo '<input type="text" class="no-outline" name="bill_business_name" value="'.$dbValues['bill_business_name'].'" size="40">';
                 echo "<br>";
-                echo $dbValues['bill_address'];
+                echo '<input type="text" class="no-outline" name="bill_address" value="'.$dbValues['bill_address'].'" size="40">';
                 echo "<br>";
-                echo $dbValues['bill_city'];
-                echo ", ";
-                echo $dbValues['bill_state'];
-                echo " ";
-                echo $dbValues['bill_zip'];
+                echo '<input type="text" class="no-outline" name="bill_city" value="'.$dbValues['bill_city'].'" size="40">';
+                echo "<br>";
+                echo '<input type="text" class="no-outline" name="bill_state" value="'.$dbValues['bill_state'].'" size="17">';
+                echo '<input type="text" class="no-outline" name="bill_zip" value="'.$dbValues['bill_zip'].'" size="17">';
             echo "</div>";
 
-            
-                echo '<div id="shippingAddress">';
-                    if ($dbValues['shipTo']) {
-                        echo "<pre>";
-                            echo $dbValues['shipTo'];
-                        echo "</pre>";
-                    } else {
-                        echo "SAME AS BILL TO";
-                    }
-                echo "</div>";
-            
+            echo '<div id="shippingAddress">';
+            ?><textarea class="no-outline" name="shipTo" cols="48" rows="5" style="resize:none"><?php
+                echo $dbValues['shipTo'] ? $dbValues['shipTo'] : "SAME AS BILL TO";
+            ?></textarea><?php
+            echo "</div>";            
 
             echo '<div id="poNo">';
                 echo $dbValues['invoices_id'];
             echo "</div>";
 
             echo '<div id="terms">';
-                echo $dbValues['terms'];
+                echo '<input type="text" class="no-outline" name="terms" value="'.$dbValues['terms'].'" size="11">';
+            echo "</div>";
+
+            echo '<div id="rep">';
+                echo '<input type="text" class="no-outline" name="rep" value="" size="6">';
             echo "</div>";
 
             echo '<div id="shipDate">';
-                echo date('m/d/Y', strtotime($dbValues['shipDate']));
+                echo '<input type="date" class="no-outline" name="shipDate" value="'.date('Y-m-d', strtotime($dbValues['shipDate'])).'" style="width:82px" required>';
             echo "</div>";
+
+            echo '<div id="via">';
+                echo '<input type="text" class="no-outline" name="via" value="" size="8">';
+            echo "</div>";
+
+            echo '<div id="fob">';
+                echo '<input type="text" class="no-outline" name="fob" value="" size="15">';
+            echo "</div>";
+
+            echo '<div id="project">';
+                echo '<input type="text" class="no-outline" name="project" value="" size="12">';
+            echo "</div>";
+
 
             echo '<div id="ItemQuantity">';
                 for ($i = 1; $i <= $noOfItems; $i++) {
-                    if ($dbValues['part'.$i.'Quantity']) {echo $dbValues['part'.$i.'Quantity'] . "<br>";} else {echo "<br>";}
+                    echo '<input type="text" class="no-outline" name="part'.$i.'Quantity" value="'.$dbValues['part'.$i.'Quantity'].'" size="8"><br>';
                 }
             echo "</div>";
 
             echo '<div id="ItemCode">';
                 for ($i = 1; $i <= $noOfItems; $i++) {
-                    if ($dbValues['part'.$i.'Item']) {echo $dbValues['part'.$i.'Item'] . "<br>";} else {echo "<br>";}
+                    echo '<input type="text" class="no-outline" name="part'.$i.'Item" value="'.$dbValues['part'.$i.'Item'].'" size="11"><br>';
                 }
             echo "</div>";
 
             echo '<div id="ItemDescription">';
                 for ($i = 1; $i <= $noOfItems; $i++) {
-                    if ($dbValues['part'.$i.'ItemDesc']) {echo $dbValues['part'.$i.'ItemDesc'] . "<br>";} else {echo "<br>";}
+                    echo '<input type="text" class="no-outline" name="part'.$i.'ItemDesc" value="'.$dbValues['part'.$i.'ItemDesc'].'" size="35"><br>';
                 }
             echo "</div>";
 
             echo '<div id="ItemSalesPrice">';
                 for ($i = 1; $i <= $noOfItems; $i++) {
-                    if ($dbValues['part'.$i.'SalesPrice'] != 0) {echo "$" . $dbValues['part'.$i.'SalesPrice'] . "<br>";} else {echo "<br>";}
+                    echo '<input type="text" class="no-outline" name="part'.$i.'SalesPrice" value="'.$dbValues['part'.$i.'SalesPrice'].'" size="13"><br>';
                 }
             echo "</div>";
 
@@ -123,11 +126,11 @@
             echo "</div>";
 
             echo '<div id="InvoicePhone">';
-                if ($dbValues['invoice_phone']) echo $dbValues['invoice_phone'] . "<br>";
+                echo '<input type="text" class="no-outline" name="invoice_phone" value="'.$dbValues['invoice_phone'].'" size="11">';
             echo "</div>";
 
             echo '<div id="InvoiceEmail">';
-                if ($dbValues['invoice_email']) echo $dbValues['invoice_email'] . "<br>";
+                echo '<input type="text" class="no-outline" name="invoice_email" value="'.$dbValues['invoice_email'].'" size="11">';
             echo "</div>";
         }
         

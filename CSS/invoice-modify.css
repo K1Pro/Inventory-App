@@ -4,17 +4,10 @@
   left: 0px; */
   z-index: -1;
 }
-#invoiceDateGroup {
+#invoiceDate {
   position: relative;
   top: -943px;
-  left: 580px;
-}
-#invoiceDate {
-  font-size: 13px;
-  background: transparent;
-  border: none;
-  width: 98px;
-  height: 24px;
+  left: 589px;
 }
 
 #invoiceNo {
@@ -28,26 +21,26 @@
 
 #billingAddress {
   position: relative;
-  top: -900px;
+  top: -906px;
   left: 65px;
-  width: 260px;
-  height: 90px;
+  /* width: 260px;
+  height: 90px; */
 }
 
 #shippingAddress {
   position: relative;
-  top: -990px;
+  top: -1010px;
   left: 455px;
-  width: 260px;
-  height: 90px;
+  /* width: 260px;
+  height: 90px; */
   /* font-family: 'Times New Roman', Times, serif; */
   z-index: 1;
 }
 
 #poNo {
   position: relative;
-  top: -900px;
-  left: 65px;
+  top: -937px;
+  left: 58px;
   width: 85px;
   height: 23px;
   text-align: center;
@@ -55,48 +48,69 @@
 
 #terms {
   position: relative;
-  top: -920px;
-  left: 165px;
-  width: 85px;
-  height: 23px;
-  text-align: center;
+  top: -962px;
+  left: 160px;
+  /* width: 85px;
+  height: 23px; */
+  /* text-align: left; */
+}
+
+#rep {
+  position: relative;
+  top: -988px;
+  left: 266px;
+  /* width: 85px;
+  height: 23px; */
+  /* text-align: left; */
 }
 
 #shipDate {
   position: relative;
-  top: 395px;
+  top: -1014px;
   left: 345px;
-  width: 85px;
-  height: 23px;
+  /* width: 85px;
+  height: 23px; */
 }
+
+#via {
+  position: relative;
+  top: -1039px;
+  left: 436px;
+}
+
+#fob {
+  position: relative;
+  top: -1065px;
+  left: 526px;
+}
+
+#project {
+  position: relative;
+  top: -1091px;
+  left: 656px;
+}
+
 #ItemQuantity {
   position: relative;
-  top: 460px;
+  top: -1050px;
   left: 65px;
-  width: 45px;
-  height: 400px;
-  text-align: right;
 }
 #ItemCode {
   position: relative;
-  top: 460px;
+  top: -1438px;
   left: 160px;
-  width: 100px;
-  height: 400px;
 }
 
 #ItemDescription {
   position: relative;
-  top: 460px;
-  left: 280px;
-  width: 230px;
-  height: 400px;
+  top: -1825px;
+  left: 270px;
 }
 
 #ItemSalesPrice {
   position: relative;
-  top: 460px;
-  left: 530px;
+  top: -2212px;
+  left: 526px;
   width: 85px;
   height: 400px;
   text-align: right;
@@ -104,7 +118,7 @@
 
 #finalAmount {
   position: relative;
-  top: 460px;
+  top: -2600px;
   left: 655px;
   width: 85px;
   height: 400px;
@@ -112,7 +126,7 @@
 }
 #finalPrice {
   position: relative;
-  top: 885px;
+  top: -2586px;
   left: 600px;
   width: 160px;
   height: 30px;
@@ -123,7 +137,7 @@
 
 #InvoicePhone {
   position: relative;
-  top: 940px;
+  top: -2555px;
   left: 65px;
   width: 180px;
   height: 30px;
@@ -131,14 +145,20 @@
 }
 #InvoiceEmail {
   position: relative;
-  top: 940px;
+  /* top: -2585px; */
   left: 275px;
   width: 220px;
   height: 30px;
   text-align: center;
+  margin-top: -2585px;
+}
+.no-outline {
+  background-color: #d1d1d1;
+  font-size: 13px;
+  /* border: none; */
 }
 
-#invoiceDateGroup,
+#invoiceDate,
 #invoiceNo,
 #billingAddress,
 #shippingAddress,
