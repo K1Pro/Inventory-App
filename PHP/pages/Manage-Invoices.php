@@ -15,7 +15,7 @@
         foreach ($invoiceQuery as $invoice) {};
         
         echo '<div id="invoiceDateAndNo">';
-            echo '<input type="date" class="fill-in" name="invoiceDate" value="'.date('Y-m-d', strtotime($invoice['invoiceDate'])).'" style="width:82px; margin-right: 40px;" required>';
+            echo '<input type="date" class="fill-in" id="invoiceDate" name="invoiceDate" value="'.date('Y-m-d', strtotime($invoice['invoiceDate'])).'" style="width:82px; margin-right: 40px;" required>';
             echo $invoice['invoices_id'];
         echo "</div>";
 
@@ -37,7 +37,7 @@
                 echo '<input type="text" class="no-outline" name="invoices_id" value="'.$invoice['invoices_id'].'" style="text-align: center;width:91px" disabled>';
                 echo '<input type="text" class="fill-in" name="terms" value="'.$invoice['terms'].'" style="width:108px">';
                 echo '<input type="text" class="fill-in" name="rep" value="" style="width:78px">';
-                echo '<input type="date" class="fill-in" name="shipDate" value="'.date('Y-m-d', strtotime($invoice['shipDate'])).'" style="width:90px" required>';
+                echo '<input type="date" class="fill-in" id="shipDate" name="shipDate" value="'.date('Y-m-d', strtotime($invoice['shipDate'])).'" style="width:90px" required>';
                 echo '<input type="text" class="fill-in" name="via" value="" style="width:90px">';
                 echo '<input type="text" class="fill-in" name="fob" value="" style="width:132px">';
                 echo '<input type="text" class="fill-in" name="project" value="" style="width:114px">';
