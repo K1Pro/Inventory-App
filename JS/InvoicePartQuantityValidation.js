@@ -2,15 +2,45 @@ const id = urlParams.get('id') ? urlParams.get('id') : '';
 const pin = urlParams.get('pin') ? urlParams.get('pin') : '';
 const noOfItems = 15;
 let date = new Date().toJSON();
-if (!id && !pin) {
-  document.getElementById('invoiceDate').value = date.slice(0, 10);
-  document.getElementById('shipDate').value = date.slice(0, 10);
-}
 console.log(id);
 console.log(pin);
 
 let firstPart = document.getElementById(`part1ItemDesc`).value;
-console.log(firstPart);
+let bill_business_name = document.getElementById(`bill_business_name`);
+let bill_address = document.getElementById(`bill_address`);
+let bill_city = document.getElementById(`bill_city`);
+let bill_state = document.getElementById(`bill_state`);
+let bill_zip = document.getElementById(`bill_zip`);
+let part1Quantity = document.getElementById(`part1Quantity`);
+let part1ItemDesc = document.getElementById(`part1ItemDesc`);
+let part1Item = document.getElementById(`part1Item`);
+let part1SalesPrice = document.getElementById(`part1SalesPrice`);
+
+if (!id && !pin) {
+  document.getElementById('invoiceDate').value = date.slice(0, 10);
+  document.getElementById('shipDate').value = date.slice(0, 10);
+
+  bill_business_name.addEventListener('change', function () {
+    let selectedBusiness = customerData.find(
+      (element) => element['customers_id'] == this.value
+    );
+    bill_address.value = selectedBusiness.address;
+    bill_city.value = selectedBusiness.city;
+    bill_state.value = selectedBusiness.state;
+    bill_zip.value = selectedBusiness.zip;
+  });
+}
+
+part1ItemDesc.addEventListener('change', function () {
+  console.log(inventoryData);
+  let selectedInventory = inventoryData.find(
+    (element) => element['inventory_id'] == this.value
+  );
+  console.log(selectedInventory);
+  part1Quantity.value = selectedInventory.quantityOnHand;
+  part1Item.value = selectedInventory.itemName;
+  part1SalesPrice.value = selectedInventory.salesPrice;
+});
 
 if (firstPart) {
 } else {
