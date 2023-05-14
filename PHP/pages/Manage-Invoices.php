@@ -45,14 +45,10 @@
 
         echo '<div id="billingAddress">';
             if ($id && $pin) {
-                echo '<input type="text" class="fill-in" name="bill_business_name" value="'.$invoice['bill_business_name'].'" style="width:270px"><br>';
-                echo '<input type="text" class="fill-in" name="bill_address" value="'.$invoice['bill_address'].'" style="width:270px"><br>';
-                echo '<input type="text" class="fill-in" name="bill_city" value="'.$invoice['bill_city'].'" style="width:270px"><br>';
-                echo '<input type="text" class="fill-in" name="bill_state" value="'.$invoice['bill_state'].'" style="width:135px">';
-                echo '<input type="text" class="fill-in" name="bill_zip" value="'.$invoice['bill_zip'].'" style="width:135px">';
+                echo '<input type="text" class="fill-in" id="bill_business_name" name="bill_business_name" value="'.$invoice['bill_business_name'].'" style="width:270px"><br>';
             } else {
                 echo '<select class="fill-in" name="bill_business_name" id="bill_business_name" style="width:270px">';
-                    echo '<option value="">Choose...</option>';
+                    echo '<option value="">Choose business name to prefill...</option>';
                     foreach ($customersQuery as $customer) {
                         echo '<option value="';
                         print_r($customer['customers_id']);
@@ -61,14 +57,14 @@
                         echo "</option>";
                     }
                 echo '</select><br>';
-                echo '<input type="text" class="fill-in" id="bill_address" name="bill_address" value="" style="width:270px"><br>';
-                echo '<input type="text" class="fill-in" id="bill_city" name="bill_city" value="" style="width:270px"><br>';
-                echo '<input type="text" class="fill-in" id="bill_state" name="bill_state" value="" style="width:135px">';
-                echo '<input type="text" class="fill-in" id="bill_zip" name="bill_zip" value="" style="width:135px">';
-                // echo '<input type="text" class="fill-in" style="opacity: 0;"><br>';
-                // echo '<input type="text" class="fill-in" style="opacity: 0;"><br>';
-                // echo '<input type="text" class="fill-in" style="opacity: 0;"><br>';
             }
+            echo '<input type="text" class="fill-in" id="bill_address" name="bill_address" value="" placeholder="Address" style="width:200px">';
+            echo '<input type="text" class="fill-in" id="bill_address2" name="bill_address2" value="" placeholder="Apt#" style="width:70px"><br>';
+            echo '<input type="text" class="fill-in" id="bill_city" name="bill_city" value="" placeholder="City" style="width:270px"><br>';
+            echo '<select class="fill-in" id="bill_state" name="bill_state" placeholder="State" value="" style="width:135px">';
+                require("./PHP/components/statesSelect.php");
+            echo '</select>';
+            echo '<input type="text" class="fill-in" id="bill_zip" name="bill_zip" value="" placeholder="Zip" style="width:135px">';
         echo "</div>";
 
         echo '<div id="shippingAddress">';
@@ -95,26 +91,24 @@
 
         echo '<div id="Items">';
             for ($i = 1; $i <= $noOfItems; $i++) {
-
-
-
-
-                echo '<input type="text" class="fill-in" id="part'.$i.'Quantity" name="part'.$i.'Quantity" value="'.$invoice['part'.$i.'Quantity'].'"       style="width:85px">';
-                echo '<input type="text" class="fill-in" id="part'.$i.'Item"    name="part'.$i.'Item"       value="'.$invoice['part'.$i.'Item'].'"          style="margin-left:10px; width:100px">';
-                echo '<select class="fill-in" id="part'.$i.'ItemDesc" name="part'.$i.'ItemDesc"  value="'.$invoice['part'.$i.'ItemDesc'].'"      style="margin-left:10px; width:248px">';
+                echo '<input type="number" step="1" min="1" class="fill-in" id="part'.$i.'Quantity" name="part'.$i.'Quantity" value="'.$invoice['part'.$i.'Quantity'].'"  style="width:85px">';
+                echo '<input type="text" class="fill-in" id="part'.$i.'Item"    name="part'.$i.'Item"       value="'.$invoice['part'.$i.'Item'].'"     style="margin-left:10px; width:100px">';
+                if ($id && $pin) {
+                echo '<input type="text" class="fill-in" id="part'.$i.'ItemDesc" name="part'.$i.'ItemDesc"  value="'.$invoice['part'.$i.'ItemDesc'].'" style="margin-left:10px; width:248px">';
+                } else {
+                    echo '<select class="fill-in" id="part'.$i.'ItemDesc" name="part'.$i.'ItemDesc" style="margin-left:10px; width:248px">';
                     echo '<option value="">Choose...</option>';
-                    foreach ($inventoryQuery as $dbValues) {
+                    foreach ($inventoryQuery as $inventory) {
                       echo '<option value="';
-                      echo $dbValues['inventory_id'];
+                      echo $inventory['inventory_id'];
                       echo '">';
-                      print_r($dbValues['descOnPurchTrans']);
+                      print_r($inventory['descOnPurchTrans']);
                       echo "</option>";
                     }
-
-                echo '<input type="text" class="fill-in" id="part'.$i.'SalesPrice" name="part'.$i.'SalesPrice" value="'.$invoice['part'.$i.'SalesPrice'].'" style="margin-left:10px; margin-right:20px; width:120px">';
-                if ($invoice['part'.$i.'SalesPrice'] != 0) {
-                    echo "$" . number_format((($invoice['part'.$i.'SalesPrice'] * $invoice['part'.$i.'Quantity'])),2) . "<br>";} else {echo "<br>";
+                echo '</select>';
                 }
+                echo '<input type="number" step=".01" min="0" class="fill-in" id="part'.$i.'SalesPrice" name="part'.$i.'SalesPrice" value="'.$invoice['part'.$i.'SalesPrice'].'" style="margin-left:10px; margin-right:20px; width:120px">';
+                echo '$<input type="text" disabled class="no-outline" id="part'.$i.'TotalPrice" value="' . number_format((($invoice['part'.$i.'SalesPrice'] * $invoice['part'.$i.'Quantity'])),2, '.', ',') .'" style="width:85px"><br>';
             }
         echo "</div>";
 
