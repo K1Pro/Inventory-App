@@ -521,4 +521,4 @@ let date = new Date().toJSON();
   document.getElementById("invoiceDate").value=date.slice(0,10);
   document.getElementById("shipDate").value=date.slice(0,10);
 </script>
-<script src="./JS/InvoicePartQuantityValidation.js"></script>
+<script src="./JS/InvoiceValidation.js"></script>

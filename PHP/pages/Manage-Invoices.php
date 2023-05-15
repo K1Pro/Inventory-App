@@ -5,7 +5,7 @@
             $id = htmlspecialchars($_GET["id"]);
             $pin = htmlspecialchars($_GET["pin"]);
         ?>
-        <input class="btn btn-primary btn-lg m-2" name="<?php echo $id && $pin ? "modify" : "create"; ?>" type="submit" value ="<?php echo $id && $pin ? "Modify Invoice" : "Create Invoice"; ?>"></input>
+        <input class="btn btn-primary btn-lg m-2" name="submit" type="submit" value ="<?php echo $id && $pin ? "Modify Invoice" : "Create Invoice"; ?>"></input>
         <div id="invoice">
             <img src="./images/blankManageInvoice.jpg" alt="Invoice">
         </div>
@@ -45,15 +45,15 @@
 
         echo '<div id="billingAddress">';
             if ($id && $pin) {
-                echo '<input type="text" class="fill-in" id="bill_business_name" name="bill_business_name" value="'.$invoice['bill_business_name'].'" style="width:270px"><br>';
+                echo '<input type="text" class="fill-in" id="bill_business_name" name="bill_business_name" value="'.$invoice['bill_business_name'].'" style="width:270px" required><br>';
             } else {
                 echo '<select class="fill-in" name="bill_business_name" id="bill_business_name" style="width:270px">';
                     echo '<option value="">Choose business name to prefill...</option>';
                     foreach ($customersQuery as $customer) {
                         echo '<option value="';
-                        print_r($customer['customers_id']);
+                        echo $customer['customers_id'] . "-" . $customer['business_name'];
                         echo '">';
-                        print_r($customer['business_name']);
+                        echo $customer['business_name'];
                         echo "</option>";
                     }
                 echo '</select><br>';
@@ -100,9 +100,9 @@
                     echo '<option value="">Choose...</option>';
                     foreach ($inventoryQuery as $inventory) {
                       echo '<option value="';
-                      echo $inventory['inventory_id'];
+                      echo $inventory['inventory_id'] . "-" . $inventory['descOnPurchTrans'];
                       echo '">';
-                      print_r($inventory['descOnPurchTrans']);
+                      echo $inventory['descOnPurchTrans'];
                       echo "</option>";
                     }
                 echo '</select>';
@@ -133,7 +133,7 @@ const customerData = <?php echo json_encode($customerArray); ?>;
 const inventoryData = <?php echo json_encode($inventoryArray); ?>;
 </script>
 
-<script src="./JS/InvoicePartQuantityValidation.js"></script>
+<script src="./JS/InvoiceValidation.js"></script>
 
 <!-- <script> window.print();</script> -->
 <!-- 
