@@ -6,16 +6,22 @@ id ? console.log(id) : console.log('No ID');
 pin ? console.log(pin) : console.log('No PIN');
 
 let bill_business_name = document.getElementById(`bill_business_name`);
+let bill_first_name = document.getElementById(`bill_first_name`);
+let bill_last_name = document.getElementById(`bill_last_name`);
 let bill_address = document.getElementById(`bill_address`);
 let bill_address2 = document.getElementById(`bill_address2`);
 let bill_city = document.getElementById(`bill_city`);
 let bill_state = document.getElementById(`bill_state`);
 let bill_zip = document.getElementById(`bill_zip`);
+let bill_phone = document.getElementById(`bill_phone`);
+let bill_fax = document.getElementById(`bill_fax`);
+let bill_email = document.getElementById(`bill_email`);
 let part1Quantity = document.getElementById(`part1Quantity`);
 let part1ItemDesc = document.getElementById(`part1ItemDesc`);
 let part1Item = document.getElementById(`part1Item`);
 let part1SalesPrice = document.getElementById(`part1SalesPrice`);
 let finalPrice = document.getElementById(`finalPrice`);
+let submitButton = document.getElementById(`finalPrice`);
 
 function addFinalPrice() {
   // Add up Final Price
@@ -43,11 +49,16 @@ if (!id && !pin) {
         element['customers_id'] ==
         this.value.substring(0, this.value.indexOf('-'))
     );
+    bill_first_name.value = selectedBusiness.first_name;
+    bill_last_name.value = selectedBusiness.last_name;
     bill_address.value = selectedBusiness.address;
     bill_address2.value = selectedBusiness.address2;
     bill_city.value = selectedBusiness.city;
     bill_state.value = selectedBusiness.state;
     bill_zip.value = selectedBusiness.zip;
+    bill_phone.value = selectedBusiness.phone;
+    bill_fax.value = selectedBusiness.fax;
+    bill_email.value = selectedBusiness.email;
   });
 
   document.getElementById(`part1Quantity`).disabled = true;
@@ -151,3 +162,7 @@ for (let i = 1; i <= 15; i++) {
       addFinalPrice();
     });
 }
+
+submitButton.addEventListener('click', function () {
+  finalPrice.disabled = false;
+});

@@ -5,7 +5,7 @@
             $id = htmlspecialchars($_GET["id"]);
             $pin = htmlspecialchars($_GET["pin"]);
         ?>
-        <input class="btn btn-primary btn-lg m-2" name="submit" type="submit" value ="<?php echo $id && $pin ? "Modify Invoice" : "Create Invoice"; ?>"></input>
+        <input class="btn btn-primary btn-lg m-2" id="submitButton" name="submit" type="submit" value ="<?php echo $id && $pin ? "Modify Invoice" : "Create Invoice"; ?>"></input>
         <div id="invoice">
             <img src="./images/blankManageInvoice.jpg" alt="Invoice">
         </div>
@@ -58,13 +58,19 @@
                     }
                 echo '</select><br>';
             }
-            echo '<input type="text" class="fill-in" id="bill_address" name="bill_address" value="" placeholder="Address" style="width:200px">';
-            echo '<input type="text" class="fill-in" id="bill_address2" name="bill_address2" value="" placeholder="Apt#" style="width:70px"><br>';
-            echo '<input type="text" class="fill-in" id="bill_city" name="bill_city" value="" placeholder="City" style="width:270px"><br>';
-            echo '<select class="fill-in" id="bill_state" name="bill_state" placeholder="State" value="" style="width:135px">';
+            echo '<input type="text" class="fill-in" id="bill_first_name" name="bill_first_name" value="'.$invoice['bill_first_name'].'" placeholder="First Name" style="display: none;width:135px">';
+            echo '<input type="text" class="fill-in" id="bill_last_name" name="bill_last_name" value="'.$invoice['bill_last_name'].'" placeholder="Last Name" style="display: none;width:135px">';
+            echo '<input type="text" class="fill-in" id="bill_address" name="bill_address" value="'.$invoice['bill_address'].'" placeholder="Address" style="width:200px">';
+            echo '<input type="text" class="fill-in" id="bill_address2" name="bill_address2" value="'.$invoice['bill_address2'].'" placeholder="Apt#" style="width:70px"><br>';
+            echo '<input type="text" class="fill-in" id="bill_city" name="bill_city" value="'.$invoice['bill_city'].'" placeholder="City" style="width:270px"><br>';
+            echo '<select class="fill-in" id="bill_state" name="bill_state" placeholder="State" value="'.$invoice['bill_state'].'" style="width:135px">';
                 require("./PHP/components/statesSelect.php");
             echo '</select>';
-            echo '<input type="text" class="fill-in" id="bill_zip" name="bill_zip" value="" placeholder="Zip" style="width:135px">';
+            echo '<input type="text" class="fill-in" id="bill_zip" name="bill_zip" value="'.$invoice['bill_zip'].'" placeholder="Zip" style="width:135px"><br>';
+
+            echo '<input type="text" class="fill-in" id="bill_phone" name="bill_phone" value="'.$invoice['bill_phone'].'" placeholder="Phone" style="display: none;width:90px">';
+            echo '<input type="text" class="fill-in" id="bill_fax" name="bill_fax" value="'.$invoice['bill_fax'].'" placeholder="Fax" style="display: none;width:90px">';
+            echo '<input type="text" class="fill-in" id="bill_email" name="bill_email" value="'.$invoice['bill_email'].'" placeholder="Email" style="display: none;width:90px">';
         echo "</div>";
 
         echo '<div id="shippingAddress">';
@@ -81,11 +87,11 @@
                         echo '<option value="Net 15">';
                         echo '<option value="Net 30">';
                     echo '</datalist>';
-                echo '<input type="text" class="fill-in" name="rep" value="" style="width:78px">';
+                echo '<input type="text" class="fill-in" name="rep" value="'.$invoice['rep'].'" style="width:78px">';
                 echo '<input type="date" class="fill-in" id="shipDate" name="shipDate" value="'.date('Y-m-d', strtotime($invoice['shipDate'])).'" style="width:90px" required>';
-                echo '<input type="text" class="fill-in" name="via" value="" style="width:90px">';
-                echo '<input type="text" class="fill-in" name="fob" value="" style="width:132px">';
-                echo '<input type="text" class="fill-in" name="project" value="" style="width:114px">';
+                echo '<input type="text" class="fill-in" name="via" value="'.$invoice['via'].'" style="width:90px">';
+                echo '<input type="text" class="fill-in" name="fob" value="'.$invoice['fob'].'" style="width:132px">';
+                echo '<input type="text" class="fill-in" name="project" value="'.$invoice['project'].'" style="width:114px">';
         echo "</div>";
 
 
@@ -113,7 +119,7 @@
         echo "</div>";
 
         echo '<div id="finalPriceGroup">';
-            echo 'Total:&emsp; $<input type="text" disabled class="no-outline" id="finalPrice" value="' . number_format($invoice['finalPrice'], 2, '.', '').'">';
+            echo 'Total:&emsp; $<input type="text" readonly class="no-outline" name="finalPrice" id="finalPrice" value="' . number_format($invoice['finalPrice'], 2, '.', '').'">';
         echo "</div>";
 
         echo '<div id="phoneAndEmail">';
