@@ -1,13 +1,13 @@
 <link href="./CSS/invoice-modify.css" rel="stylesheet">
 <div style="overflow-y: auto; overflow-x: auto; width:100vw">
-    <form class="needs-validation" novalidate  action='./index.php?page=View-Invoices' method="post">
+    <form  action='./index.php?page=View-Invoices' method="post">
         <?php
             $id = htmlspecialchars($_GET["id"]);
             $pin = htmlspecialchars($_GET["pin"]);
         ?>
-        <input class="btn btn-primary btn-lg m-2" name="submit" type="submit" value ="<?php echo $id && $pin ? "Modify Invoice" : "Create Invoice"; ?>"></input>
+        <input class="btn btn-primary btn-lg m-2" name="<?php echo $id && $pin ? "modify" : "create"; ?>" type="submit" value ="<?php echo $id && $pin ? "Modify Invoice" : "Create Invoice"; ?>"></input>
         <div id="invoice">
-            <img src="./images/blankInvoice.jpg" alt="Invoice">
+            <img src="./images/blankManageInvoice.jpg" alt="Invoice">
         </div>
 
         <?php
@@ -108,12 +108,12 @@
                 echo '</select>';
                 }
                 echo '<input type="number" step=".01" min="0" class="fill-in" id="part'.$i.'SalesPrice" name="part'.$i.'SalesPrice" value="'.$invoice['part'.$i.'SalesPrice'].'" style="margin-left:10px; margin-right:20px; width:120px">';
-                echo '$<input type="text" disabled class="no-outline" id="part'.$i.'TotalPrice" value="' . number_format((($invoice['part'.$i.'SalesPrice'] * $invoice['part'.$i.'Quantity'])),2, '.', ',') .'" style="width:85px"><br>';
+                echo '$<input type="text" disabled class="no-outline" id="part'.$i.'TotalPrice" value="' . number_format($invoice['part'.$i.'SalesPrice'] * $invoice['part'.$i.'Quantity'], 2, '.', '') .'" style="width:85px"><br>';
             }
         echo "</div>";
 
-        echo '<div id="finalPrice">';
-            echo "$" . number_format($invoice['finalPrice'], 2, '.', ',');
+        echo '<div id="finalPriceGroup">';
+            echo 'Total:&emsp; $<input type="text" disabled class="no-outline" id="finalPrice" value="' . number_format($invoice['finalPrice'], 2, '.', '').'">';
         echo "</div>";
 
         echo '<div id="phoneAndEmail">';

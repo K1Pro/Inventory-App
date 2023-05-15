@@ -15,6 +15,22 @@ let part1Quantity = document.getElementById(`part1Quantity`);
 let part1ItemDesc = document.getElementById(`part1ItemDesc`);
 let part1Item = document.getElementById(`part1Item`);
 let part1SalesPrice = document.getElementById(`part1SalesPrice`);
+let finalPrice = document.getElementById(`finalPrice`);
+
+function addFinalPrice() {
+  // Add up Final Price
+  let totalPriceArray = [];
+  for (let i = 1; i <= 15; i++) {
+    totalPriceArray.push(
+      Number(document.getElementById(`part${i}TotalPrice`).value)
+    );
+  }
+  let finalPriceValue = totalPriceArray.reduce(add, 0); // with initial value to avoid when the array is empty
+  function add(total, amount) {
+    return total + amount;
+  }
+  finalPrice.value = Number(finalPriceValue).toFixed(2);
+}
 
 if (!id && !pin) {
   document.getElementById('invoiceDate').value = date.slice(0, 10);
@@ -69,12 +85,13 @@ for (let i = 1; i <= 15; i++) {
         document.getElementById(`part${i}SalesPrice`).value =
           selectedInventory.salesPrice;
         // Item Total Price
-        document.getElementById(`part${i}TotalPrice`).value =
+        document.getElementById(`part${i}TotalPrice`).value = Number(
           document.getElementById(`part${i}Quantity`).value *
-          document.getElementById(`part${i}SalesPrice`).value;
-
+            document.getElementById(`part${i}SalesPrice`).value
+        ).toFixed(2); // toLocaleString('en-US');
         // Enable next item
         document.getElementById(`part${i + 1}ItemDesc`).disabled = false;
+        addFinalPrice();
       } else {
         // Quantity
         document.getElementById(`part${i}Quantity`).disabled = true;
@@ -82,8 +99,14 @@ for (let i = 1; i <= 15; i++) {
         // Item
         document.getElementById(`part${i}Item`).disabled = true;
         document.getElementById(`part${i}Item`).value = '';
+        // Sales Price
         document.getElementById(`part${i}SalesPrice`).disabled = true;
         document.getElementById(`part${i}SalesPrice`).value = '';
+        // Item Total Price
+        document.getElementById(`part${i}TotalPrice`).value = Number(
+          document.getElementById(`part${i}Quantity`).value *
+            document.getElementById(`part${i}SalesPrice`).value
+        ).toFixed(2);
         for (let j = i + 1; j <= 15; j++) {
           // Quantity
           document.getElementById(`part${j}Quantity`).value = '';
@@ -97,7 +120,30 @@ for (let i = 1; i <= 15; i++) {
           // Sales Price
           document.getElementById(`part${j}SalesPrice`).value = '';
           document.getElementById(`part${j}SalesPrice`).disabled = true;
+          // Sales Price
+          document.getElementById(`part${j}TotalPrice`).value = '0.00';
         }
+        addFinalPrice();
       }
+    });
+
+  document
+    .getElementById(`part${i}Quantity`)
+    .addEventListener('change', function () {
+      // Item Total Price
+      document.getElementById(`part${i}TotalPrice`).value = Number(
+        this.value * document.getElementById(`part${i}SalesPrice`).value
+      ).toFixed(2);
+      addFinalPrice();
+    });
+
+  document
+    .getElementById(`part${i}SalesPrice`)
+    .addEventListener('change', function () {
+      // Item Total Price
+      document.getElementById(`part${i}TotalPrice`).value = Number(
+        document.getElementById(`part${i}Quantity`).value * this.value
+      ).toFixed(2);
+      addFinalPrice();
     });
 }

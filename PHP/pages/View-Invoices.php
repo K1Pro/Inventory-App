@@ -1,3 +1,9 @@
+<?php
+
+$postedData = $POST
+
+?>
+
 <div style="overflow-y: auto; overflow-x: auto">
 
 <table class="table table-striped">

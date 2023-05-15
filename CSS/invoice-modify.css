@@ -29,7 +29,7 @@
   position: relative;
   top: -914px;
   left: 65px;
-  width: 750px;
+  width: 720px;
 }
 
 #Items {
@@ -39,21 +39,28 @@
   width: 700px;
 }
 
-#finalPrice {
+#finalPriceGroup {
   position: relative;
   top: -830px;
-  left: 600px;
-  width: 160px;
-  height: 30px;
-  text-align: right;
+  left: 570px;
+  width: 275px;
+  text-align: left;
   font-size: 22px;
   font-weight: bold;
-  background-color: white;
+  /* background-color: white; */
+}
+
+#finalPrice {
+  text-align: left;
+  font-size: 22px;
+  font-weight: bold;
+  width: 150px;
+  /* background-color: white; */
 }
 
 #phoneAndEmail {
   position: relative;
-  margin-top: -800px;
+  margin-top: -820px;
   left: 65px;
   width: 453px;
 }
