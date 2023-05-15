@@ -64,8 +64,24 @@
                 echo $dbValues['terms'];
             echo "</div>";
 
+            echo '<div id="rep">';
+                echo $dbValues['rep'];
+            echo "</div>";
+
             echo '<div id="shipDate">';
                 echo date('m/d/Y', strtotime($dbValues['shipDate']));
+            echo "</div>";
+
+            echo '<div id="via">';
+                echo $dbValues['via'];
+            echo "</div>";
+
+            echo '<div id="fob">';
+                echo $dbValues['fob'];
+            echo "</div>";
+
+            echo '<div id="project">';
+                echo $dbValues['project'];
             echo "</div>";
 
             echo '<div id="ItemQuantity">';

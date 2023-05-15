@@ -78,8 +78,20 @@
         $pdf->SetXY(41,103);
         $pdf->Cell(29, 8, $dbValues['terms'], 0, 0, 'C');
 
+        $pdf->SetXY(65,103);
+        $pdf->Cell(29, 8, $dbValues['rep'], 0, 0, 'C');
+
         $pdf->SetXY(90,103);
         $pdf->Cell(24, 8, date('m/d/Y', strtotime($dbValues['shipDate'])), 0, 0, 'C');
+
+        $pdf->SetXY(110,103);
+        $pdf->Cell(29, 8, $dbValues['via'], 0, 0, 'C');
+
+        $pdf->SetXY(140,103);
+        $pdf->Cell(29, 8, $dbValues['fob'], 0, 0, 'C');
+
+        $pdf->SetXY(175,103);
+        $pdf->Cell(29, 8, $dbValues['project'], 0, 0, 'C');
 
         for ($i = 1; $i <= $noOfItems; $i++) {
             $pdf->SetXY(13,112+($i*7));
@@ -88,9 +100,7 @@
 
         for ($i = 1; $i <= $noOfItems; $i++) {
             $pdf->SetXY(42,112+($i*7));
-            $pdf->Cell(29, 7, strlen($dbValues['part'.$i.'Item']) > 10 ? substr($dbValues['part'.$i.'Item'],0,10)."..." : $dbValues['part'.$i.'Item'], 0, 0, 'L');
-
-            
+            $pdf->Cell(29, 7, strlen($dbValues['part'.$i.'Item']) > 10 ? substr($dbValues['part'.$i.'Item'],0,10)."..." : $dbValues['part'.$i.'Item'], 0, 0, 'L'); 
         }
 
         for ($i = 1; $i <= $noOfItems; $i++) {
@@ -147,8 +157,20 @@
         $pdf->SetXY(41,103);
         $pdf->Cell(29, 8, $dbValues['terms'], 0, 0, 'C');
 
+        $pdf->SetXY(65,103);
+        $pdf->Cell(29, 8, $dbValues['rep'], 0, 0, 'C');
+
         $pdf->SetXY(90,103);
         $pdf->Cell(24, 8, date('m/d/Y', strtotime($dbValues['shipDate'])), 0, 0, 'C');
+
+        $pdf->SetXY(110,103);
+        $pdf->Cell(29, 8, $dbValues['via'], 0, 0, 'C');
+
+        $pdf->SetXY(140,103);
+        $pdf->Cell(29, 8, $dbValues['fob'], 0, 0, 'C');
+
+        $pdf->SetXY(175,103);
+        $pdf->Cell(29, 8, $dbValues['project'], 0, 0, 'C');
 
         for ($i = 1; $i <= $noOfItems; $i++) {
             $pdf->SetXY(13,112+($i*7));

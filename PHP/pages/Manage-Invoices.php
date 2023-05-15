@@ -80,7 +80,7 @@
         echo "</div>";      
 
         echo '<div id="invoiceOptions">';
-                echo '<input type="text" class="no-outline" name="invoices_id" value="'.$invoice['invoices_id'].'" style="text-align: center;width:91px" disabled>';
+                echo '<input type="text" class="no-outline" name="invoices_id" value="'.$invoice['invoices_id'].'" style="text-align: center;width:91px" readonly>';
                 echo '<input list="termsList" class="fill-in" name="terms" value="'.$invoice['terms'].'" style="width:108px">';
                     echo '<datalist id="termsList">';
                         echo '<option value="Due on receipt">';

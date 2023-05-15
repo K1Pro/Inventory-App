@@ -64,12 +64,21 @@ if (!id && !pin) {
   document.getElementById(`part1Quantity`).disabled = true;
   document.getElementById(`part1Item`).disabled = true;
   document.getElementById(`part1SalesPrice`).disabled = true;
+}
 
-  for (let i = 2; i <= noOfItems; i++) {
+for (let i = 2; i <= noOfItems; i++) {
+  if (document.getElementById(`part${i}ItemDesc`).value == '') {
     document.getElementById(`part${i}Quantity`).disabled = true;
+    document.getElementById(`part${i}Quantity`).value = '';
+
     document.getElementById(`part${i}Item`).disabled = true;
+    document.getElementById(`part${i}Item`).value = '';
+
     document.getElementById(`part${i}ItemDesc`).disabled = true;
+    document.getElementById(`part${i}ItemDesc`).value = '';
+
     document.getElementById(`part${i}SalesPrice`).disabled = true;
+    document.getElementById(`part${i}SalesPrice`).value = '';
   }
 }
 
