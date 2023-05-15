@@ -1,8 +1,10 @@
 <?php
-
-$postedData = $POST
-
+$postedData = $_POST;
 ?>
+<script>
+const postedData = <?php echo json_encode($postedData); ?>;
+console.log(postedData)
+</script>
 
 <div style="overflow-y: auto; overflow-x: auto">
 
