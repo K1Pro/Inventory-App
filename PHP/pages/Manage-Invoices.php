@@ -24,7 +24,7 @@
             $customerArray[] = $customer;
         };
 
-        $inventorySQL = "SELECT * FROM inventory ORDER BY descOnPurchTrans ASC";
+        $inventorySQL = "SELECT * FROM inventory WHERE quantityOnHand > 0  ORDER BY descOnPurchTrans ASC";
         $inventoryQuery = mysqli_query($conn, $inventorySQL);
         $inventoryArray[] = array();
         foreach ($inventoryQuery as $inventory) {
