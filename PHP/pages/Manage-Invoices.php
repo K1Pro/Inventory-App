@@ -1,6 +1,6 @@
 <link href="./CSS/invoice-modify.css" rel="stylesheet">
 <div style="overflow-y: auto; overflow-x: auto; width:100vw">
-    <form  action='./index.php?page=View-Invoices' method="post">
+    <form class="needs-validation" novalidate action='./index.php?page=View-Invoices' method="post">
         <?php
             $id = htmlspecialchars($_GET["id"]);
             $pin = htmlspecialchars($_GET["pin"]);
@@ -100,9 +100,9 @@
                 echo '<input type="number" step="1" min="1" class="fill-in" id="part'.$i.'Quantity" name="part'.$i.'Quantity" value="'.$invoice['part'.$i.'Quantity'].'"  style="width:85px">';
                 echo '<input type="text" class="fill-in" id="part'.$i.'Item"    name="part'.$i.'Item"       value="'.$invoice['part'.$i.'Item'].'"     style="margin-left:10px; width:100px">';
                 if ($id && $pin) {
-                echo '<input type="text" class="fill-in" id="part'.$i.'ItemDesc" name="part'.$i.'ItemDesc"  value="'.$invoice['part'.$i.'ItemDesc'].'" style="margin-left:10px; width:248px">';
+                echo '<input type="text" class="fill-in" id="part'.$i.'ItemDesc" name="part'.$i.'ItemDesc"  value="'.$invoice['part'.$i.'ItemDesc'].'" style="margin-left:10px; margin-right:10px; width:248px">';
                 } else {
-                    echo '<select class="fill-in" id="part'.$i.'ItemDesc" name="part'.$i.'ItemDesc" style="margin-left:10px; width:248px">';
+                    echo '<select class="fill-in" id="part'.$i.'ItemDesc" name="part'.$i.'ItemDesc" style="margin-left:10px; margin-right:10px; width:248px">';
                     echo '<option value="">Choose...</option>';
                     foreach ($inventoryQuery as $inventory) {
                       echo '<option value="';
@@ -113,7 +113,7 @@
                     }
                 echo '</select>';
                 }
-                echo '<input type="number" step=".01" min="0" class="fill-in" id="part'.$i.'SalesPrice" name="part'.$i.'SalesPrice" value="'.$invoice['part'.$i.'SalesPrice'].'" style="margin-left:10px; margin-right:20px; width:120px">';
+                echo '$<input type="number" step=".01" min="0" class="fill-in" id="part'.$i.'SalesPrice" name="part'.$i.'SalesPrice" value="'.$invoice['part'.$i.'SalesPrice'].'" style="margin-left:5px; margin-right:20px; width:110px">';
                 echo '$<input type="text" disabled class="no-outline" id="part'.$i.'TotalPrice" value="' . number_format($invoice['part'.$i.'SalesPrice'] * $invoice['part'.$i.'Quantity'], 2, '.', '') .'" style="width:85px"><br>';
             }
         echo "</div>";

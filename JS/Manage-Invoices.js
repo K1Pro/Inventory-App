@@ -40,6 +40,28 @@ function addFinalPrice() {
   finalPrice.value = Number(finalPriceValue).toFixed(2);
 }
 
+for (let i = 1; i <= 15; i++) {
+  document
+    .getElementById(`part${i}Quantity`)
+    .addEventListener('change', function () {
+      // Item Total Price
+      document.getElementById(`part${i}TotalPrice`).value = Number(
+        this.value * document.getElementById(`part${i}SalesPrice`).value
+      ).toFixed(2);
+      addFinalPrice();
+    });
+
+  document
+    .getElementById(`part${i}SalesPrice`)
+    .addEventListener('change', function () {
+      // Item Total Price
+      document.getElementById(`part${i}TotalPrice`).value = Number(
+        document.getElementById(`part${i}Quantity`).value * this.value
+      ).toFixed(2);
+      addFinalPrice();
+    });
+}
+
 // Validation for creating an invoice
 if (!id && !pin) {
   document.getElementById('invoiceDate').value = date.slice(0, 10);
@@ -93,22 +115,20 @@ if (!id && !pin) {
         );
 
         if (this.value != '') {
+          invoiceItems.forEach((invoiceItem) => {
+            document.getElementById(`part${i}${invoiceItem}`).disabled = false;
+            document.getElementById(`part${i}${invoiceItem}`).required = true;
+          });
           // Quantity
-          document.getElementById(`part${i}Quantity`).disabled = false;
-          document.getElementById(`part${i}Quantity`).required = true;
           document.getElementById(`part${i}Quantity`).value =
             selectedInventory.quantityOnHand;
           document
             .getElementById(`part${i}Quantity`)
             .setAttribute('max', selectedInventory.quantityOnHand);
           // Item
-          document.getElementById(`part${i}Item`).disabled = false;
-          document.getElementById(`part${i}Item`).required = true;
           document.getElementById(`part${i}Item`).value =
             selectedInventory.itemName;
           // Sales Price
-          document.getElementById(`part${i}SalesPrice`).disabled = false;
-          document.getElementById(`part${i}SalesPrice`).required = true;
           document.getElementById(`part${i}SalesPrice`).value =
             selectedInventory.salesPrice;
           // Item Total Price
@@ -138,47 +158,20 @@ if (!id && !pin) {
               document.getElementById(`part${i}SalesPrice`).value
           ).toFixed(2);
           for (let j = i + 1; j <= 15; j++) {
-            // Quantity
-            document.getElementById(`part${j}Quantity`).value = '';
-            document.getElementById(`part${j}Quantity`).disabled = true;
-            document.getElementById(`part${i}Quantity`).required = false;
-            // Item
-            document.getElementById(`part${j}Item`).value = '';
-            document.getElementById(`part${j}Item`).disabled = true;
-            document.getElementById(`part${i}Item`).required = false;
-
-            // Item Description
-            document.getElementById(`part${j}ItemDesc`).value = '';
-            document.getElementById(`part${j}ItemDesc`).disabled = true;
-            // Sales Price
-            document.getElementById(`part${j}SalesPrice`).value = '';
-            document.getElementById(`part${j}SalesPrice`).disabled = true;
-            document.getElementById(`part${i}SalesPrice`).required = false;
-            // Sales Price
+            console.log('what is this?');
+            invoiceItems.forEach((invoiceItem) => {
+              document.getElementById(`part${j}${invoiceItem}`).value = '';
+              document.getElementById(`part${j}${invoiceItem}`).disabled = true;
+              document.getElementById(
+                `part${i}${invoiceItem}`
+              ).required = false;
+            });
+            // Item Total Price
             document.getElementById(`part${j}TotalPrice`).value = '0.00';
           }
           addFinalPrice();
+          document.getElementById(`part1ItemDesc`).required = true;
         }
-      });
-
-    document
-      .getElementById(`part${i}Quantity`)
-      .addEventListener('change', function () {
-        // Item Total Price
-        document.getElementById(`part${i}TotalPrice`).value = Number(
-          this.value * document.getElementById(`part${i}SalesPrice`).value
-        ).toFixed(2);
-        addFinalPrice();
-      });
-
-    document
-      .getElementById(`part${i}SalesPrice`)
-      .addEventListener('change', function () {
-        // Item Total Price
-        document.getElementById(`part${i}TotalPrice`).value = Number(
-          document.getElementById(`part${i}Quantity`).value * this.value
-        ).toFixed(2);
-        addFinalPrice();
       });
   }
 }
@@ -192,26 +185,15 @@ if (id && pin) {
         .addEventListener('change', function () {
           if (this.value != '') {
             console.log('next level');
-            // Quantity
-            document.getElementById(`part${i}Quantity`).disabled = false;
-            document.getElementById(`part${i}Quantity`).required = true;
-            // Item
-            document.getElementById(`part${i}Item`).disabled = false;
-            document.getElementById(`part${i}Item`).required = true;
-            // Item Description
-            document.getElementById(`part${i}ItemDesc`).disabled = false;
-            document.getElementById(`part${i}ItemDesc`).required = true;
-            // Sales Price
-            document.getElementById(`part${i}SalesPrice`).disabled = false;
-            document.getElementById(`part${i}SalesPrice`).required = true;
-            // Enable next Item Quantity
-            document.getElementById(`part${i + 1}Quantity`).disabled = false;
-            // Enable next Item Code
-            document.getElementById(`part${i + 1}Item`).disabled = false;
-            // Enable next Item Description
-            document.getElementById(`part${i + 1}ItemDesc`).disabled = false;
-            // Enable next Item Sales Price
-            document.getElementById(`part${i + 1}SalesPrice`).disabled = false;
+            invoiceItems.forEach((invoiceItem) => {
+              document.getElementById(
+                `part${i}${invoiceItem}`
+              ).disabled = false;
+              document.getElementById(`part${i}${invoiceItem}`).required = true;
+              document.getElementById(
+                `part${i + 1}${invoiceItem}`
+              ).disabled = false;
+            });
           }
         });
     }
@@ -221,29 +203,23 @@ if (id && pin) {
 // Disabling all fields that are not ready to be editted
 for (let i = 2; i <= noOfItems; i++) {
   if (document.getElementById(`part${i}ItemDesc`).value == '') {
-    document.getElementById(`part${i}Quantity`).disabled = true;
-    document.getElementById(`part${i}Quantity`).value = '';
-
-    document.getElementById(`part${i}Item`).disabled = true;
-    document.getElementById(`part${i}Item`).value = '';
-
-    document.getElementById(`part${i}ItemDesc`).disabled = true;
-    document.getElementById(`part${i}ItemDesc`).value = '';
-
-    document.getElementById(`part${i}SalesPrice`).disabled = true;
-    document.getElementById(`part${i}SalesPrice`).value = '';
+    console.log('check this now');
+    invoiceItems.forEach((invoiceItem) => {
+      document.getElementById(`part${i}${invoiceItem}`).disabled = true;
+      document.getElementById(`part${i}${invoiceItem}`).value = '';
+      // document.getElementById(`part${i}${invoiceItem}`).style.visibility =
+      //   'hidden';
+    });
   }
 }
 
-// Enabling only next field when modifying an invoice only
+// Enabling only next row of fields (Quantity, Code, Desc, Price) when modifying an invoice only
 if (id && pin) {
   for (let i = 2; i <= noOfItems; i++) {
     if (document.getElementById(`part${i - 1}ItemDesc`).value != '') {
-      console.log('check this');
-      document.getElementById(`part${i}Quantity`).disabled = false;
-      document.getElementById(`part${i}Item`).disabled = false;
-      document.getElementById(`part${i}ItemDesc`).disabled = false;
-      document.getElementById(`part${i}SalesPrice`).disabled = false;
+      invoiceItems.forEach((invoiceItem) => {
+        document.getElementById(`part${i}${invoiceItem}`).disabled = false;
+      });
     }
   }
 }
