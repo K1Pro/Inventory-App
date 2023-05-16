@@ -76,9 +76,9 @@ if (strlen($_POST['submit']) && strlen($id)) {
             <div class="col-sm-4">
               <label for="itemName" class="form-label">Item Name</label>
               <input type="text" class="form-control" name="itemName" id="itemName" value="<?php print_r($inventoryValues['itemName']);?>" placeholder="" required>
-              <div class="invalid-feedback">
+              <!-- <div class="invalid-feedback">
                 Invalid item name
-              </div>
+              </div> -->
             </div>
 
             <div class="col-sm-4">
