@@ -26,7 +26,7 @@ if ($postedData['submit'] == "Create Invoice") {
         //     . mysqli_error($conn);
     }
 
-} else if($_GET['action']=='email'){
+} else if($postedData['submit']=='Email Invoice'){
     ?><script>snackbar(`Successfully emailed invoice`);</script><?php
 }
 

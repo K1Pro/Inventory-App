@@ -17,7 +17,7 @@ foreach ($invoices as $invoiceValues) {
     <div class="justify-content-center">
 
         <h4 class="mb-3">Email Invoice</h4>
-        <!-- <form class="needs-validation" novalidate action="./index.php?page=EmailSent-Invoices&id=<?php echo $invoiceValues['invoices_id'];?>" method="post" enctype="multipart/form-data"> -->
+        <!-- <form class="needs-validation" novalidate action="./index.php?page=View-Invoices" method="post"> -->
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">From:</span>
                 <input name="fromEmail" readonly id="fromEmail" type="text" class="form-control" placeholder="From" aria-label="From" aria-describedby="basic-addon2" value="support@landmhardware.com" required>
@@ -50,8 +50,8 @@ foreach ($invoices as $invoiceValues) {
                 ?>
                     Dear Customer,
                     <br><br>
-                    Your invoice can be found at this link: <a href="http://landmhardware.com/inventory/invoice.php?id=<?php echo $invoiceValues['invoices_id']; ?>&pin=<?php echo $invoiceValues['bill_zip']; ?>" target="_blank">HTML</a><br>
-                    You can also download your invoice here: <a href="http://landmhardware.com/inventory/invoice_pdf.php?id=<?php echo $invoiceValues['invoices_id']; ?>&pin=<?php echo $invoiceValues['bill_zip']; ?>" target="_blank">DOWNLOAD</a><br>
+                    Your invoice is attached to this email as a pdf.<br>
+                    Additionally, your invoice can be found at this link: <a href="http://landmhardware.com/inventory/invoice.php?id=<?php echo $invoiceValues['invoices_id']; ?>&pin=<?php echo $invoiceValues['bill_zip']; ?>" target="_blank">HTML</a> or <a href="http://landmhardware.com/inventory/invoice_pdf.php?id=<?php echo $invoiceValues['invoices_id']; ?>&pin=<?php echo $invoiceValues['bill_zip']; ?>" target="_blank">PDF</a><br>
                     Please remit payment at your earliest convenience.<br>
                     Thank you for your business - we appreciate it very much.<br><br>
                     Sincrerely,<br><br>
@@ -62,8 +62,9 @@ foreach ($invoices as $invoiceValues) {
             </div>
 
             <hr class="my-4">
-
-            <input type="button" value="Send Invoice" class="w-80 btn btn-primary btn-lg" onclick="sendEmail()" /></input>
+            <!-- <input class="btn btn-primary btn-lg m-2" id="submitButton" name="submit" type="submit" value ="<?php echo $id && $pin ? "Modify Invoice" : "Create Invoice"; ?>"></input> -->
+            <!-- <input type="button" value="Send Invoice" class="w-80 btn btn-primary btn-lg" onclick="sendEmail()" /></input> -->
+            <input name="submit" type="submit" value="Email Invoice" class="w-80 btn btn-primary btn-lg" onclick="sendEmail()" /></input>
 
         <!-- </form> -->
 
@@ -75,4 +76,4 @@ const invoiceData = <?php echo json_encode($invoiceArray); ?>;
 </script>
 
 <script src="./JS/smtp.js"></script>
-<script src="./JS/sendEmail.js"></script>
+<script src="./JS/Email-Invoices.js"></script>

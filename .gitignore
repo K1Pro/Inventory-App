@@ -11,8 +11,8 @@
 /uploads
 config.php
 login.php
-/JS/sendEmail.js
 /JS/smtp.js
+/JS/Email-Invoices.js
 
 # syncing
 sync.ffs_db

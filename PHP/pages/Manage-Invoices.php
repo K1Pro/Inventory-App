@@ -131,7 +131,9 @@
             echo '<input type="text" class="fill-in" name="invoice_email" value="'.$invoice_email.'" style="margin-left:10px; width:248px">';
         }
         echo "</div>";
+
         ?>
+
     </form>
 </div>
 <script>
