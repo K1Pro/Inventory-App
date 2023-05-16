@@ -47,7 +47,7 @@
             if ($id && $pin) {
                 echo '<input type="text" class="fill-in" id="bill_business_name" name="bill_business_name" value="'.$invoice['bill_business_name'].'" style="width:270px" required><br>';
             } else {
-                echo '<select class="fill-in" name="bill_business_name" id="bill_business_name" style="width:270px">';
+                echo '<select class="fill-in" name="bill_business_name" id="bill_business_name" style="width:270px" required>';
                     echo '<option value="">Choose business name to prefill...</option>';
                     foreach ($customersQuery as $customer) {
                         echo '<option value="';
@@ -60,13 +60,13 @@
             }
             echo '<input type="text" class="fill-in" id="bill_first_name" name="bill_first_name" value="'.$invoice['bill_first_name'].'" placeholder="First Name" style="display: none;width:135px">';
             echo '<input type="text" class="fill-in" id="bill_last_name" name="bill_last_name" value="'.$invoice['bill_last_name'].'" placeholder="Last Name" style="display: none;width:135px">';
-            echo '<input type="text" class="fill-in" id="bill_address" name="bill_address" value="'.$invoice['bill_address'].'" placeholder="Address" style="width:200px">';
+            echo '<input type="text" class="fill-in" id="bill_address" name="bill_address" value="'.$invoice['bill_address'].'" placeholder="Address" style="width:200px" required>';
             echo '<input type="text" class="fill-in" id="bill_address2" name="bill_address2" value="'.$invoice['bill_address2'].'" placeholder="Apt#" style="width:70px"><br>';
-            echo '<input type="text" class="fill-in" id="bill_city" name="bill_city" value="'.$invoice['bill_city'].'" placeholder="City" style="width:270px"><br>';
-            echo '<select class="fill-in" id="bill_state" name="bill_state" placeholder="State" value="'.$invoice['bill_state'].'" style="width:135px">';
+            echo '<input type="text" class="fill-in" id="bill_city" name="bill_city" value="'.$invoice['bill_city'].'" placeholder="City" style="width:270px" required><br>';
+            echo '<select class="fill-in" id="bill_state" name="bill_state" style="width:135px">';
                 require("./PHP/components/statesSelect.php");
             echo '</select>';
-            echo '<input type="text" class="fill-in" id="bill_zip" name="bill_zip" value="'.$invoice['bill_zip'].'" placeholder="Zip" style="width:135px"><br>';
+            echo '<input type="text" class="fill-in" id="bill_zip" name="bill_zip" value="'.$invoice['bill_zip'].'" placeholder="Zip" style="width:135px" required><br>';
 
             echo '<input type="text" class="fill-in" id="bill_phone" name="bill_phone" value="'.$invoice['bill_phone'].'" placeholder="Phone" style="display: none;width:90px">';
             echo '<input type="text" class="fill-in" id="bill_fax" name="bill_fax" value="'.$invoice['bill_fax'].'" placeholder="Fax" style="display: none;width:90px">';
@@ -74,7 +74,7 @@
         echo "</div>";
 
         echo '<div id="shippingAddress">';
-        ?><textarea class="fill-in" name="shipTo" rows="5" style="width:300px;resize:none"><?php
+        ?><textarea class="fill-in" name="shipTo" rows="5" style="width:300px;resize:none" required><?php
             echo $invoice['shipTo'] ? $invoice['shipTo'] : "SAME AS BILL TO";
         ?></textarea><?php
         echo "</div>";      
@@ -124,11 +124,11 @@
 
         echo '<div id="phoneAndEmail">';
         if ($id && $pin) {
-            echo '<input type="text" class="fill-in" name="invoice_phone" value="'.$invoice['invoice_phone'].'" style="width:195px">';
-            echo '<input type="text" class="fill-in" name="invoice_email" value="'.$invoice['invoice_email'].'" style="margin-left:10px; width:248px">';
+            echo '<input type="text" class="fill-in" name="invoice_phone" value="'.$invoice['invoice_phone'].'" style="width:195px" required>';
+            echo '<input type="text" class="fill-in" name="invoice_email" value="'.$invoice['invoice_email'].'" style="margin-left:10px; width:248px" required>';
         } else {
-            echo '<input type="text" class="fill-in" name="invoice_phone" value="'.$invoice_phone.'" style="width:195px">';
-            echo '<input type="text" class="fill-in" name="invoice_email" value="'.$invoice_email.'" style="margin-left:10px; width:248px">';
+            echo '<input type="text" class="fill-in" name="invoice_phone" value="'.$invoice_phone.'" style="width:195px" required>';
+            echo '<input type="text" class="fill-in" name="invoice_email" value="'.$invoice_email.'" style="margin-left:10px; width:248px" required>';
         }
         echo "</div>";
 
@@ -141,7 +141,7 @@ const customerData = <?php echo json_encode($customerArray); ?>;
 const inventoryData = <?php echo json_encode($inventoryArray); ?>;
 </script>
 
-<script src="./JS/InvoiceValidation.js"></script>
+<script src="./JS/Manage-Invoices.js"></script>
 
 <!-- <script> window.print();</script> -->
 <!-- 

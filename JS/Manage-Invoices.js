@@ -1,10 +1,13 @@
+// Global variables and post-get data
 const id = urlParams.get('id') ? urlParams.get('id') : '';
 const pin = urlParams.get('pin') ? urlParams.get('pin') : '';
 const noOfItems = 15;
 let date = new Date().toJSON();
 id ? console.log(id) : console.log('No ID');
 pin ? console.log(pin) : console.log('No PIN');
+invoiceItems = ['Quantity', 'Item', 'ItemDesc', 'SalesPrice'];
 
+// Retrieve elements
 let bill_business_name = document.getElementById(`bill_business_name`);
 let bill_first_name = document.getElementById(`bill_first_name`);
 let bill_last_name = document.getElementById(`bill_last_name`);
@@ -37,31 +40,46 @@ function addFinalPrice() {
   finalPrice.value = Number(finalPriceValue).toFixed(2);
 }
 
+// Validation for creating an invoice
 if (!id && !pin) {
   document.getElementById('invoiceDate').value = date.slice(0, 10);
   document.getElementById('shipDate').value = date.slice(0, 10);
   bill_state.value = 'IL';
 
   bill_business_name.addEventListener('change', function () {
-    let selectedBusiness = customerData.find(
-      (element) =>
-        element['customers_id'] ==
-        this.value.substring(0, this.value.indexOf('-'))
-    );
-    bill_first_name.value = selectedBusiness.first_name;
-    bill_last_name.value = selectedBusiness.last_name;
-    bill_address.value = selectedBusiness.address;
-    bill_address2.value = selectedBusiness.address2;
-    bill_city.value = selectedBusiness.city;
-    bill_state.value = selectedBusiness.state;
-    bill_zip.value = selectedBusiness.zip;
-    bill_phone.value = selectedBusiness.phone;
-    bill_fax.value = selectedBusiness.fax;
-    bill_email.value = selectedBusiness.email;
+    if (this.value != '') {
+      let selectedBusiness = customerData.find(
+        (element) =>
+          element['customers_id'] ==
+          this.value.substring(0, this.value.indexOf('-'))
+      );
+      bill_first_name.value = selectedBusiness.first_name;
+      bill_last_name.value = selectedBusiness.last_name;
+      bill_address.value = selectedBusiness.address;
+      bill_address2.value = selectedBusiness.address2;
+      bill_city.value = selectedBusiness.city;
+      bill_state.value = selectedBusiness.state;
+      bill_zip.value = selectedBusiness.zip;
+      bill_phone.value = selectedBusiness.phone;
+      bill_fax.value = selectedBusiness.fax;
+      bill_email.value = selectedBusiness.email;
+    } else {
+      bill_first_name.value = '';
+      bill_last_name.value = '';
+      bill_address.value = '';
+      bill_address2.value = '';
+      bill_city.value = '';
+      bill_state.value = 'IL';
+      bill_zip.value = '';
+      bill_phone.value = '';
+      bill_fax.value = '';
+      bill_email.value = '';
+    }
   });
 
   document.getElementById(`part1Quantity`).disabled = true;
   document.getElementById(`part1Item`).disabled = true;
+  document.getElementById(`part1ItemDesc`).required = true;
   document.getElementById(`part1SalesPrice`).disabled = true;
 
   for (let i = 1; i <= 15; i++) {
@@ -77,6 +95,7 @@ if (!id && !pin) {
         if (this.value != '') {
           // Quantity
           document.getElementById(`part${i}Quantity`).disabled = false;
+          document.getElementById(`part${i}Quantity`).required = true;
           document.getElementById(`part${i}Quantity`).value =
             selectedInventory.quantityOnHand;
           document
@@ -84,10 +103,12 @@ if (!id && !pin) {
             .setAttribute('max', selectedInventory.quantityOnHand);
           // Item
           document.getElementById(`part${i}Item`).disabled = false;
+          document.getElementById(`part${i}Item`).required = true;
           document.getElementById(`part${i}Item`).value =
             selectedInventory.itemName;
           // Sales Price
           document.getElementById(`part${i}SalesPrice`).disabled = false;
+          document.getElementById(`part${i}SalesPrice`).required = true;
           document.getElementById(`part${i}SalesPrice`).value =
             selectedInventory.salesPrice;
           // Item Total Price
@@ -101,12 +122,15 @@ if (!id && !pin) {
         } else {
           // Quantity
           document.getElementById(`part${i}Quantity`).disabled = true;
+          document.getElementById(`part${i}Quantity`).required = false;
           document.getElementById(`part${i}Quantity`).value = '';
           // Item
           document.getElementById(`part${i}Item`).disabled = true;
+          document.getElementById(`part${i}Item`).required = false;
           document.getElementById(`part${i}Item`).value = '';
           // Sales Price
           document.getElementById(`part${i}SalesPrice`).disabled = true;
+          document.getElementById(`part${i}SalesPrice`).required = false;
           document.getElementById(`part${i}SalesPrice`).value = '';
           // Item Total Price
           document.getElementById(`part${i}TotalPrice`).value = Number(
@@ -117,15 +141,19 @@ if (!id && !pin) {
             // Quantity
             document.getElementById(`part${j}Quantity`).value = '';
             document.getElementById(`part${j}Quantity`).disabled = true;
+            document.getElementById(`part${i}Quantity`).required = false;
             // Item
             document.getElementById(`part${j}Item`).value = '';
             document.getElementById(`part${j}Item`).disabled = true;
+            document.getElementById(`part${i}Item`).required = false;
+
             // Item Description
             document.getElementById(`part${j}ItemDesc`).value = '';
             document.getElementById(`part${j}ItemDesc`).disabled = true;
             // Sales Price
             document.getElementById(`part${j}SalesPrice`).value = '';
             document.getElementById(`part${j}SalesPrice`).disabled = true;
+            document.getElementById(`part${i}SalesPrice`).required = false;
             // Sales Price
             document.getElementById(`part${j}TotalPrice`).value = '0.00';
           }
@@ -155,20 +183,42 @@ if (!id && !pin) {
   }
 }
 
+// Validation for modifying an invoice
 if (id && pin) {
-  for (let i = 2; i <= noOfItems; i++) {
-    document
-      .getElementById(`part${i}ItemDesc`)
-      .addEventListener('change', function () {
-        if (this.value != '') {
-          console.log('maybe');
-          document.getElementById(`part${i + 1}ItemDesc`).disabled = false;
-          //left off here 5/16/2023
-        }
-      });
-  }
+  invoiceItems.forEach((invoiceItem) => {
+    for (let i = 2; i <= noOfItems - 1; i++) {
+      document
+        .getElementById(`part${i}${invoiceItem}`)
+        .addEventListener('change', function () {
+          if (this.value != '') {
+            console.log('next level');
+            // Quantity
+            document.getElementById(`part${i}Quantity`).disabled = false;
+            document.getElementById(`part${i}Quantity`).required = true;
+            // Item
+            document.getElementById(`part${i}Item`).disabled = false;
+            document.getElementById(`part${i}Item`).required = true;
+            // Item Description
+            document.getElementById(`part${i}ItemDesc`).disabled = false;
+            document.getElementById(`part${i}ItemDesc`).required = true;
+            // Sales Price
+            document.getElementById(`part${i}SalesPrice`).disabled = false;
+            document.getElementById(`part${i}SalesPrice`).required = true;
+            // Enable next Item Quantity
+            document.getElementById(`part${i + 1}Quantity`).disabled = false;
+            // Enable next Item Code
+            document.getElementById(`part${i + 1}Item`).disabled = false;
+            // Enable next Item Description
+            document.getElementById(`part${i + 1}ItemDesc`).disabled = false;
+            // Enable next Item Sales Price
+            document.getElementById(`part${i + 1}SalesPrice`).disabled = false;
+          }
+        });
+    }
+  });
 }
 
+// Disabling all fields that are not ready to be editted
 for (let i = 2; i <= noOfItems; i++) {
   if (document.getElementById(`part${i}ItemDesc`).value == '') {
     document.getElementById(`part${i}Quantity`).disabled = true;
@@ -185,93 +235,15 @@ for (let i = 2; i <= noOfItems; i++) {
   }
 }
 
+// Enabling only next field when modifying an invoice only
 if (id && pin) {
   for (let i = 2; i <= noOfItems; i++) {
     if (document.getElementById(`part${i - 1}ItemDesc`).value != '') {
+      console.log('check this');
+      document.getElementById(`part${i}Quantity`).disabled = false;
+      document.getElementById(`part${i}Item`).disabled = false;
       document.getElementById(`part${i}ItemDesc`).disabled = false;
-      // document
-      //   .getElementById(`part${i}ItemDesc`)
-      //   .addEventListener('change', function () {
-      //     if (document.getElementById(`part${i}ItemDesc`) != '') {
-      //       document.getElementById(`part${i}Quantity`).disabled = false;
-      //       document.getElementById(`part${i}Item`).disabled = false;
-      //       document.getElementById(`part${i + 1}ItemDesc`).disabled = false;
-      //       document.getElementById(`part${i}SalesPrice`).disabled = false;
-      //     }
-      //   });
-
-      // document
-      //   .getElementById(`part${i}ItemDesc`)
-      //   .addEventListener('change', function () {
-      //     if (this.value != '') {
-      //       // Quantity
-      //       document.getElementById(`part${i}Quantity`).disabled = false;
-      //       document.getElementById(`part${i}Quantity`).value = '';
-      //       // Item
-      //       document.getElementById(`part${i}Item`).disabled = false;
-      //       document.getElementById(`part${i}Item`).value = '';
-      //       // Sales Price
-      //       document.getElementById(`part${i}SalesPrice`).disabled = false;
-      //       document.getElementById(`part${i}SalesPrice`).value = '';
-      //       // Item Total Price
-      //       document.getElementById(`part${i}TotalPrice`).value = '0.00';
-      //       // Enable next item
-      //       document.getElementById(`part${i + 1}ItemDesc`).disabled = false;
-      //       addFinalPrice();
-      //     } else {
-      //       // Quantity
-      //       document.getElementById(`part${i}Quantity`).disabled = true;
-      //       document.getElementById(`part${i}Quantity`).value = '';
-      //       // Item
-      //       document.getElementById(`part${i}Item`).disabled = true;
-      //       document.getElementById(`part${i}Item`).value = '';
-      //       // Sales Price
-      //       document.getElementById(`part${i}SalesPrice`).disabled = true;
-      //       document.getElementById(`part${i}SalesPrice`).value = '';
-      //       // Item Total Price
-      //       document.getElementById(`part${i}TotalPrice`).value = Number(
-      //         document.getElementById(`part${i}Quantity`).value *
-      //           document.getElementById(`part${i}SalesPrice`).value
-      //       ).toFixed(2);
-      //       for (let j = i + 1; j <= 15; j++) {
-      //         // Quantity
-      //         document.getElementById(`part${j}Quantity`).value = '';
-      //         document.getElementById(`part${j}Quantity`).disabled = true;
-      //         // Item
-      //         document.getElementById(`part${j}Item`).value = '';
-      //         document.getElementById(`part${j}Item`).disabled = true;
-      //         // Item Description
-      //         document.getElementById(`part${j}ItemDesc`).value = '';
-      //         document.getElementById(`part${j}ItemDesc`).disabled = true;
-      //         // Sales Price
-      //         document.getElementById(`part${j}SalesPrice`).value = '';
-      //         document.getElementById(`part${j}SalesPrice`).disabled = true;
-      //         // Sales Price
-      //         document.getElementById(`part${j}TotalPrice`).value = '0.00';
-      //       }
-      //       addFinalPrice();
-      //     }
-      //   });
-
-      // document
-      //   .getElementById(`part${i}Quantity`)
-      //   .addEventListener('change', function () {
-      //     // Item Total Price
-      //     document.getElementById(`part${i}TotalPrice`).value = Number(
-      //       this.value * document.getElementById(`part${i}SalesPrice`).value
-      //     ).toFixed(2);
-      //     addFinalPrice();
-      //   });
-
-      // document
-      //   .getElementById(`part${i}SalesPrice`)
-      //   .addEventListener('change', function () {
-      //     // Item Total Price
-      //     document.getElementById(`part${i}TotalPrice`).value = Number(
-      //       document.getElementById(`part${i}Quantity`).value * this.value
-      //     ).toFixed(2);
-      //     addFinalPrice();
-      //   });
+      document.getElementById(`part${i}SalesPrice`).disabled = false;
     }
   }
 }
