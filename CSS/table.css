@@ -36,3 +36,29 @@ th {
   background-size: 29px 29px;
   background-repeat: no-repeat;
 }
+
+.unchecked {
+  margin-top: 5px;
+  /* height: 15px; */
+  width: 15px;
+  background: none;
+  border-style: none;
+  -webkit-text-fill-color: transparent;
+  /* background-color: rgba(255, 0, 0, 0.3) !important; */
+  background-image: url('./../icons/unchecked.png');
+  background-size: 13px 13px;
+  background-repeat: no-repeat;
+}
+
+.checked {
+  margin-top: 5px;
+  /* height: 15px; */
+  width: 15px;
+  background: none;
+  border-style: none;
+  -webkit-text-fill-color: transparent;
+  /* background-color: rgba(255, 0, 0, 0.3) !important; */
+  background-image: url('./../icons/checked.png');
+  background-size: 13px 13px;
+  background-repeat: no-repeat;
+}

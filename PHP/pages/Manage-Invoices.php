@@ -58,8 +58,9 @@
                     }
                 echo '</select><br>';
             }
-            echo '<input type="text" class="fill-in" id="bill_first_name" name="bill_first_name" value="'.$invoice['bill_first_name'].'" placeholder="First Name" style="display: none;width:135px">';
-            echo '<input type="text" class="fill-in" id="bill_last_name" name="bill_last_name" value="'.$invoice['bill_last_name'].'" placeholder="Last Name" style="display: none;width:135px">';
+            echo '<input type="number" class="fill-in" id="bill_id" name="bill_id" value="'.$invoice['bill_id'].'" style="display: none;width:90px">';
+            echo '<input type="text" class="fill-in" id="bill_first_name" name="bill_first_name" value="'.$invoice['bill_first_name'].'" placeholder="First Name" style="display: none;width:90px">';
+            echo '<input type="text" class="fill-in" id="bill_last_name" name="bill_last_name" value="'.$invoice['bill_last_name'].'" placeholder="Last Name" style="display: none;width:90px">';
             echo '<input type="text" class="fill-in" id="bill_address" name="bill_address" value="'.$invoice['bill_address'].'" placeholder="Address" style="width:200px" required>';
             echo '<input type="text" class="fill-in" id="bill_address2" name="bill_address2" value="'.$invoice['bill_address2'].'" placeholder="Apt#" style="width:70px"><br>';
             echo '<input type="text" class="fill-in" id="bill_city" name="bill_city" value="'.$invoice['bill_city'].'" placeholder="City" style="width:270px" required><br>';
@@ -113,6 +114,7 @@
                     }
                 echo '</select>';
                 }
+                echo '<input type="number" class="fill-in" id="part'.$i.'ItemNo" name="part'.$i.'ItemNo" value="'.$invoice['part'.$i.'ItemNo'].'" style="display: none;margin-left:5px; margin-right:20px; width:110px">';
                 echo '$<input type="number" step=".01" min="0" class="fill-in" id="part'.$i.'SalesPrice" name="part'.$i.'SalesPrice" value="'.$invoice['part'.$i.'SalesPrice'].'" style="margin-left:5px; margin-right:20px; width:110px">';
                 echo '$<input type="text" disabled class="no-outline" id="part'.$i.'TotalPrice" value="' . number_format($invoice['part'.$i.'SalesPrice'] * $invoice['part'.$i.'Quantity'], 2, '.', '') .'" style="width:85px"><br>';
             }

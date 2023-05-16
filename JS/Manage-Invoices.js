@@ -6,6 +6,7 @@ let date = new Date().toJSON();
 id ? console.log(id) : console.log('No ID');
 pin ? console.log(pin) : console.log('No PIN');
 invoiceItems = ['Quantity', 'Item', 'ItemDesc', 'SalesPrice'];
+console.log(inventoryData);
 
 // Retrieve elements
 let bill_business_name = document.getElementById(`bill_business_name`);
@@ -131,6 +132,9 @@ if (!id && !pin) {
           // Sales Price
           document.getElementById(`part${i}SalesPrice`).value =
             selectedInventory.salesPrice;
+          // Item No
+          document.getElementById(`part${i}ItemNo`).value =
+            selectedInventory.inventory_id;
           // Item Total Price
           document.getElementById(`part${i}TotalPrice`).value = Number(
             document.getElementById(`part${i}Quantity`).value *
