@@ -98,7 +98,12 @@
 
         echo '<div id="Items">';
             for ($i = 1; $i <= $noOfItems; $i++) {
-                echo '<input type="number" step="1" min="1" class="fill-in" id="part'.$i.'Quantity" name="part'.$i.'Quantity" value="'.$invoice['part'.$i.'Quantity'].'"  style="width:85px">';
+                if ($invoice['part'.$i.'Quantity'] > 0){
+                    echo '<input type="number" step="1" min="1" class="fill-in" id="part'.$i.'Quantity" name="part'.$i.'Quantity" value="'.$invoice['part'.$i.'Quantity'].'"  style="width:85px">';
+                } else {
+                    echo '<input type="number" step="1" min="1" class="fill-in" id="part'.$i.'Quantity" name="part'.$i.'Quantity" value=""  style="width:85px">';
+                }
+                
                 echo '<input type="text" class="fill-in" id="part'.$i.'Item"    name="part'.$i.'Item"       value="'.$invoice['part'.$i.'Item'].'"     style="margin-left:10px; width:100px">';
                 if ($id && $pin) {
                 echo '<input type="text" class="fill-in" id="part'.$i.'ItemDesc" name="part'.$i.'ItemDesc"  value="'.$invoice['part'.$i.'ItemDesc'].'" style="margin-left:10px; margin-right:10px; width:248px">';
@@ -114,8 +119,12 @@
                     }
                 echo '</select>';
                 }
-                echo '<input type="number" class="fill-in" id="part'.$i.'ItemNo" name="part'.$i.'ItemNo" value="'.$invoice['part'.$i.'ItemNo'].'" style="display: none;margin-left:5px; margin-right:20px; width:110px">';
-                echo '$<input type="number" step=".01" min="0" class="fill-in" id="part'.$i.'SalesPrice" name="part'.$i.'SalesPrice" value="'.$invoice['part'.$i.'SalesPrice'].'" style="margin-left:5px; margin-right:20px; width:110px">';
+                if (!$id && !$pin) {echo '<input type="number" class="fill-in" id="part'.$i.'ItemNo" name="part'.$i.'ItemNo" value="'.$invoice['part'.$i.'ItemNo'].'" style="display: none;margin-left:5px; margin-right:20px; width:110px">';}
+                if ($invoice['part'.$i.'SalesPrice'] > 0) {
+                    echo '$<input type="number" step=".01" min="0" class="fill-in" id="part'.$i.'SalesPrice" name="part'.$i.'SalesPrice" value="'.$invoice['part'.$i.'SalesPrice'].'" style="margin-left:5px; margin-right:20px; width:110px">';
+                }   else {
+                    echo '$<input type="number" step=".01" min="0" class="fill-in" id="part'.$i.'SalesPrice" name="part'.$i.'SalesPrice" value="" style="margin-left:5px; margin-right:20px; width:110px">';
+                }
                 echo '$<input type="text" disabled class="no-outline" id="part'.$i.'TotalPrice" value="' . number_format($invoice['part'.$i.'SalesPrice'] * $invoice['part'.$i.'Quantity'], 2, '.', '') .'" style="width:85px"><br>';
             }
         echo "</div>";

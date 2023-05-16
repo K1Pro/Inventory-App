@@ -156,6 +156,8 @@ if (!id && !pin) {
           document.getElementById(`part${i}SalesPrice`).disabled = true;
           document.getElementById(`part${i}SalesPrice`).required = false;
           document.getElementById(`part${i}SalesPrice`).value = '';
+          // Item No
+          document.getElementById(`part${i}ItemNo`).value = '';
           // Item Total Price
           document.getElementById(`part${i}TotalPrice`).value = Number(
             document.getElementById(`part${i}Quantity`).value *
@@ -163,6 +165,7 @@ if (!id && !pin) {
           ).toFixed(2);
           for (let j = i + 1; j <= 15; j++) {
             console.log('what is this?');
+            document.getElementById(`part${j}ItemNo`).value = '';
             invoiceItems.forEach((invoiceItem) => {
               document.getElementById(`part${j}${invoiceItem}`).value = '';
               document.getElementById(`part${j}${invoiceItem}`).disabled = true;
@@ -208,6 +211,7 @@ if (id && pin) {
 for (let i = 2; i <= noOfItems; i++) {
   if (document.getElementById(`part${i}ItemDesc`).value == '') {
     console.log('check this now');
+    document.getElementById(`part${i}ItemNo`).value = '';
     invoiceItems.forEach((invoiceItem) => {
       document.getElementById(`part${i}${invoiceItem}`).disabled = true;
       document.getElementById(`part${i}${invoiceItem}`).value = '';
