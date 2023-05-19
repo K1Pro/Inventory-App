@@ -57,7 +57,7 @@
             echo "</pre>";
 
             echo '<div id="poNo">';
-                echo $dbValues['invoices_id'];
+                echo $dbValues['po_no'];
             echo "</div>";
 
             echo '<div id="terms">';
@@ -119,13 +119,17 @@
                 echo "$" . number_format($dbValues['finalPrice'], 2, '.', ',');
             echo "</div>";
 
-            echo '<div id="InvoicePhone">';
-                if ($dbValues['invoice_phone']) echo $dbValues['invoice_phone'] . "<br>";
-            echo "</div>";
+            echo "<pre>";
+                echo '<div id="InvoicePhone">';
+                    if ($dbValues['invoice_phone']) echo $dbValues['invoice_phone'] . "<br>";
+                echo "</div>";
+            echo "</pre>";
 
-            echo '<div id="InvoiceEmail">';
-                if ($dbValues['invoice_email']) echo $dbValues['invoice_email'] . "<br>";
-            echo "</div>";
+            echo "<pre>";
+                echo '<div id="InvoiceEmail">';
+                    if ($dbValues['invoice_email']) echo $dbValues['invoice_email'] . "<br>";
+                echo "</div>";
+            echo "</pre>";
         }
         
         // Close connection

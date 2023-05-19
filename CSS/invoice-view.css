@@ -158,16 +158,18 @@
   top: 940px;
   left: 65px;
   width: 180px;
-  height: 30px;
+  height: 90px;
   text-align: center;
+  font-family: 'Times New Roman', Times, serif;
 }
 #InvoiceEmail {
   position: absolute;
   top: 940px;
   left: 275px;
   width: 220px;
-  height: 30px;
+  height: 90px;
   text-align: center;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 #invoiceDate,
@@ -186,9 +188,10 @@
 #ItemDescription,
 #ItemSalesPrice,
 #finalAmount,
-#finalPrice,
+#finalPrice
+/* ,
 #InvoicePhone,
-#InvoiceEmail {
+#InvoiceEmail  */ {
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   /* word-wrap: break-word !important; */

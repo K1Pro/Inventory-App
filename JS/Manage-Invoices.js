@@ -142,6 +142,12 @@ if (!id && !pin) {
           ).toFixed(2); // toLocaleString('en-US');
           // Enable next item
           document.getElementById(`part${i + 1}ItemDesc`).disabled = false;
+          // if (this.value.slice(-4) == 'Misc') {
+          //   console.log('Misc Selected');
+          //   const miscItem = document.createElement('input');
+          //   miscItem.value = 'Misc';
+          //   this.parentNode.replaceChild(miscItem, this);
+          // }
           addFinalPrice();
         } else {
           // Quantity
@@ -164,7 +170,6 @@ if (!id && !pin) {
               document.getElementById(`part${i}SalesPrice`).value
           ).toFixed(2);
           for (let j = i + 1; j <= 15; j++) {
-            console.log('what is this?');
             document.getElementById(`part${j}ItemNo`).value = '';
             invoiceItems.forEach((invoiceItem) => {
               document.getElementById(`part${j}${invoiceItem}`).value = '';
@@ -191,7 +196,6 @@ if (id && pin) {
         .getElementById(`part${i}${invoiceItem}`)
         .addEventListener('change', function () {
           if (this.value != '') {
-            console.log('next level');
             invoiceItems.forEach((invoiceItem) => {
               document.getElementById(
                 `part${i}${invoiceItem}`
@@ -210,7 +214,6 @@ if (id && pin) {
 // Disabling all fields that are not ready to be editted
 for (let i = 2; i <= noOfItems; i++) {
   if (document.getElementById(`part${i}ItemDesc`).value == '') {
-    console.log('check this now');
     document.getElementById(`part${i}ItemNo`).value = '';
     invoiceItems.forEach((invoiceItem) => {
       document.getElementById(`part${i}${invoiceItem}`).disabled = true;
