@@ -162,8 +162,3 @@ const inventoryData = <?php echo json_encode($inventoryArray); ?>;
 </script>
 
 <script src="./JS/Manage-Invoices.js"></script>
-
-<!-- <script> window.print();</script> -->
-<!-- 
-</body>
-</html> -->

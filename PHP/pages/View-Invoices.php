@@ -68,7 +68,7 @@ console.log(postedData)
   <tr>
     <!-- <th>invoices_id</th> -->
     <th width="75px">Invoice</th>
-    <!-- <th width="50px">Slip</th> -->
+    <th width="50px">Slip</th>
     <th width="75px">Modify</th>
     <th width="60px">Email</th>
     <!-- <th width="75px">Modify</th> -->
@@ -107,6 +107,13 @@ console.log(postedData)
             echo '<td class="tdCenter">';
                 echo '<a href="invoice_pdf.php?id='.$dbValuesOne['invoices_id'].'&pin='.$dbValuesOne['bill_zip'].'" target="_blank">'; 
                     echo '<img src="./icons/invoice.png" alt="Invoice" width="30" height="30">';
+                echo '</a>';
+            echo "</td>";
+
+            // Link to Slip
+            echo '<td class="tdCenter">';
+                echo '<a href="slip_pdf.php?id='.$dbValuesOne['invoices_id'].'&pin='.$dbValuesOne['bill_zip'].'" target="_blank">'; 
+                    echo '<img src="./icons/slip.png" alt="Invoice" width="30" height="30">';
                 echo '</a>';
             echo "</td>";
 
