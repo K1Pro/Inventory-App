@@ -42,6 +42,10 @@ function addFinalPrice() {
   finalPrice.value = Number(finalPriceValue).toFixed(2);
 }
 
+function lowerCase(randomString) {
+  return randomString.toLowerCase();
+}
+
 for (let i = 1; i <= 15; i++) {
   document
     .getElementById(`part${i}Quantity`)
@@ -112,10 +116,20 @@ if (!id && !pin) {
     document
       .getElementById(`part${i}ItemDesc`)
       .addEventListener('change', function () {
-        let selectedInventory = inventoryData.find(
-          (element) =>
-            element['inventory_id'] ==
-            this.value.substring(0, this.value.indexOf('-'))
+        // Format the array's object values to be lower case
+        let formattedInventoryData = [];
+        inventoryData.forEach((inventory) => {
+          let inventoryDataObjects = {};
+          for (let key in inventory) {
+            key == 'descOnPurchTrans'
+              ? (inventoryDataObjects[key] = inventory[key].toLowerCase())
+              : (inventoryDataObjects[key] = inventory[key]);
+          }
+          formattedInventoryData.push(inventoryDataObjects);
+        });
+
+        let selectedInventory = formattedInventoryData.find(
+          (element) => element['descOnPurchTrans'] == this.value.toLowerCase()
         );
 
         if (this.value != '') {

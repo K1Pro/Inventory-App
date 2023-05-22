@@ -109,16 +109,17 @@
                 if ($id && $pin) {
                 echo '<input type="text" class="fill-in" id="part'.$i.'ItemDesc" name="part'.$i.'ItemDesc"  value="'.$invoice['part'.$i.'ItemDesc'].'" style="margin-left:10px; margin-right:10px; width:248px">';
                 } else {
-                    echo '<select class="fill-in" id="part'.$i.'ItemDesc" name="part'.$i.'ItemDesc" style="margin-left:10px; margin-right:10px; width:248px">';
-                    echo '<option value="">Choose...</option>';
+                    echo '<input list="part'.$i.'ItemDescList" class="fill-in" id="part'.$i.'ItemDesc" name="part'.$i.'ItemDesc" style="margin-left:10px; margin-right:10px; width:248px">';
+                    echo '<datalist id="part'.$i.'ItemDescList">';
+                    // echo '<option value="">Choose...</option>';
                     foreach ($inventoryQuery as $inventory) {
                       echo '<option value="';
-                      echo $inventory['inventory_id'] . "-" . $inventory['descOnPurchTrans'];
-                      echo '">';
                       echo $inventory['descOnPurchTrans'];
-                      echo "</option>";
+                      echo '">';
+                    //   echo $inventory['descOnPurchTrans'];
+                    //   echo "</option>";
                     }
-                echo '</select>';
+                echo '</datalist>';
                 }
                 if (!$id && !$pin) {echo '<input type="number" class="fill-in" id="part'.$i.'ItemNo" name="part'.$i.'ItemNo" value="'.$invoice['part'.$i.'ItemNo'].'" style="display: none;margin-left:5px; margin-right:20px; width:110px">';}
                 if ($invoice['part'.$i.'SalesPrice'] > 0) {
