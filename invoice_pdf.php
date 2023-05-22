@@ -72,9 +72,11 @@
         $pdf->SetXY(120,58);
         $pdf->MultiCell(70, 6, $dbValues['shipTo'] ? $dbValues['shipTo'] : 'SAME AS BILL TO', 0, 'L');
         
+        $pdf->SetFont('Times','B',13);
         $pdf->SetXY(13,103);
         $pdf->Cell(28, 8, $dbValues['po_no'], 0, 0, 'C');
 
+        $pdf->SetFont('Times','',11);
         $pdf->SetXY(41,103);
         $pdf->Cell(29, 8, $dbValues['terms'], 0, 0, 'C');
 

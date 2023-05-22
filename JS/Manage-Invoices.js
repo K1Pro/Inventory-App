@@ -20,6 +20,7 @@ let bill_zip = document.getElementById(`bill_zip`);
 let bill_phone = document.getElementById(`bill_phone`);
 let bill_fax = document.getElementById(`bill_fax`);
 let bill_email = document.getElementById(`bill_email`);
+let shipTo = document.getElementById(`shipTo`);
 let part1Quantity = document.getElementById(`part1Quantity`);
 let part1ItemDesc = document.getElementById(`part1ItemDesc`);
 let part1Item = document.getElementById(`part1Item`);
@@ -71,6 +72,7 @@ if (!id && !pin) {
 
   bill_business_name.addEventListener('change', function () {
     if (this.value != '') {
+      console.log(customerData);
       let selectedBusiness = customerData.find(
         (element) =>
           element['customers_id'] ==
@@ -86,6 +88,7 @@ if (!id && !pin) {
       bill_phone.value = selectedBusiness.phone;
       bill_fax.value = selectedBusiness.fax;
       bill_email.value = selectedBusiness.email;
+      shipTo.value = `${selectedBusiness.business_name}\n${selectedBusiness.address} ${selectedBusiness.address2}\n${selectedBusiness.city}, ${selectedBusiness.state} ${selectedBusiness.zip}`;
     } else {
       bill_first_name.value = '';
       bill_last_name.value = '';

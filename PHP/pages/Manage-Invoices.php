@@ -75,8 +75,9 @@
         echo "</div>";
 
         echo '<div id="shippingAddress">';
-        ?><textarea class="fill-in" name="shipTo" rows="5" style="width:300px;resize:none" required><?php
-            echo $invoice['shipTo'] ? $invoice['shipTo'] : "SAME AS BILL TO";
+        ?><textarea class="fill-in" id="shipTo" name="shipTo" rows="5" style="width:300px;resize:none" required><?php
+            echo $invoice['shipTo'];
+            // echo $invoice['shipTo'] ? $invoice['shipTo'] : "SAME AS BILL TO";
         ?></textarea><?php
         echo "</div>";      
 

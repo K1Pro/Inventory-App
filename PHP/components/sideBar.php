@@ -15,13 +15,25 @@
           </li>
           <li>
             <a href="?page=View-Invoices" class="nav-link text-white">
-              <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+              <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#receipt"></use></svg>
               Invoices
             </a>
           </li>
           <li>
+            <a href="?page=Invoice-Report" class="nav-link text-white">
+              <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+              Invoice Report
+            </a>
+          </li>
+          <li>
+            <a href="?page=Estimates" class="nav-link text-white">
+              <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#patchquestion"></use></svg>
+              Estimates
+            </a>
+          </li>
+          <li>
             <a href="?page=View-Inventory" class="nav-link text-white">
-            <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+            <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#tools"></use></svg>
               Inventory
             </a>
           </li>
@@ -33,7 +45,7 @@
           </li>
           <li>
             <a href="?page=View-Users" class="nav-link text-white">
-              <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+              <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#vcard"></use></svg>
               Users
             </a>
           </li>
