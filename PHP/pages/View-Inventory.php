@@ -42,7 +42,6 @@ if ($postedData['submit'] == "Create Inventory") {
             . mysqli_error($conn);
     }
 } else if(strpos($postedData['submit'], 'Delete') !== false){
-    console_log("Deleting");
     $parts = explode('-', $postedData['submit']);
     $deleteDB = $parts[1];
     $deleteValue = $parts[2];
@@ -91,14 +90,11 @@ if ($postedData['submit'] == "Create Inventory") {
 
         // Delete an Inventory Part
         echo '<td class="tdCenter">';
-            echo '<a href="./index.php?page=Delete">';
-            echo '<a href="./index.php?page=Delete&id='.$dbValues['inventory_id'].'&db=inventory">';
-                echo '<img src="./icons/delete.png" alt="Invoice" width="30" height="30">';
-            echo '</a>';
+            echo '<form action="./index.php?page=View-Inventory" method="post">';
+                echo '<input class="deleteButton" type="submit" name="submit" value="Delete-inventory-'.$dbValues['inventory_id'].'">';
+            echo '</form>';
         echo "</td>";
-        // foreach ($dbValues as $values) {
-        //     echo "<td>$values</td>";
-        // }
+
         echo "<td>";
             print_r($dbValues['itemName']);
         echo "</td>";
