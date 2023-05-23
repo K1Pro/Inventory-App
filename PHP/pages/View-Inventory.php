@@ -61,6 +61,7 @@ if ($postedData['submit'] == "Create Inventory") {
     <th>Desc. On Purch. Trans.</th>
     <!-- <th>descOnSalesTrans</th> -->
     <th width="75px">Price</th>
+    <th width="75px">Cost</th>
     <!-- <th>COGSaccount</th> -->
     <th>Preferred Vendor</th>
     <th>Quantity</th>
@@ -71,7 +72,7 @@ if ($postedData['submit'] == "Create Inventory") {
 
 <?php
     // SQL query
-    $strSQL = "SELECT itemName, subitemOf, descOnPurchTrans, salesPrice, preferredVendor, quantityOnHand, inventory_id FROM inventory ORDER BY descOnPurchTrans ASC";
+    $strSQL = "SELECT itemName, subitemOf, descOnPurchTrans, salesPrice, cost, preferredVendor, quantityOnHand, inventory_id FROM inventory ORDER BY descOnPurchTrans ASC";
 
     // Execute the query
     $rs = mysqli_query($conn, $strSQL);
@@ -90,9 +91,11 @@ if ($postedData['submit'] == "Create Inventory") {
 
         // Delete an Inventory Part
         echo '<td class="tdCenter">';
+        if ($dbValues['descOnPurchTrans'] != "Misc") {
             echo '<form action="./index.php?page=View-Inventory" method="post">';
                 echo '<input class="deleteButton" type="submit" name="submit" value="Delete-inventory-'.$dbValues['inventory_id'].'">';
             echo '</form>';
+        }
         echo "</td>";
 
         echo "<td>";
@@ -109,6 +112,10 @@ if ($postedData['submit'] == "Create Inventory") {
 
         echo "<td>$";
             print_r($dbValues['salesPrice']);
+        echo "</td>";
+
+        echo "<td>$";
+            print_r($dbValues['cost']);
         echo "</td>";
 
         echo "<td>";

@@ -109,19 +109,27 @@
                 if ($id && $pin) {
                 echo '<input type="text" class="fill-in" id="part'.$i.'ItemDesc" name="part'.$i.'ItemDesc"  value="'.$invoice['part'.$i.'ItemDesc'].'" style="margin-left:10px; margin-right:10px; width:248px">';
                 } else {
-                    echo '<input list="part'.$i.'ItemDescList" class="fill-in" id="part'.$i.'ItemDesc" name="part'.$i.'ItemDesc" placeholder="TYPE ITEM DESCRIPTION..." style="margin-left:10px; margin-right:10px; width:248px">';
-                    echo '<datalist id="part'.$i.'ItemDescList">';
+                    echo '<span class="inventoryDropdown" style="margin-left:10px; margin-right:10px">';
+                    echo '<input class="fill-in" id="part'.$i.'ItemDesc" name="part'.$i.'ItemDesc" placeholder="Choose..." type="text" />';
+                    echo '<select class="fill-in" id="part'.$i.'ItemSelect" style="width:248px" onchange="this.previousElementSibling.value=this.value; this.previousElementSibling.focus()">';
+                    // echo '<input list="part'.$i.'ItemDescList" class="fill-in" id="part'.$i.'ItemDesc" name="part'.$i.'ItemDesc" placeholder="TYPE ITEM DESCRIPTION..." style="margin-left:10px; margin-right:10px; width:248px">';
+                    // echo '<datalist id="part'.$i.'ItemDescList">';
                     // echo '<option value="">Choose...</option>';
                     foreach ($inventoryQuery as $inventory) {
                       echo '<option value="';
                       echo $inventory['descOnPurchTrans'];
                       echo '">';
-                    //   echo $inventory['descOnPurchTrans'];
-                    //   echo "</option>";
+                      echo $inventory['descOnPurchTrans'];
+                      echo "</option>";
                     }
-                echo '</datalist>';
+                // echo '</datalist>';
+                echo '</select>';
+                echo '</span>';
                 }
-                if (!$id && !$pin) {echo '<input type="number" class="fill-in" id="part'.$i.'ItemNo" name="part'.$i.'ItemNo" value="'.$invoice['part'.$i.'ItemNo'].'" style="display: none;margin-left:5px; margin-right:20px; width:110px">';}
+                // These should be hidden VVVVVVVVVVV
+                if (!$id && !$pin) {echo '<input type="number" class="fill-in" id="part'.$i.'ItemCost" name="part'.$i.'ItemCost" value="'.$invoice['part'.$i.'ItemCost'].'" style="display:none; margin-left:5px; margin-right:5px; width:60px">';}
+                if (!$id && !$pin) {echo '<input type="number" class="fill-in" id="part'.$i.'ItemNo" name="part'.$i.'ItemNo" value="'.$invoice['part'.$i.'ItemNo'].'" style="display:none; margin-left:5px; margin-right:5px; width:40px">';}
+                // These should be hidden ^^^^^^^^^^^
                 if ($invoice['part'.$i.'SalesPrice'] > 0) {
                     echo '$<input type="number" step=".01" min="0" class="fill-in" id="part'.$i.'SalesPrice" name="part'.$i.'SalesPrice" value="'.$invoice['part'.$i.'SalesPrice'].'" style="margin-left:5px; margin-right:20px; width:110px">';
                 }   else {

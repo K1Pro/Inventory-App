@@ -155,7 +155,7 @@ console.log(postedData)
 
             // Invoice Date 
             echo "<td>";
-                print_r($dbValuesOne['invoiceDate']);
+                echo date('m/d/Y', strtotime($dbValuesOne['invoiceDate']));
             echo "</td>";
 
             // Total amount on bill

@@ -26,16 +26,20 @@ let part1ItemDesc = document.getElementById(`part1ItemDesc`);
 let part1Item = document.getElementById(`part1Item`);
 let part1SalesPrice = document.getElementById(`part1SalesPrice`);
 let finalPrice = document.getElementById(`finalPrice`);
+let formattedInventoryData = [];
+let inventoryDataObjects = {};
+let selectedInventory, finalPriceValue, selectedBusiness;
+let totalPriceArray = [];
 
 function addFinalPrice() {
   // Add up Final Price
-  let totalPriceArray = [];
+  totalPriceArray = [];
   for (let i = 1; i <= 15; i++) {
     totalPriceArray.push(
       Number(document.getElementById(`part${i}TotalPrice`).value)
     );
   }
-  let finalPriceValue = totalPriceArray.reduce(add, 0); // with initial value to avoid when the array is empty
+  finalPriceValue = totalPriceArray.reduce(add, 0); // with initial value to avoid when the array is empty
   function add(total, amount) {
     return total + amount;
   }
@@ -77,7 +81,7 @@ if (!id && !pin) {
   bill_business_name.addEventListener('change', function () {
     if (this.value != '') {
       console.log(customerData);
-      let selectedBusiness = customerData.find(
+      selectedBusiness = customerData.find(
         (element) =>
           element['customers_id'] ==
           this.value.substring(0, this.value.indexOf('-'))
@@ -114,12 +118,12 @@ if (!id && !pin) {
 
   for (let i = 1; i <= 15; i++) {
     document
-      .getElementById(`part${i}ItemDesc`)
+      .getElementById(`part${i}ItemSelect`)
       .addEventListener('change', function () {
         // Format the array's object values to be lower case
-        let formattedInventoryData = [];
+        formattedInventoryData = [];
         inventoryData.forEach((inventory) => {
-          let inventoryDataObjects = {};
+          inventoryDataObjects = {};
           for (let key in inventory) {
             key == 'descOnPurchTrans'
               ? (inventoryDataObjects[key] = inventory[key].toLowerCase())
@@ -128,11 +132,14 @@ if (!id && !pin) {
           formattedInventoryData.push(inventoryDataObjects);
         });
 
-        let selectedInventory = formattedInventoryData.find(
+        selectedInventory = formattedInventoryData.find(
           (element) => element['descOnPurchTrans'] == this.value.toLowerCase()
         );
+        console.log(this.value.toLowerCase());
+        console.log(selectedInventory);
 
         if (this.value != '') {
+          console.log('test');
           invoiceItems.forEach((invoiceItem) => {
             document.getElementById(`part${i}${invoiceItem}`).disabled = false;
             document.getElementById(`part${i}${invoiceItem}`).required = true;
@@ -152,6 +159,9 @@ if (!id && !pin) {
           // Item No
           document.getElementById(`part${i}ItemNo`).value =
             selectedInventory.inventory_id;
+          // Cost
+          document.getElementById(`part${i}ItemCost`).value =
+            selectedInventory.cost;
           // Item Total Price
           document.getElementById(`part${i}TotalPrice`).value = Number(
             document.getElementById(`part${i}Quantity`).value *

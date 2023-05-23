@@ -109,3 +109,26 @@
   /* background-color: #e59500; */
   /* opacity: 0.5; */
 }
+
+.inventoryDropdown {
+  position: relative;
+  /* width: 200px; */
+}
+
+.inventoryDropdown select {
+  /* width: 100%; */
+  height: 26px;
+  border-width: 2px !important;
+}
+
+.inventoryDropdown > * {
+  box-sizing: border-box;
+  /* height: 1.5em; */
+}
+
+.inventoryDropdown input {
+  position: absolute;
+  width: calc(100% - 20px);
+  margin-top: 1px;
+  /* border-right: none; */
+}
