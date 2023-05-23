@@ -3,64 +3,6 @@ $id = htmlspecialchars($_GET["id"]);
 $inventorySQL = "SELECT * FROM inventory WHERE inventory_id = '".$id."'";
 $inventory = mysqli_query($conn, $inventorySQL);
 foreach ($inventory as $inventoryValues) {};
-
-// If inventory was modified, import posted modifications
-$itemName =  $_POST['itemName'] ? $_POST['itemName'] : "";
-$subitemOf =  $_POST['subitemOf'] ? $_POST['subitemOf'] : "";
-$manufacturersPart = $_POST['manufacturersPart'] ? $_POST['manufacturersPart'] : "";
-$descOnPurchTrans = $_POST['descOnPurchTrans'] ? $_POST['descOnPurchTrans'] : "";
-$descOnSalesTrans = $_POST['descOnSalesTrans'] ? $_POST['descOnSalesTrans'] : "";
-$cost = $_POST['cost'] ? $_POST['cost'] : "";
-$COGSaccount = $_POST['COGSaccount'] ? $_POST['COGSaccount'] : "";
-$preferredVendor =  $_POST['preferredVendor'] ? $_POST['preferredVendor'] : "";
-$salesPrice = $_POST['salesPrice'] ? $_POST['salesPrice'] : "";
-$incomeAccount = $_POST['incomeAccount'] ? $_POST['incomeAccount'] : "";
-$assetAccount =  $_POST['assetAccount'] ? $_POST['assetAccount'] : "";
-$reorderPoint =  $_POST['reorderPoint'] ? $_POST['reorderPoint'] : "";
-$quantityOnHand =  $_POST['quantityOnHand'] ? $_POST['quantityOnHand'] : "";
-
-if (strlen($_POST['submit']) && strlen($id)) {
-  // Performing update query execution
-  $updateInventorySQL = "UPDATE inventory SET 
-  itemName = '".$itemName."', 
-  subitemOf = '".$subitemOf."', 
-  manufacturersPart = '".$manufacturersPart."', 
-  descOnPurchTrans = '".$descOnPurchTrans."', 
-  descOnSalesTrans = '".$descOnSalesTrans."', 
-  cost = '".$cost."', 
-  COGSaccount = '".$COGSaccount."',
-  preferredVendor = '".$preferredVendor."',
-  salesPrice = '".$salesPrice."',
-  incomeAccount = '".$incomeAccount."',
-  assetAccount = '".$assetAccount."',
-  reorderPoint = '".$reorderPoint."',
-  quantityOnHand = '".$quantityOnHand."'
-  WHERE inventory_id = ".$id;
-
-  if(mysqli_query($conn, $updateInventorySQL)){
-    ?><script>
-    snackbar(`Inventory successfully updated`);
-    setTimeout(function () {window.location.href= './index.php?page=View-Inventory';},1000);
-  </script><?php   
-  } else{
-    echo "ERROR: Hush! Sorry $updateInventorySQL. "
-        . mysqli_error($conn);
-  }
-} else if (strlen($_POST['submit'])) {
-  // Performing insert query execution
-  $insertCustomerSQL = "INSERT INTO inventory VALUES (inventory_id, '$itemName', '$subitemOf', '$manufacturersPart','$descOnPurchTrans','$descOnSalesTrans', '$cost', '$COGSaccount', '$preferredVendor', '$salesPrice', '$incomeAccount', '$assetAccount', '$reorderPoint', '$quantityOnHand')";
-  
-  if(mysqli_query($conn, $insertCustomerSQL)){
-    ?><script>
-    snackbar(`Inventory successfully created`);
-    setTimeout(function () {window.location.href= './index.php?page=View-Inventory';},1000);
-  </script><?php   
-  } else{
-      echo "ERROR: Hush! Sorry $insertCustomerSQL. "
-          . mysqli_error($conn);
-  }
-}
-
 ?>
 
 <!-- <div style="overflow-y: scroll"></div> -->
@@ -70,7 +12,7 @@ if (strlen($_POST['submit']) && strlen($id)) {
     <div class="row g-5 justify-content-center">
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3 text-center"><?php echo strlen($id) ? "Modify inventory part" : "Create inventory part"; ?></h4>
-        <form class="needs-validation" novalidate action='./index.php?page=Manage-Inventory&id=<?php echo $id; ?>' method="post">
+        <form class="needs-validation" novalidate action='./index.php?page=View-Inventory&id=<?php echo $id; ?>' method="post">
           <div class="row g-3">
 
             <div class="col-sm-4">
@@ -189,7 +131,7 @@ if (strlen($_POST['submit']) && strlen($id)) {
 
 
           <hr class="my-4">
-          <input class="w-100 btn btn-primary btn-lg" name="submit" type="submit" value ="Submit"></input>
+          <input class="w-100 btn btn-primary btn-lg" name="submit" type="submit" value ="<?php echo $id ? "Modify Inventory" : "Create Inventory"; ?>"></input>
         </form>
       </div>
     </div>

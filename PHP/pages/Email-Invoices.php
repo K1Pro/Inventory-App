@@ -56,7 +56,7 @@ foreach ($invoices as $invoiceValues) {
                     Thank you for your business - we appreciate it very much.<br><br>
                     Sincrerely,<br><br>
                     L & M Hardware, Ltd.<br>
-                    310-805-2752<br>
+                    312-805-2752<br>
                 </div>
                 </div>
             </div>

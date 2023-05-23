@@ -3,7 +3,7 @@ $postedData = $_POST;
 if($postedData['submit']){}
 
 if ($postedData['submit'] == "Create Invoice") {
-    require("./PHP/components/invoiceSchema-create.php");
+    require("./PHP/components/schemaInvoice-create.php");
     for ($i = 1; $i <= 15; $i++) {
         console_log(${"part".$i."ItemDesc"});
         if ($postedData['part'.$i.'ItemNo']) {
@@ -31,7 +31,7 @@ if ($postedData['submit'] == "Create Invoice") {
         <?php  
     }
 } else if ($postedData['submit'] == "Modify Invoice") {
-    require("./PHP/components/invoiceSchema-modify.php");
+    require("./PHP/components/schemaInvoice-modify.php");
     $updateInvoiceSQL = "UPDATE invoices SET bill_business_name = '".$bill_business_name."', bill_address = '".$bill_address."', bill_address2 = '".$bill_address2."', bill_city = '".$bill_city."', bill_state = '".$bill_state."', bill_zip = '".$bill_zip."', shipTo = '".$shipTo."', invoiceDate = '".$invoiceDate."', shipDate = '".$shipDate."', po_no = '".$po_no."', terms = '".$terms."', rep = '".$rep."', via = '".$via."', fob = '".$fob."', project = '".$project."', part1ItemNo = '".$part1ItemNo."', part1Item = '".$part1Item."', part1ItemDesc = '".$part1ItemDesc."', part1Quantity = '".$part1Quantity."', part1SalesPrice = '".$part1SalesPrice."', part2ItemNo = '".$part2ItemNo."', part2Item = '".$part2Item."', part2ItemDesc = '".$part2ItemDesc."', part2Quantity = '".$part2Quantity."', part2SalesPrice = '".$part2SalesPrice."', part3ItemNo = '".$part3ItemNo."', part3Item = '".$part3Item."', part3ItemDesc = '".$part3ItemDesc."', part3Quantity = '".$part3Quantity."', part3SalesPrice = '".$part3SalesPrice."', part4ItemNo = '".$part4ItemNo."', part4Item = '".$part4Item."', part4ItemDesc = '".$part4ItemDesc."', part4Quantity = '".$part4Quantity."', part4SalesPrice = '".$part4SalesPrice."', part5ItemNo = '".$part5ItemNo."', part5Item = '".$part5Item."', part5ItemDesc = '".$part5ItemDesc."', part5Quantity = '".$part5Quantity."', part5SalesPrice = '".$part5SalesPrice."', part6ItemNo = '".$part6ItemNo."', part6Item = '".$part6Item."', part6ItemDesc = '".$part6ItemDesc."', part6Quantity = '".$part6Quantity."', part6SalesPrice = '".$part6SalesPrice."', part7ItemNo = '".$part7ItemNo."', part7Item = '".$part7Item."', part7ItemDesc = '".$part7ItemDesc."', part7Quantity = '".$part7Quantity."', part7SalesPrice = '".$part7SalesPrice."', part8ItemNo = '".$part8ItemNo."', part8Item = '".$part8Item."', part8ItemDesc = '".$part8ItemDesc."', part8Quantity = '".$part8Quantity."', part8SalesPrice = '".$part8SalesPrice."', part9ItemNo = '".$part9ItemNo."', part9Item = '".$part9Item."', part9ItemDesc = '".$part9ItemDesc."', part9Quantity = '".$part9Quantity."', part9SalesPrice = '".$part9SalesPrice."', part10ItemNo = '".$part10ItemNo."', part10Item = '".$part10Item."', part10ItemDesc = '".$part10ItemDesc."', part10Quantity = '".$part10Quantity."', part10SalesPrice = '".$part10SalesPrice."', part11ItemNo = '".$part11ItemNo."', part11Item = '".$part11Item."', part11ItemDesc = '".$part11ItemDesc."', part11Quantity = '".$part11Quantity."', part11SalesPrice = '".$part11SalesPrice."', part12ItemNo = '".$part12ItemNo."', part12Item = '".$part12Item."', part12ItemDesc = '".$part12ItemDesc."', part12Quantity = '".$part12Quantity."', part12SalesPrice = '".$part12SalesPrice."', part13ItemNo = '".$part13ItemNo."', part13Item = '".$part13Item."', part13ItemDesc = '".$part13ItemDesc."', part13Quantity = '".$part13Quantity."', part13SalesPrice = '".$part13SalesPrice."', part14ItemNo = '".$part14ItemNo."', part14Item = '".$part14Item."', part14ItemDesc = '".$part14ItemDesc."', part14Quantity = '".$part14Quantity."', part14SalesPrice = '".$part14SalesPrice."', part15ItemNo = '".$part15ItemNo."', part15Item = '".$part15Item."', part15ItemDesc = '".$part15ItemDesc."', part15Quantity = '".$part15Quantity."', part15SalesPrice = '".$part15SalesPrice."', finalPrice = '".$finalPrice."', invoice_phone = '".$invoice_phone."', invoice_email = '".$invoice_email."' WHERE invoices_id = ".$postedData['invoices_id'];
     if(mysqli_query($conn, $updateInvoiceSQL)){
         ?><script>snackbar(`Successfully modified invoice`);</script><?php
@@ -80,6 +80,7 @@ console.log(postedData)
     <th width="80px">Inv No.</th>
     <th width="70px">PO No.</th>
     <th>Bill To</th>
+    <th>Created</th>
     <!-- <th>shipDate</th> -->
     <!-- <th>Part1 Item</th> -->
     <!-- <th>part1Quantity</th> -->
@@ -117,7 +118,7 @@ console.log(postedData)
                 echo '</a>';
             echo "</td>";
 
-            // Link to Packaging Slip
+            // Modify the invoice
             echo '<td class="tdCenter">';
                 echo '<a href="./index.php?page=Manage-Invoices&id='.$dbValuesOne['invoices_id'].'&pin='.$dbValuesOne['bill_zip'].'">'; 
                     echo '<img src="./icons/modify.png" alt="Invoice" width="30" height="30">';
@@ -184,6 +185,11 @@ console.log(postedData)
             // Bill To 
             echo "<td>";
                 print_r($dbValuesOne['bill_business_name']);
+            echo "</td>";
+
+            // Bill To 
+            echo "<td>Larry";
+                // print_r($dbValuesOne['bill_business_name']);
             echo "</td>";
 
         echo "</tr>";

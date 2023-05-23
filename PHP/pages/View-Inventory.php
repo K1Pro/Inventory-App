@@ -1,3 +1,55 @@
+<?php $postedData = $_POST;
+$id = htmlspecialchars($_GET["id"]);
+if($postedData['submit']){}
+
+if ($postedData['submit'] == "Create Inventory") {
+    require("./PHP/components/schemaInventory.php");
+    $insertCustomerSQL = "INSERT INTO inventory VALUES (inventory_id, '$itemName', '$subitemOf', '$manufacturersPart','$descOnPurchTrans','$descOnSalesTrans', '$cost', '$COGSaccount', '$preferredVendor', '$salesPrice', '$incomeAccount', '$assetAccount', '$reorderPoint', '$quantityOnHand')";
+    if(mysqli_query($conn, $insertCustomerSQL)){
+        ?><script>
+        snackbar(`Inventory successfully created`);
+    </script><?php   
+    } else{
+        echo "ERROR: Hush! Sorry $insertCustomerSQL. "
+            . mysqli_error($conn);
+    }
+} else if ($postedData['submit'] == "Modify Inventory") {
+    require("./PHP/components/schemaInventory.php");
+
+    // Performing update query execution
+    $updateInventorySQL = "UPDATE inventory SET 
+    itemName = '".$itemName."', 
+    subitemOf = '".$subitemOf."', 
+    manufacturersPart = '".$manufacturersPart."', 
+    descOnPurchTrans = '".$descOnPurchTrans."', 
+    descOnSalesTrans = '".$descOnSalesTrans."', 
+    cost = '".$cost."', 
+    COGSaccount = '".$COGSaccount."',
+    preferredVendor = '".$preferredVendor."',
+    salesPrice = '".$salesPrice."',
+    incomeAccount = '".$incomeAccount."',
+    assetAccount = '".$assetAccount."',
+    reorderPoint = '".$reorderPoint."',
+    quantityOnHand = '".$quantityOnHand."'
+    WHERE inventory_id = ".$id;
+
+    if(mysqli_query($conn, $updateInventorySQL)){
+        ?><script>
+        snackbar(`Inventory successfully updated`);
+    </script><?php   
+    } else{
+        echo "ERROR: Hush! Sorry $updateInventorySQL. "
+            . mysqli_error($conn);
+    }
+} else if(strpos($postedData['submit'], 'Delete') !== false){
+    console_log("Deleting");
+    $parts = explode('-', $postedData['submit']);
+    $deleteDB = $parts[1];
+    $deleteValue = $parts[2];
+    require("./PHP/components/delete.php");
+}
+
+?>
 <div style="overflow-y: auto; overflow-x: auto">
 <table class="table table-striped">
   <tr>

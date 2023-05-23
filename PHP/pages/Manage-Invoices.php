@@ -1,10 +1,10 @@
+<?php
+    $id = htmlspecialchars($_GET["id"]);
+    $pin = htmlspecialchars($_GET["pin"]);
+?>
 <link href="./CSS/invoice-modify.css" rel="stylesheet">
 <div style="overflow-y: auto; overflow-x: auto; width:100vw">
     <form class="needs-validation" novalidate action='./index.php?page=View-Invoices' method="post">
-        <?php
-            $id = htmlspecialchars($_GET["id"]);
-            $pin = htmlspecialchars($_GET["pin"]);
-        ?>
         <input class="btn btn-primary btn-lg m-2" id="submitButton" name="submit" type="submit" value ="<?php echo $id && $pin ? "Modify Invoice" : "Create Invoice"; ?>"></input>
         <div id="invoice">
             <img src="./images/blankManageInvoice.jpg" alt="Invoice">
@@ -109,7 +109,7 @@
                 if ($id && $pin) {
                 echo '<input type="text" class="fill-in" id="part'.$i.'ItemDesc" name="part'.$i.'ItemDesc"  value="'.$invoice['part'.$i.'ItemDesc'].'" style="margin-left:10px; margin-right:10px; width:248px">';
                 } else {
-                    echo '<input list="part'.$i.'ItemDescList" class="fill-in" id="part'.$i.'ItemDesc" name="part'.$i.'ItemDesc" style="margin-left:10px; margin-right:10px; width:248px">';
+                    echo '<input list="part'.$i.'ItemDescList" class="fill-in" id="part'.$i.'ItemDesc" name="part'.$i.'ItemDesc" placeholder="TYPE ITEM DESCRIPTION..." style="margin-left:10px; margin-right:10px; width:248px">';
                     echo '<datalist id="part'.$i.'ItemDescList">';
                     // echo '<option value="">Choose...</option>';
                     foreach ($inventoryQuery as $inventory) {
