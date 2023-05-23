@@ -4,61 +4,6 @@ $customersSQL = "SELECT * FROM customers WHERE customers_id = '".$id."'";
 $customers = mysqli_query($conn, $customersSQL);
 foreach ($customers as $customerValues) {};
 
-// If customer was modified, import posted modifications
-$businessName =  $_POST['businessName'] ? $_POST['businessName'] : '';
-$firstName =  $_POST['firstName'] ? $_POST['firstName'] : '';
-$lastName = $_POST['lastName'] ? $_POST['lastName'] : '';
-$address = $_POST['address'] ? $_POST['address'] : '';
-$address2 = $_POST['address2'] ? $_POST['address2'] : '';
-$city = $_POST['city'] ? $_POST['city'] : '';
-$state =  $_POST['state'] ? $_POST['state'] : '';
-$zip = $_POST['zip'] ? $_POST['zip'] : '';
-$country = $_POST['country'] ? $_POST['country'] : '';
-$phone =  $_POST['phone'] ? $_POST['phone'] : '';
-$fax =  $_POST['fax'] ? $_POST['fax'] : '';
-$email =  $_POST['email'] ? $_POST['email'] : '';
-
-if (strlen($_POST['submit']) && strlen($id)) {
-  // Performing update query execution
-  $updateCustomerSQL = "UPDATE customers SET 
-  business_name = '".$businessName."', 
-  first_name = '".$firstName."', 
-  last_name = '".$lastName."', 
-  address = '".$address."', 
-  address2 = '".$address2."', 
-  city = '".$city."', 
-  state = '".$state."',
-  zip = '".$zip."',
-  country = '".$country."',
-  phone = '".$phone."',
-  fax = '".$fax."',
-  email = '".$email."'
-  WHERE customers_id = ".$id;
-
-  if(mysqli_query($conn, $updateCustomerSQL)){
-      ?><script>
-        snackbar(`Customer successfully updated`);
-        setTimeout(function () {window.location.href= './index.php?page=View-Customers';},1000);
-      </script><?php   
-  } else{
-      echo "ERROR: Hush! Sorry $updateCustomerSQL. "
-          . mysqli_error($conn);
-  }
-} else if (strlen($_POST['submit'])) {
-  // Performing insert query execution
-  $insertCustomerSQL = "INSERT INTO customers VALUES (customers_id, '$businessName', '$firstName', '$lastName','$address','$address2', '$city', '$state', '$zip', '$country', '$phone', '$fax', '$email')";
-  
-  if(mysqli_query($conn, $insertCustomerSQL)){
-    ?><script>
-    snackbar(`Customer successfully created`);
-    setTimeout(function () {window.location.href= './index.php?page=View-Customers';},1000);
-  </script><?php   
-  } else{
-      echo "ERROR: Hush! Sorry $insertCustomerSQL. "
-          . mysqli_error($conn);
-  }
-}
-
 ?>
 
 <!-- <div style="overflow-y: scroll"></div> -->
@@ -68,7 +13,7 @@ if (strlen($_POST['submit']) && strlen($id)) {
     <div class="row g-5 justify-content-center">
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3 text-center"><?php echo strlen($id) ? "Modify customer" : "Create customer"; ?></h4>
-        <form class="needs-validation" novalidate  action='./index.php?page=Manage-Customers&id=<?php echo $id; ?>' method="post">
+        <form class="needs-validation" novalidate  action='./index.php?page=View-Customers&id=<?php echo $id; ?>' method="post">
         <!-- action='./index.php?page=Modified-Customers&id= -->
           <div class="row g-3">
 
@@ -223,7 +168,7 @@ if (strlen($_POST['submit']) && strlen($id)) {
             </div>
           </div>
           <hr class="my-4">
-          <input class="w-100 btn btn-primary btn-lg" name="submit" type="submit" value ="Submit"></input>
+          <input class="w-100 btn btn-primary btn-lg" name="submit" type="submit" value ="<?php echo $id ? "Modify Customer" : "Create Customer"; ?>"></input>
         </form>
       </div>
     </div>
