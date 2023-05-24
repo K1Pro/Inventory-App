@@ -66,7 +66,7 @@ console.log(finalPriceData)
     <!-- <th width="70px">Delete</th> -->
     <th width="80px">Inv No.</th>
     <th width="90px">PO No.</th>
-    <th width="125px">
+    <th width="140px">
     <form action="./index.php?page=View-Invoice-Report" id="filteringForm" method="post">
         <select name="invoiceYearSelect" id="invoiceYearSelect">
             <option value="">Choose Year...</option>

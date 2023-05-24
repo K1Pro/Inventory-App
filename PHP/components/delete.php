@@ -1,6 +1,11 @@
 <?php
 // Link to Deleting Invoice 
-$deleteSQL = "DELETE FROM ".$deleteDB." WHERE ".$deleteDB."_id = '".$deleteValue."'";
+if ($deleteDB == "estimates") {
+  $deleteSQL = "DELETE FROM ".$deleteDB." WHERE invoices_id = '".$deleteValue."'";
+} else {
+  $deleteSQL = "DELETE FROM ".$deleteDB." WHERE ".$deleteDB."_id = '".$deleteValue."'";
+}
+
 
 if(mysqli_query($conn, $deleteSQL)){
   ?><script>

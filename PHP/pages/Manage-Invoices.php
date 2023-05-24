@@ -1,11 +1,13 @@
 <?php
     $id = htmlspecialchars($_GET["id"]);
     $pin = htmlspecialchars($_GET["pin"]);
+    $action = htmlspecialchars($_GET["action"]);
+    console_log($action);
 ?>
 <link href="./CSS/invoice-modify.css" rel="stylesheet">
 <div style="overflow-y: auto; overflow-x: auto; width:100vw">
-    <form class="needs-validation" novalidate action='./index.php?page=View-Invoices' method="post">
-        <input class="btn btn-primary btn-lg m-2" id="submitButton" name="submit" type="submit" value ="<?php echo $id && $pin ? "Modify Invoice" : "Create Invoice"; ?>"></input>
+    <form class="needs-validation" novalidate action="<?php if ($action) {echo "./index.php?page=View-Estimates";} else {echo "./index.php?page=View-Invoices";} ?>" method="post">
+        <input class="btn btn-primary btn-lg m-2" id="submitButton" name="submit" type="submit" value ="<?php if ($id && $pin) {echo "Modify Invoice";} else if ($action) {echo "Create Estimate";} else {echo "Create Invoice";} ?>"></input>
         <div id="invoice">
             <img src="./images/blankManageInvoice.jpg" alt="Invoice">
         </div>

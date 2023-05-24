@@ -1,8 +1,11 @@
 <?php
 $postedData = $_POST;
 if($postedData['submit']){}
+$page = htmlspecialchars($_GET["page"]);
+$chosenDB = strtolower(explode('-', $page)[1]);
+console_log($chosenDB);
 
-if ($postedData['submit'] == "Create Invoice") {
+if (explode(' ', $postedData['submit'])[0] == "Create") {
     require("./PHP/components/schemaInvoice-create.php");
     for ($i = 1; $i <= 15; $i++) {
         console_log(${"part".$i."ItemDesc"});
@@ -12,24 +15,25 @@ if ($postedData['submit'] == "Create Invoice") {
         foreach ($usersQuery as $usersValues) {
           $invoice_created_by = $usersValues['username'];
         }
-
-        if ($postedData['part'.$i.'ItemNo']) {
-            if (strpos(strtolower(${"part".$i."ItemDesc"}), "freight") !== false) {console_log("Freight Detected");}
-            else if(strpos(strtolower(${"part".$i."ItemDesc"}),"tax") !== false) {console_log("Tax Detected");}
-            else if(strpos(strtolower(${"part".$i."ItemDesc"}), "tariff") !== false) {console_log("Tariff Detected");}
-            else if(strpos(strtolower(${"part".$i."ItemDesc"}), "design") !== false) {console_log("Design Detected");}
-            else if(strpos(strtolower(${"part".$i."ItemDesc"}), "misc") !== false) {console_log("Misc Detected");}
-            else {
-                // echo $postedData['part'.$i.'ItemNo'];
-                $inventoryUpdateSQL = "UPDATE inventory SET quantityOnHand = quantityOnHand - ".$postedData['part'.$i.'Quantity']." WHERE inventory_id = ".$postedData['part'.$i.'ItemNo'];
-                mysqli_query($conn, $inventoryUpdateSQL);
+        if (explode(' ', $postedData['submit'])[1] == "Invoice") {
+            if ($postedData['part'.$i.'ItemNo']) {
+                if (strpos(strtolower(${"part".$i."ItemDesc"}), "freight") !== false) {console_log("Freight Detected");}
+                else if(strpos(strtolower(${"part".$i."ItemDesc"}),"tax") !== false) {console_log("Tax Detected");}
+                else if(strpos(strtolower(${"part".$i."ItemDesc"}), "tariff") !== false) {console_log("Tariff Detected");}
+                else if(strpos(strtolower(${"part".$i."ItemDesc"}), "design") !== false) {console_log("Design Detected");}
+                else if(strpos(strtolower(${"part".$i."ItemDesc"}), "misc") !== false) {console_log("Misc Detected");}
+                else {
+                    // echo $postedData['part'.$i.'ItemNo'];
+                    $inventoryUpdateSQL = "UPDATE inventory SET quantityOnHand = quantityOnHand - ".$postedData['part'.$i.'Quantity']." WHERE inventory_id = ".$postedData['part'.$i.'ItemNo'];
+                    mysqli_query($conn, $inventoryUpdateSQL);
+                }
             }
         }
     }
-    $insertInvoiceSQL = "INSERT INTO invoices VALUES (invoices_id, '$bill_id', '$bill_business_name', '$bill_first_name', '$bill_last_name', '$bill_address', '$bill_address2', '$bill_city', '$bill_state', '$bill_zip', '$bill_country', '$bill_phone', '$bill_fax', '$bill_email', '$shipTo', '$invoiceDate', '$shipDate', '$po_no', '$terms', '$rep', '$via', '$fob', '$project', '$part1ItemNo', '$part1Item', '$part1ItemDesc', '$part1Quantity', '$part1SalesPrice', '$part1Cost', '$part2ItemNo', '$part2Item', '$part2ItemDesc', '$part2Quantity', '$part2SalesPrice', '$part2Cost', '$part3ItemNo', '$part3Item', '$part3ItemDesc', '$part3Quantity', '$part3SalesPrice', '$part3Cost', '$part4ItemNo', '$part4Item', '$part4ItemDesc', '$part4Quantity', '$part4SalesPrice', '$part4Cost', '$part5ItemNo', '$part5Item', '$part5ItemDesc', '$part5Quantity', '$part5SalesPrice', '$part5Cost', '$part6ItemNo', '$part6Item', '$part6ItemDesc', '$part6Quantity', '$part6SalesPrice', '$part6Cost', '$part7ItemNo', '$part7Item', '$part7ItemDesc', '$part7Quantity', '$part7SalesPrice', '$part7Cost', '$part8ItemNo', '$part8Item', '$part8ItemDesc', '$part8Quantity', '$part8SalesPrice', '$part8Cost', '$part9ItemNo', '$part9Item', '$part9ItemDesc', '$part9Quantity', '$part9SalesPrice', '$part9Cost', '$part10ItemNo', '$part10Item', '$part10ItemDesc', '$part10Quantity', '$part10SalesPrice', '$part10Cost', '$part11ItemNo', '$part11Item', '$part11ItemDesc', '$part11Quantity', '$part11SalesPrice', '$part11Cost', '$part12ItemNo', '$part12Item', '$part12ItemDesc', '$part12Quantity', '$part12SalesPrice', '$part12Cost', '$part13ItemNo', '$part13Item', '$part13ItemDesc', '$part13Quantity', '$part13SalesPrice', '$part13Cost', '$part14ItemNo', '$part14Item', '$part14ItemDesc', '$part14Quantity', '$part14SalesPrice', '$part14Cost', '$part15ItemNo', '$part15Item', '$part15ItemDesc', '$part15Quantity', '$part15SalesPrice', '$part15Cost', '$finalPrice', '$finalCost', '$invoice_phone', '$invoice_email', '$paid', '$invoice_created_by')";
+    $insertInvoiceSQL = "INSERT INTO ".strtolower(explode(' ', $postedData['submit'])[1])."s VALUES (invoices_id, '$bill_id', '$bill_business_name', '$bill_first_name', '$bill_last_name', '$bill_address', '$bill_address2', '$bill_city', '$bill_state', '$bill_zip', '$bill_country', '$bill_phone', '$bill_fax', '$bill_email', '$shipTo', '$invoiceDate', '$shipDate', '$po_no', '$terms', '$rep', '$via', '$fob', '$project', '$part1ItemNo', '$part1Item', '$part1ItemDesc', '$part1Quantity', '$part1SalesPrice', '$part1Cost', '$part2ItemNo', '$part2Item', '$part2ItemDesc', '$part2Quantity', '$part2SalesPrice', '$part2Cost', '$part3ItemNo', '$part3Item', '$part3ItemDesc', '$part3Quantity', '$part3SalesPrice', '$part3Cost', '$part4ItemNo', '$part4Item', '$part4ItemDesc', '$part4Quantity', '$part4SalesPrice', '$part4Cost', '$part5ItemNo', '$part5Item', '$part5ItemDesc', '$part5Quantity', '$part5SalesPrice', '$part5Cost', '$part6ItemNo', '$part6Item', '$part6ItemDesc', '$part6Quantity', '$part6SalesPrice', '$part6Cost', '$part7ItemNo', '$part7Item', '$part7ItemDesc', '$part7Quantity', '$part7SalesPrice', '$part7Cost', '$part8ItemNo', '$part8Item', '$part8ItemDesc', '$part8Quantity', '$part8SalesPrice', '$part8Cost', '$part9ItemNo', '$part9Item', '$part9ItemDesc', '$part9Quantity', '$part9SalesPrice', '$part9Cost', '$part10ItemNo', '$part10Item', '$part10ItemDesc', '$part10Quantity', '$part10SalesPrice', '$part10Cost', '$part11ItemNo', '$part11Item', '$part11ItemDesc', '$part11Quantity', '$part11SalesPrice', '$part11Cost', '$part12ItemNo', '$part12Item', '$part12ItemDesc', '$part12Quantity', '$part12SalesPrice', '$part12Cost', '$part13ItemNo', '$part13Item', '$part13ItemDesc', '$part13Quantity', '$part13SalesPrice', '$part13Cost', '$part14ItemNo', '$part14Item', '$part14ItemDesc', '$part14Quantity', '$part14SalesPrice', '$part14Cost', '$part15ItemNo', '$part15Item', '$part15ItemDesc', '$part15Quantity', '$part15SalesPrice', '$part15Cost', '$finalPrice', '$finalCost', '$invoice_phone', '$invoice_email', '$paid', '$invoice_created_by')";
     if(mysqli_query($conn, $insertInvoiceSQL)){
         ?>
-        <script>snackbar(`Successfully created invoice`);</script>
+        <script>snackbar(`Successfully created`);</script>
         <?php  
     } else{
         ?>
@@ -73,8 +77,8 @@ console.log(postedData)
 <table class="table table-striped">
   <tr>
     <!-- <th>invoices_id</th> -->
-    <th width="75px">Invoice</th>
-    <th width="50px">Slip</th>
+    <th width="85px"><?php echo ucfirst(substr($chosenDB, 0, -1));?></th>
+    <?php if ($chosenDB == "invoices"){ echo '<th width="50px">Slip</th>';} ?>
     <th width="75px">Modify</th>
     <th width="60px">Email</th>
     <!-- <th width="75px">Modify</th> -->
@@ -99,7 +103,7 @@ console.log(postedData)
 
 <?php
     // SQL query
-    $strSQL = "SELECT * FROM invoices ORDER BY invoices_id DESC";
+    $strSQL = "SELECT * FROM ".$chosenDB." ORDER BY invoices_id DESC";
     
     // Execute the query
     $rs = mysqli_query($conn, $strSQL);
@@ -110,6 +114,7 @@ console.log(postedData)
     foreach ($rs as $dbValuesOne) {
         echo "<tr>";
 
+
             // Link to Invoice 
             echo '<td class="tdCenter">';
                 echo '<a href="invoice_pdf.php?id='.$dbValuesOne['invoices_id'].'&pin='.$dbValuesOne['bill_zip'].'" target="_blank">'; 
@@ -117,12 +122,14 @@ console.log(postedData)
                 echo '</a>';
             echo "</td>";
 
+            if ($chosenDB == "invoices"){
             // Link to Slip
             echo '<td class="tdCenter">';
                 echo '<a href="slip_pdf.php?id='.$dbValuesOne['invoices_id'].'&pin='.$dbValuesOne['bill_zip'].'" target="_blank">'; 
                     echo '<img src="./icons/slip.png" alt="Invoice" width="30" height="30">';
                 echo '</a>';
             echo "</td>";
+            }
 
             // Modify the invoice
             echo '<td class="tdCenter">';
@@ -140,8 +147,8 @@ console.log(postedData)
 
             // Delete an Invoice
             echo '<td class="tdCenter">';
-                echo '<form action="./index.php?page=View-Invoices" method="post">';
-                    echo '<input class="deleteButton" type="submit" name="submit" value="Delete-invoices-'.$dbValuesOne['invoices_id'].'">';
+                echo '<form action="./index.php?page=View-'.ucfirst($chosenDB).'" method="post">';
+                    echo '<input class="deleteButton" type="submit" name="submit" value="Delete-'.$chosenDB.'-'.$dbValuesOne['invoices_id'].'">';
                 echo '</form>';
             echo "</td>";
 
