@@ -131,16 +131,21 @@
                 }   else {
                     echo '$<input type="number" step=".01" min="0" class="fill-in" id="part'.$i.'SalesPrice" name="part'.$i.'SalesPrice" value="" style="margin-left:5px; margin-right:5px; width:60px">';
                 }
-                echo '$<input type="number" class="fill-in" id="part'.$i.'Cost" name="part'.$i.'Cost" value="'.$invoice['part'.$i.'Cost'].'" style="margin-left:5px; margin-right:15px; width:60px">';
-                echo '$<input type="text" disabled class="no-outline" id="part'.$i.'TotalPrice" value="' . number_format($invoice['part'.$i.'SalesPrice'] * $invoice['part'.$i.'Quantity'], 2, '.', '') .'" style="width:85px">';
+                echo '$<input type="number" step=".01" min="0" class="fill-in" id="part'.$i.'Cost" name="part'.$i.'Cost" value="'.$invoice['part'.$i.'Cost'].'" style="margin-left:5px; margin-right:15px; width:60px">';
+                echo '$<input type="text" disabled class="no-outline" id="part'.$i.'TotalPrice" value="' . number_format($invoice['part'.$i.'SalesPrice'] * $invoice['part'.$i.'Quantity'], 2, '.', '') .'" style="width:85px"><br>';
                 // These should be hidden VVVVVVVVVVV display:none;
-                echo '<input type="number" class="fill-in" id="part'.$i.'ItemNo" name="part'.$i.'ItemNo" value="'.$invoice['part'.$i.'ItemNo'].'" style="width:40px"><br>';
+                echo '<input type="text" disabled class="no-outline" id="part'.$i.'TotalCost" value="' . number_format($invoice['part'.$i.'Cost'] * $invoice['part'.$i.'Quantity'], 2, '.', '') .'" style="display:none;width:85px">';
+                echo '<input type="number" class="fill-in" id="part'.$i.'ItemNo" name="part'.$i.'ItemNo" value="'.$invoice['part'.$i.'ItemNo'].'" style="display:none;width:40px">';
                 // These should be hidden ^^^^^^^^^^^
             }
         echo "</div>";
 
         echo '<div id="finalPriceGroup">';
             echo 'Total:&emsp; $<input type="text" readonly class="no-outline" name="finalPrice" id="finalPrice" value="' . number_format($invoice['finalPrice'], 2, '.', '').'">';
+        echo "</div>";
+
+        echo '<div id="finalCostGroup" style="display:none">';
+            echo 'Cost:&emsp; $<input type="text" readonly class="no-outline" name="finalCost" id="finalCost" value="' . number_format($invoice['finalCost'], 2, '.', '').'">';
         echo "</div>";
 
         echo '<div id="phoneAndEmail">';

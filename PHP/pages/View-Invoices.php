@@ -14,11 +14,11 @@ if ($postedData['submit'] == "Create Invoice") {
         }
 
         if ($postedData['part'.$i.'ItemNo']) {
-            if (strpos(strtolower(${"part".$i."ItemDesc"}), "freight") !== false) {}
-            else if(strpos(strtolower(${"part".$i."ItemDesc"}),"tax") !== false) {}
-            else if(strpos(strtolower(${"part".$i."ItemDesc"}), "tariff") !== false) {}
-            else if(strpos(strtolower(${"part".$i."ItemDesc"}), "design") !== false) {}
-            else if(strpos(strtolower(${"part".$i."ItemDesc"}), "misc") !== false) {}
+            if (strpos(strtolower(${"part".$i."ItemDesc"}), "freight") !== false) {console_log("Freight Detected");}
+            else if(strpos(strtolower(${"part".$i."ItemDesc"}),"tax") !== false) {console_log("Tax Detected");}
+            else if(strpos(strtolower(${"part".$i."ItemDesc"}), "tariff") !== false) {console_log("Tariff Detected");}
+            else if(strpos(strtolower(${"part".$i."ItemDesc"}), "design") !== false) {console_log("Design Detected");}
+            else if(strpos(strtolower(${"part".$i."ItemDesc"}), "misc") !== false) {console_log("Misc Detected");}
             else {
                 // echo $postedData['part'.$i.'ItemNo'];
                 $inventoryUpdateSQL = "UPDATE inventory SET quantityOnHand = quantityOnHand - ".$postedData['part'.$i.'Quantity']." WHERE inventory_id = ".$postedData['part'.$i.'ItemNo'];

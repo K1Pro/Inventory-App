@@ -58,6 +58,25 @@
   /* background-color: white; */
 }
 
+#finalCostGroup {
+  position: relative;
+  top: -830px;
+  left: 570px;
+  width: 275px;
+  text-align: left;
+  font-size: 22px;
+  font-weight: bold;
+  /* background-color: white; */
+}
+
+#finalCost {
+  text-align: left;
+  font-size: 22px;
+  font-weight: bold;
+  width: 150px;
+  /* background-color: white; */
+}
+
 #phoneAndEmail {
   position: relative;
   margin-top: -830px;
