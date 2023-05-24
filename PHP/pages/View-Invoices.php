@@ -82,7 +82,7 @@ console.log(postedData)
     <?php if ($chosenDB == "invoices"){ echo '<th width="75px">Modify</th>';} ?>
     <th width="60px">Email</th>
     <!-- <th width="75px">Modify</th> -->
-    <th width="70px">Delete</th>
+    <?php if($permissions['type'] == "administrator") { echo'<th width="70px">Delete</th>';} ?>
     <th width="125px"><?php echo ucfirst(substr($chosenDB, 0, -1));?> Date</th>
     <!-- <th>shipTo</th> -->
     <th width="110px">$Total</th>
@@ -149,12 +149,14 @@ console.log(postedData)
                 echo '</a>';
             echo "</td>";
 
+            if($permissions['type'] == "administrator") {
             // Delete an Invoice
             echo '<td class="tdCenter">';
                 echo '<form action="./index.php?page=View-'.ucfirst($chosenDB).'" method="post">';
                     echo '<input class="deleteButton" type="submit" name="submit" value="Delete-'.$chosenDB.'-'.$dbValuesOne['invoices_id'].'">';
                 echo '</form>';
             echo "</td>";
+            }
 
             // Delete an Invoice
             // echo '<td class="tdCenter">';
