@@ -57,7 +57,8 @@
             <strong><?php echo ucfirst(htmlspecialchars($_SESSION["username"])); ?></strong>
           </a>
           <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-            <li><a class="dropdown-item" href="?page=Manage-Invoices">Create Invoice</a></li>
+            <li><a class="dropdown-item" href="?page=Manage-Invoices">Create Invoice & Slip</a></li>
+            <li><a class="dropdown-item" href="?page=Manage-Invoices&action=estimate">Create Estimate</a></li>
             <li><a class="dropdown-item" href="?page=Manage-Inventory">Create Inventory</a></li>
             <li><a class="dropdown-item" href="?page=Manage-Customers">Create Customer</a></li>
             <li><a class="dropdown-item" href="?page=Create-Users">Create User</a></li>

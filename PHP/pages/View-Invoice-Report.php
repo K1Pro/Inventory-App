@@ -1,9 +1,14 @@
 <?php
 $postedData = $_POST;
-if($postedData['businessSelect']){
-    console_log("We are in");
+if($postedData['businessSelect'] && $postedData['invoiceYearSelect']){
+    $invoicesSQL = "SELECT * FROM invoices WHERE bill_business_name = '".$postedData['businessSelect']."' AND invoiceDate LIKE '%".$postedData['invoiceYearSelect']."%' ORDER BY invoiceDate DESC";
+console_log("both are selected");
+} else if ($postedData['businessSelect']){
     $invoicesSQL = "SELECT * FROM invoices WHERE bill_business_name = '".$postedData['businessSelect']."' ORDER BY invoices_id DESC";
-} else {
+} else if ($postedData['invoiceYearSelect']){
+    $invoicesSQL = "SELECT * FROM invoices WHERE invoiceDate LIKE '%".$postedData['invoiceYearSelect']."%' ORDER BY invoiceDate DESC";
+    // "%".$value."%"
+}else {
     $invoicesSQL = "SELECT * FROM invoices ORDER BY invoices_id DESC";
 }
 
@@ -26,12 +31,19 @@ $businessNamesQuery = mysqli_query($conn, $businessNamesSQL);
 foreach ($businessNamesQuery as $invoices) {
     $billToArray[] = $invoices['bill_business_name'];
 };
+
+$invoiceYearSQL = "SELECT * FROM invoices ORDER BY invoices_id DESC";
+$invoiceYearQuery = mysqli_query($conn, $invoiceYearSQL);
+foreach ($invoiceYearQuery as $invoices) {
+    $invoiceYearArray[] = substr($invoices['invoiceDate'], 0, 4);
+};
+
 ?>
 <script>
 const postedData = <?php echo json_encode($postedData); ?>;
 console.log(postedData)
 
-const invoicesData = <?php echo json_encode($invoicesArray); ?>;
+const invoicesData = <?php echo json_encode($invoiceYearArray); ?>;
 console.log(invoicesData)
 
 const finalPriceData = <?php echo json_encode(number_format(array_sum($finalPriceArray), 2, '.', '')); ?>;
@@ -54,26 +66,42 @@ console.log(finalPriceData)
     <!-- <th width="70px">Delete</th> -->
     <th width="80px">Inv No.</th>
     <th width="90px">PO No.</th>
-    <th width="125px">Invoice Date</th>
+    <th width="125px">
+    <form action="./index.php?page=View-Invoice-Report" id="filteringForm" method="post">
+        <select name="invoiceYearSelect" id="invoiceYearSelect">
+            <option value="">Choose Year...</option>
+            <?php
+            rsort($invoiceYearArray);
+                foreach (array_unique($invoiceYearArray) as $year) {
+                    echo '<option value="';
+                    echo $year;
+                    echo '"';
+                    if ($year == $postedData['invoiceYearSelect']){echo "selected";}
+                    echo '>';
+                    echo $year;
+                    echo "</option>";
+                }
+            ?>
+        </select>
+    <!-- </form> -->
+    </th>
     <!-- <th>shipTo</th> -->
-    <th>Paid (Total: $<?php echo number_format(array_sum($finalPriceArray), 2, '.', ''); ?>)</th>
-    <th>Cost (Total: $<?php echo number_format(array_sum($finalCostArray), 2, '.', ''); ?>)</th>
+    <th>Paid (Total: $<?php echo $finalPriceArray ? number_format(array_sum($finalPriceArray), 2, '.', '') : "0.00"; ?>)</th>
+    <th>Cost (Total: $<?php echo $finalCostArray ? number_format(array_sum($finalCostArray), 2, '.', '') : "0.00"; ?>)</th>
     <th width="50px">Paid</th>
 
     <th>
-    <!-- <label for="business">Choose a car:</label> -->
-    <form action="./index.php?page=View-Invoice-Report" id="businessSelectForm" method="post">
+    <!-- <form action="./index.php?page=View-Invoice-Report" id="businessSelectForm" method="post"> -->
         <select name="businessSelect" id="businessSelect">
             <option value="">Choose Business...</option>
-            <!-- <option value="saab">Saab</option>
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option> -->
             <?php
             sort($billToArray);
                 foreach (array_unique($billToArray) as $businessName) {
                     echo '<option value="';
                     echo $businessName;
-                    echo '">';
+                    echo '"';
+                    if ($businessName == $postedData['businessSelect']){echo "selected";}
+                    echo '>';
                     echo $businessName;
                     echo "</option>";
                 }
