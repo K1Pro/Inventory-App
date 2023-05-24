@@ -114,7 +114,7 @@
                     echo '<select class="fill-in" id="part'.$i.'ItemSelect" style="width:248px" onchange="this.previousElementSibling.value=this.value; this.previousElementSibling.focus()">';
                     // echo '<input list="part'.$i.'ItemDescList" class="fill-in" id="part'.$i.'ItemDesc" name="part'.$i.'ItemDesc" placeholder="TYPE ITEM DESCRIPTION..." style="margin-left:10px; margin-right:10px; width:248px">';
                     // echo '<datalist id="part'.$i.'ItemDescList">';
-                    // echo '<option value="">Choose...</option>';
+                    echo '<option value="">Choose...</option>';
                     foreach ($inventoryQuery as $inventory) {
                       echo '<option value="';
                       echo $inventory['descOnPurchTrans'];
@@ -126,16 +126,16 @@
                 echo '</select>';
                 echo '</span>';
                 }
-                // These should be hidden VVVVVVVVVVV
-                if (!$id && !$pin) {echo '<input type="number" class="fill-in" id="part'.$i.'ItemNo" name="part'.$i.'ItemNo" value="'.$invoice['part'.$i.'ItemNo'].'" style="display:none; margin-left:5px; margin-right:5px; width:40px">';}
-                // These should be hidden ^^^^^^^^^^^
                 if ($invoice['part'.$i.'SalesPrice'] > 0) {
                     echo '$<input type="number" step=".01" min="0" class="fill-in" id="part'.$i.'SalesPrice" name="part'.$i.'SalesPrice" value="'.$invoice['part'.$i.'SalesPrice'].'" style="margin-left:5px; margin-right:5px; width:60px">';
                 }   else {
                     echo '$<input type="number" step=".01" min="0" class="fill-in" id="part'.$i.'SalesPrice" name="part'.$i.'SalesPrice" value="" style="margin-left:5px; margin-right:5px; width:60px">';
                 }
-                echo '$<input type="number" class="fill-in" id="part'.$i.'ItemCost" name="part'.$i.'ItemCost" value="'.$invoice['part'.$i.'ItemCost'].'" style="margin-left:5px; margin-right:15px; width:60px">';
-                echo '$<input type="text" disabled class="no-outline" id="part'.$i.'TotalPrice" value="' . number_format($invoice['part'.$i.'SalesPrice'] * $invoice['part'.$i.'Quantity'], 2, '.', '') .'" style="width:85px"><br>';
+                echo '$<input type="number" class="fill-in" id="part'.$i.'Cost" name="part'.$i.'Cost" value="'.$invoice['part'.$i.'Cost'].'" style="margin-left:5px; margin-right:15px; width:60px">';
+                echo '$<input type="text" disabled class="no-outline" id="part'.$i.'TotalPrice" value="' . number_format($invoice['part'.$i.'SalesPrice'] * $invoice['part'.$i.'Quantity'], 2, '.', '') .'" style="width:85px">';
+                // These should be hidden VVVVVVVVVVV display:none;
+                echo '<input type="number" class="fill-in" id="part'.$i.'ItemNo" name="part'.$i.'ItemNo" value="'.$invoice['part'.$i.'ItemNo'].'" style="width:40px"><br>';
+                // These should be hidden ^^^^^^^^^^^
             }
         echo "</div>";
 

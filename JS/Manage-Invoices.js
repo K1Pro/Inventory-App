@@ -5,7 +5,14 @@ const noOfItems = 15;
 let date = new Date().toJSON();
 id ? console.log(id) : console.log('No ID');
 pin ? console.log(pin) : console.log('No PIN');
-invoiceItems = ['Quantity', 'Item', 'ItemDesc', 'SalesPrice'];
+invoiceItems = [
+  'Quantity',
+  'Item',
+  'ItemDesc',
+  'ItemSelect',
+  'SalesPrice',
+  'Cost',
+];
 console.log(inventoryData);
 
 // Retrieve elements
@@ -23,8 +30,10 @@ let bill_email = document.getElementById(`bill_email`);
 let shipTo = document.getElementById(`shipTo`);
 let part1Quantity = document.getElementById(`part1Quantity`);
 let part1ItemDesc = document.getElementById(`part1ItemDesc`);
+let part1ItemSelect = document.getElementById(`part1ItemSelect`);
 let part1Item = document.getElementById(`part1Item`);
 let part1SalesPrice = document.getElementById(`part1SalesPrice`);
+let part1Cost = document.getElementById(`part1Cost`);
 let finalPrice = document.getElementById(`finalPrice`);
 let formattedInventoryData = [];
 let inventoryDataObjects = {};
@@ -111,10 +120,12 @@ if (!id && !pin) {
     }
   });
 
-  document.getElementById(`part1Quantity`).disabled = true;
-  document.getElementById(`part1Item`).disabled = true;
-  document.getElementById(`part1ItemDesc`).required = true;
-  document.getElementById(`part1SalesPrice`).disabled = true;
+  part1Quantity.disabled = true;
+  part1Item.disabled = true;
+  part1ItemDesc.required = true;
+  part1ItemSelect.required = true;
+  part1SalesPrice.disabled = true;
+  part1Cost.disabled = true;
 
   for (let i = 1; i <= 15; i++) {
     document
@@ -160,7 +171,7 @@ if (!id && !pin) {
           document.getElementById(`part${i}ItemNo`).value =
             selectedInventory.inventory_id;
           // Cost
-          document.getElementById(`part${i}ItemCost`).value =
+          document.getElementById(`part${i}Cost`).value =
             selectedInventory.cost;
           // Item Total Price
           document.getElementById(`part${i}TotalPrice`).value = Number(
@@ -169,6 +180,7 @@ if (!id && !pin) {
           ).toFixed(2); // toLocaleString('en-US');
           // Enable next item
           document.getElementById(`part${i + 1}ItemDesc`).disabled = false;
+          document.getElementById(`part${i + 1}ItemSelect`).disabled = false;
           // if (this.value.slice(-4) == 'Misc') {
           //   console.log('Misc Selected');
           //   const miscItem = document.createElement('input');
@@ -189,6 +201,10 @@ if (!id && !pin) {
           document.getElementById(`part${i}SalesPrice`).disabled = true;
           document.getElementById(`part${i}SalesPrice`).required = false;
           document.getElementById(`part${i}SalesPrice`).value = '';
+          // Cost
+          document.getElementById(`part${i}Cost`).disabled = true;
+          document.getElementById(`part${i}Cost`).required = false;
+          document.getElementById(`part${i}Cost`).value = '';
           // Item No
           document.getElementById(`part${i}ItemNo`).value = '';
           // Item Total Price
