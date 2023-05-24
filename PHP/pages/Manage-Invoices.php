@@ -9,7 +9,12 @@
     <form class="needs-validation" novalidate action="<?php if ($action) {echo "./index.php?page=View-Estimates";} else {echo "./index.php?page=View-Invoices";} ?>" method="post">
         <input class="btn btn-primary btn-lg m-2" id="submitButton" name="submit" type="submit" value ="<?php if ($id && $pin) {echo "Modify Invoice";} else if ($action) {echo "Create Estimate";} else {echo "Create Invoice";} ?>"></input>
         <div id="invoice">
-            <img src="./images/blankManageInvoice.jpg" alt="Invoice">
+        <?php if ($action) {
+            echo '<img src="./images/blankManageEstimate.jpg" alt="Estimate">';
+        } else {
+            echo '<img src="./images/blankManageInvoice.jpg" alt="Invoice">';
+        }
+        ?>
         </div>
 
         <?php
@@ -150,6 +155,7 @@
             echo 'Cost:&emsp; $<input type="text" readonly class="no-outline" name="finalCost" id="finalCost" value="' . number_format($invoice['finalCost'], 2, '.', '').'">';
         echo "</div>";
 
+        if (!$action) {
         echo '<div id="phoneAndEmail">';
             ?><textarea class="fill-in" name="invoice_phone" rows="2" style="width:195px;text-align: center;resize:none" required><?php
                 if($invoice['invoice_phone']) {
@@ -168,7 +174,7 @@
                 }
             ?></textarea><?php
         echo "</div>";
-
+        }
         ?>
 
     </form>

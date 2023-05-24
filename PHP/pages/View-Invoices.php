@@ -79,16 +79,18 @@ console.log(postedData)
     <!-- <th>invoices_id</th> -->
     <th width="85px"><?php echo ucfirst(substr($chosenDB, 0, -1));?></th>
     <?php if ($chosenDB == "invoices"){ echo '<th width="50px">Slip</th>';} ?>
-    <th width="75px">Modify</th>
+    <?php if ($chosenDB == "invoices"){ echo '<th width="75px">Modify</th>';} ?>
     <th width="60px">Email</th>
     <!-- <th width="75px">Modify</th> -->
     <th width="70px">Delete</th>
-    <th width="125px">Invoice Date</th>
+    <th width="125px"><?php echo ucfirst(substr($chosenDB, 0, -1));?> Date</th>
     <!-- <th>shipTo</th> -->
-    <th width="110px">Total Paid</th>
-    <th width="50px">Paid</th>
-    <th width="80px">Inv No.</th>
-    <th width="70px">PO No.</th>
+    <th width="110px">$Total</th>
+    <?php if ($chosenDB == "invoices"){ echo '<th width="50px">Paid</th>';} ?>
+    <?php if ($chosenDB == "invoices"){ echo '<th width="80px">Inv No.</th>';} else {echo '<th width="80px">Est No.</th>';} ?>
+    
+    <?php if ($chosenDB == "invoices"){ echo '<th width="70px">PO No.</th>';} ?>
+    
     <th>Bill To</th>
     <th>Created</th>
     <!-- <th>shipDate</th> -->
@@ -117,7 +119,7 @@ console.log(postedData)
 
             // Link to Invoice 
             echo '<td class="tdCenter">';
-                echo '<a href="invoice_pdf.php?id='.$dbValuesOne['invoices_id'].'&pin='.$dbValuesOne['bill_zip'].'" target="_blank">'; 
+                echo '<a href="'.substr($chosenDB, 0, -1).'_pdf.php?id='.$dbValuesOne['invoices_id'].'&pin='.$dbValuesOne['bill_zip'].'" target="_blank">'; 
                     echo '<img src="./icons/invoice.png" alt="Invoice" width="30" height="30">';
                 echo '</a>';
             echo "</td>";
@@ -131,12 +133,14 @@ console.log(postedData)
             echo "</td>";
             }
 
+            if ($chosenDB == "invoices"){
             // Modify the invoice
             echo '<td class="tdCenter">';
                 echo '<a href="./index.php?page=Manage-Invoices&id='.$dbValuesOne['invoices_id'].'&pin='.$dbValuesOne['bill_zip'].'">'; 
                     echo '<img src="./icons/modify.png" alt="Invoice" width="30" height="30">';
                 echo '</a>';
             echo "</td>";
+            }
 
             // Sending an invoice via email
             echo '<td class="tdCenter">';
@@ -169,6 +173,7 @@ console.log(postedData)
                 print_r($dbValuesOne['finalPrice']);
             echo "</td>";
 
+            if ($chosenDB == "invoices"){
             // Payment Indicator
             echo '<td class="tdCenter">';
                 echo '<form action="./index.php?page=View-Invoices" method="post">';
@@ -179,6 +184,7 @@ console.log(postedData)
                 }
                 echo '</form>';
             echo "</td>";
+            }
 
             // Payment Indicator
             // echo '<td class="tdCenter">';
@@ -190,10 +196,12 @@ console.log(postedData)
                 print_r($dbValuesOne['invoices_id']);
             echo "</td>";
 
+            if ($chosenDB == "invoices"){
             // PO NO
             echo '<td class="tdCenter">';
                 print_r($dbValuesOne['po_no']);
             echo "</td>";
+            }
 
             // Bill To 
             echo "<td>";

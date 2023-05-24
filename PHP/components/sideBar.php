@@ -1,3 +1,11 @@
+<?php 
+
+$permissionsSQL = "SELECT type FROM users WHERE users_id = '".$_SESSION["users_id"]."'";
+$permissionsQuery = mysqli_query($conn, $permissionsSQL);
+foreach ($permissionsQuery as $permissions) {}
+console_log($permissions['type']);
+?>
+
 <h1 class="visually-hidden">L&M Hardware Sidebar</h1>
       <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
@@ -59,11 +67,11 @@
           <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
             <li><a class="dropdown-item" href="?page=Manage-Invoices">Create Invoice & Slip</a></li>
             <li><a class="dropdown-item" href="?page=Manage-Invoices&action=estimate">Create Estimate</a></li>
-            <li><a class="dropdown-item" href="?page=Manage-Inventory">Create Inventory</a></li>
+            <?php if($permissions['type'] == "administrator") {echo '<li><a class="dropdown-item" href="?page=Manage-Inventory">Create Inventory</a></li>';}?>
             <li><a class="dropdown-item" href="?page=Manage-Customers">Create Customer</a></li>
-            <li><a class="dropdown-item" href="?page=Create-Users">Create User</a></li>
+            <?php if($permissions['type'] == "administrator") {echo '<li><a class="dropdown-item" href="?page=Create-Users">Create User</a></li>';}?>
             <!-- <li><a id="export" class="dropdown-item" href="?page=Export">Import-Export</a></li> -->
-            <li><a class="dropdown-item" href="?page=Reset-Password">Reset Password</a></li>
+            <?php if($permissions['type'] == "administrator") {echo '<li><a class="dropdown-item" href="?page=Reset-Password">Reset Password</a></li>';}?>
             <!-- <li><a class="dropdown-item" href="#">Profile</a></li> -->
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="logout.php">Sign Out</a></li>
