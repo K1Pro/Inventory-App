@@ -1,7 +1,12 @@
 <?php
 $postedData = $_POST;
-if($postedData['submit']){}
-$invoicesSQL = "SELECT * FROM invoices ORDER BY invoices_id DESC";
+if($postedData['businessSelect']){
+    console_log("We are in");
+    $invoicesSQL = "SELECT * FROM invoices WHERE bill_business_name = '".$postedData['businessSelect']."' ORDER BY invoices_id DESC";
+} else {
+    $invoicesSQL = "SELECT * FROM invoices ORDER BY invoices_id DESC";
+}
+
 $invoicesQuery = mysqli_query($conn, $invoicesSQL);
 
 foreach ($invoicesQuery as $invoices) {
@@ -9,6 +14,16 @@ foreach ($invoicesQuery as $invoices) {
 };
 
 foreach ($invoicesQuery as $invoices) {
+    $finalPriceArray[] = $invoices['finalPrice'];
+};
+
+foreach ($invoicesQuery as $invoices) {
+    $finalCostArray[] = $invoices['finalCost'];
+};
+
+$businessNamesSQL = "SELECT * FROM invoices ORDER BY invoices_id DESC";
+$businessNamesQuery = mysqli_query($conn, $businessNamesSQL);
+foreach ($businessNamesQuery as $invoices) {
     $billToArray[] = $invoices['bill_business_name'];
 };
 ?>
@@ -19,8 +34,11 @@ console.log(postedData)
 const invoicesData = <?php echo json_encode($invoicesArray); ?>;
 console.log(invoicesData)
 
-const billData = <?php echo json_encode(array_unique($billToArray)); ?>;
-console.log(billData)
+const finalPriceData = <?php echo json_encode(number_format(array_sum($finalPriceArray), 2, '.', '')); ?>;
+console.log(finalPriceData)
+
+// const billData = <?php echo json_encode(array_unique($billToArray)); ?>;
+// console.log(billData)
 </script>
 
 <div style="overflow-y: auto; overflow-x: auto">
@@ -35,17 +53,17 @@ console.log(billData)
     <!-- <th width="75px">Modify</th> -->
     <!-- <th width="70px">Delete</th> -->
     <th width="80px">Inv No.</th>
-    <th width="70px">PO No.</th>
+    <th width="90px">PO No.</th>
     <th width="125px">Invoice Date</th>
     <!-- <th>shipTo</th> -->
-    <th width="110px">Total Paid</th>
-    <th width="110px">Cost</th>
+    <th>Paid (Total: $<?php echo number_format(array_sum($finalPriceArray), 2, '.', ''); ?>)</th>
+    <th>Cost (Total: $<?php echo number_format(array_sum($finalCostArray), 2, '.', ''); ?>)</th>
     <th width="50px">Paid</th>
 
     <th>
     <!-- <label for="business">Choose a car:</label> -->
     <form action="./index.php?page=View-Invoice-Report" id="businessSelectForm" method="post">
-        <select name="business" id="businessSelect">
+        <select name="businessSelect" id="businessSelect">
             <option value="">Choose Business...</option>
             <!-- <option value="saab">Saab</option>
             <option value="mercedes">Mercedes</option>
@@ -126,7 +144,7 @@ console.log(billData)
             echo "</td>";
 
             // PO NO
-            echo '<td class="tdCenter">';
+            echo '<td>';
                 print_r($dbValuesOne['po_no']);
             echo "</td>";
 
