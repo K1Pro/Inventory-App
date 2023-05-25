@@ -68,7 +68,7 @@ console.log(finalPriceData)
     <th width="90px">PO No.</th>
     <th width="140px">
     <form action="./index.php?page=View-Invoice-Report" id="filteringForm" method="post">
-        <select name="invoiceYearSelect" id="invoiceYearSelect">
+        <select name="invoiceYearSelect" id="invoiceYearSelect" data-bs-theme="dark">
             <option value="">Choose Year...</option>
             <?php
             rsort($invoiceYearArray);
@@ -92,7 +92,7 @@ console.log(finalPriceData)
 
     <th>
     <!-- <form action="./index.php?page=View-Invoice-Report" id="businessSelectForm" method="post"> -->
-        <select name="businessSelect" id="businessSelect">
+        <select name="businessSelect" id="businessSelect" data-bs-theme="dark">
             <option value="">Choose Business...</option>
             <?php
             sort($billToArray);

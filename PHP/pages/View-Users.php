@@ -1,3 +1,4 @@
+
 <div style="overflow-y: auto; overflow-x: auto">
 
 <table class="table table-striped">
@@ -14,6 +15,14 @@
   </tr>
 
 <?php
+if($permissions['type'] == "administrator") {
+    $postedData = $_POST;
+    if(strpos($postedData['submit'], 'Delete') !== false){
+        $parts = explode('-', $postedData['submit']);
+        $deleteDB = $parts[1];
+        $deleteValue = $parts[2];
+        require("./PHP/components/delete.php");
+    }
     // SQL query
     $strSQL = "SELECT username, email, phone, type, created_at, users_id FROM users";
     // Execute the query
@@ -29,14 +38,23 @@
             echo '</a>';
         echo "</td>";
 
-        // Delete a customer
+        // Delete an Invoice
         echo '<td class="tdCenter">';
         if ($dbValues['username'] == "larry" || $dbValues['username'] == "bartosz") {} else{
-            echo '<a href="./index.php?page=Delete&id='.$dbValues['users_id'].'&db=users">';
-                echo '<img src="./icons/delete.png" alt="Invoice" width="30" height="30">';
-            echo '</a>';
+            echo '<form action="./index.php?page=View-Users" method="post">';
+                echo '<input class="deleteButton" type="submit" name="submit" value="Delete-users-'.$dbValues['users_id'].'">';
+            echo '</form>';
         }
         echo "</td>";
+
+        // Old Delete a customer
+        // echo '<td class="tdCenter">';
+        // if ($dbValues['username'] == "larry" || $dbValues['username'] == "bartosz") {} else{
+        //     echo '<a href="./index.php?page=Delete&id='.$dbValues['users_id'].'&db=users">';
+        //         echo '<img src="./icons/delete.png" alt="Invoice" width="30" height="30">';
+        //     echo '</a>';
+        // }
+        // echo "</td>";
 
         echo "<td>";
             print_r($dbValues['username']);
@@ -60,6 +78,7 @@
 
         echo "</tr>";
     }
+}
 ?>
 
 </table>

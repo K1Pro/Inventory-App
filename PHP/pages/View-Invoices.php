@@ -114,7 +114,7 @@ console.log(postedData)
 
 
     foreach ($rs as $dbValuesOne) {
-        echo "<tr>";
+        echo '<tr>';
 
 
             // Link to Invoice 
@@ -167,6 +167,10 @@ console.log(postedData)
 
             // Invoice Date 
             echo "<td>";
+
+// left off here
+            $dueDate = date('m/d/Y', strtotime(($dbValuesOne['invoiceDate'] + '1 day')));
+            console_log($dueDate);
                 echo date('m/d/Y', strtotime($dbValuesOne['invoiceDate']));
             echo "</td>";
 
