@@ -64,9 +64,9 @@ console.log(finalPriceData)
     <th width="60px">Email</th> -->
     <!-- <th width="75px">Modify</th> -->
     <!-- <th width="70px">Delete</th> -->
-    <th style="width:110px"><button onclick="exportData()">Download</button></th>
-    <th style="width:90px">PO No.</th>
-    <th style="width:140px">
+    <th style="width:120px"><button type="button" class="btn btn-warning" onclick="exportData()">Download</button></th>
+    <th style="width:90px; vertical-align:middle">PO No.</th>
+    <th style="width:140px; vertical-align:middle">
     <form action="./index.php?page=View-Invoice-Report" id="filteringForm" method="post">
         <select name="invoiceDate" id="invoiceDate" data-bs-theme="dark">
             <option value="">Choose Year...</option>
@@ -86,11 +86,11 @@ console.log(finalPriceData)
     <!-- </form> -->
     </th>
     <!-- <th>shipTo</th> -->
-    <th>Paid (Total: $<?php echo $finalPriceArray ? number_format(array_sum($finalPriceArray), 2, '.', '') : "0.00"; ?>)</th>
-    <th>Cost (Total: $<?php echo $finalCostArray ? number_format(array_sum($finalCostArray), 2, '.', '') : "0.00"; ?>)</th>
-    <th style="width:50px">Paid</th>
+    <th style="vertical-align:middle">Paid (Total: $<?php echo $finalPriceArray ? number_format(array_sum($finalPriceArray), 2, '.', '') : "0.00"; ?>)</th>
+    <th style="vertical-align:middle">Cost (Total: $<?php echo $finalCostArray ? number_format(array_sum($finalCostArray), 2, '.', '') : "0.00"; ?>)</th>
+    <th style="width:50px; vertical-align:middle">Paid</th>
 
-    <th>
+    <th style="vertical-align:middle">
     <!-- <form action="./index.php?page=View-Invoice-Report" id="bill_business_nameForm" method="post"> -->
         <select name="bill_business_name" id="bill_business_name" data-bs-theme="dark">
             <option value="">Choose Business...</option>
@@ -226,56 +226,3 @@ console.log(finalPriceData)
 </table>
 </div>
 <script src="./JS/View-Invoice-Report.js"></script>
-<script>
-function exportData(){
-    const event = new Date();
-    const fileNameDate = event.toISOString().slice(0,19).replaceAll(":", "-");
-    /* Get the HTML data using Element by Id */
-    let table = document.getElementById("invoiceReportTable");
- 
-    /* Declaring array variable */
-    let rows =[];
- 
-      //iterate through rows of table
-    for(let i=1,row; row = table.rows[i];i++){
-        //rows would be accessed using the "row" variable assigned in the for loop
-        //Get each cell value/column from the row
-        column1 = row.cells[0].innerText;
-        column2 = row.cells[1].innerText;
-        column3 = row.cells[2].innerText;
-        column4 = row.cells[3].innerText;
-        column5 = row.cells[4].innerText;
-        column6 = row.cells[5].innerText;
-        column7 = row.cells[6].innerText;
- 
-    /* add a new records in the array */
-        rows.push(
-            [
-                column1,
-                column2,
-                column3,
-                column4,
-                column5,
-                column6,
-                column7
-            ]
-        );
-
-        }
-        csvContent = "data:text/csv;charset=utf-8,";
-         /* add the column delimiter as comma(,) and each row splitted by new line character (\n) */
-        rows.forEach(function(rowArray){
-            row = rowArray.join(",");
-            csvContent += row + "\r\n";
-        });
-
-        /* create a hidden <a> DOM node and set its download attribute */
-        let encodedUri = encodeURI(csvContent);
-        let link = document.createElement("a");
-        link.setAttribute("href", encodedUri);
-        link.setAttribute(`download`, `${fileNameDate}-InvoiceReport.csv`);
-        document.body.appendChild(link);
-         /* download the data file named "InvoiceReport.csv" */
-        link.click();
-}
-</script>

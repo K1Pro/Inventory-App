@@ -3,13 +3,12 @@ $postedData = $_POST;
 if($postedData['submit']){}
 $page = htmlspecialchars($_GET["page"]);
 $chosenDB = strtolower(explode('-', $page)[1]);
-console_log($chosenDB);
+console_log("Chosen DB:" . $chosenDB);
+$invoicesSQL = "SELECT * FROM ".$chosenDB." ORDER BY invoices_id DESC";
 
 if (explode(' ', $postedData['submit'])[0] == "Create") {
     require("./PHP/components/schemaInvoice-create.php");
     for ($i = 1; $i <= 15; $i++) {
-        console_log(${"part".$i."ItemDesc"});
-
         $usersSQL = "SELECT username FROM users WHERE users_id = '".$_SESSION["users_id"]."'";
         $usersQuery = mysqli_query($conn, $usersSQL);
         foreach ($usersQuery as $usersValues) {
@@ -17,11 +16,17 @@ if (explode(' ', $postedData['submit'])[0] == "Create") {
         }
         if (explode(' ', $postedData['submit'])[1] == "Invoice") {
             if ($postedData['part'.$i.'ItemNo']) {
-                if (strpos(strtolower(${"part".$i."ItemDesc"}), "freight") !== false) {console_log("Freight Detected");}
-                else if(strpos(strtolower(${"part".$i."ItemDesc"}),"tax") !== false) {console_log("Tax Detected");}
-                else if(strpos(strtolower(${"part".$i."ItemDesc"}), "tariff") !== false) {console_log("Tariff Detected");}
-                else if(strpos(strtolower(${"part".$i."ItemDesc"}), "design") !== false) {console_log("Design Detected");}
-                else if(strpos(strtolower(${"part".$i."ItemDesc"}), "misc") !== false) {console_log("Misc Detected");}
+                if (${"part".$i."ItemNo"} == "305") {console_log("Freight Van Detected");}
+                else if(${"part".$i."ItemNo"} == "306") {console_log("Freight UPS Detected");}
+                else if(${"part".$i."ItemNo"} == "307") {console_log("Tax Detected");}
+                else if(${"part".$i."ItemNo"} == "308") {console_log("Tariff Detected");}
+                else if(${"part".$i."ItemNo"} == "313") {console_log("Design Detected");}
+                else if(${"part".$i."ItemNo"} == "315") {console_log("Misc Detected");}
+                // if (strpos(strtolower(${"part".$i."ItemDesc"}), "freight") !== false) {console_log("Freight Detected");}
+                // else if(strpos(strtolower(${"part".$i."ItemDesc"}),"tax") !== false) {console_log("Tax Detected");}
+                // else if(strpos(strtolower(${"part".$i."ItemDesc"}), "tariff") !== false) {console_log("Tariff Detected");}
+                // else if(strpos(strtolower(${"part".$i."ItemDesc"}), "design") !== false) {console_log("Design Detected");}
+                // else if(strpos(strtolower(${"part".$i."ItemDesc"}), "misc") !== false) {console_log("Misc Detected");}
                 else {
                     // echo $postedData['part'.$i.'ItemNo'];
                     $inventoryUpdateSQL = "UPDATE inventory SET quantityOnHand = quantityOnHand - ".$postedData['part'.$i.'Quantity']." WHERE inventory_id = ".$postedData['part'.$i.'ItemNo'];
@@ -64,35 +69,54 @@ if (explode(' ', $postedData['submit'])[0] == "Create") {
     } else{
         ?><script>snackbar(`Error`);</script><?php   
     }
+} else if($postedData['submit']=='View-Invoices'){
+    array_shift($postedData);
+    $mySQLquery = http_build_query($postedData, "", "%' AND ");
+    $mySQLquery = str_replace("%26", "&", $mySQLquery);
+    $mySQLquery = str_replace("+", " ", $mySQLquery);
+    $mySQLquery = str_replace("=", " LIKE '%", $mySQLquery);
+    $invoicesSQL = "SELECT * FROM ".$chosenDB." WHERE ".$mySQLquery."%' ORDER BY invoices_id DESC";
+    console_log("MySQL Query Generated");
 }
 
 ?>
 <script>
 const postedData = <?php echo json_encode($postedData); ?>;
-console.log(postedData)
 </script>
 
 <div style="overflow-y: auto; overflow-x: auto">
-
 <table class="table table-striped">
   <tr>
     <!-- <th>invoices_id</th> -->
-    <th width="85px"><?php echo ucfirst(substr($chosenDB, 0, -1));?></th>
-    <?php if ($chosenDB == "invoices"){ echo '<th width="50px">Slip</th>';} ?>
-    <?php if ($chosenDB == "invoices"){ echo '<th width="75px">Modify</th>';} ?>
-    <th width="60px">Email</th>
+    <th style="width:85px; vertical-align:middle"><?php echo ucfirst(substr($chosenDB, 0, -1));?></th>
+    <?php if ($chosenDB == "invoices"){ echo '<th style="vertical-align:middle" width="50px">Slip</th>';} ?>
+    <?php if ($chosenDB == "invoices"){ echo '<th style="vertical-align:middle" width="75px">Modify</th>';} ?>
+    <th style="width:60px; vertical-align:middle">Email</th>
     <!-- <th width="75px">Modify</th> -->
-    <?php if($permissions['type'] == "administrator") { echo'<th width="70px">Delete</th>';} ?>
-    <th width="125px"><?php echo ucfirst(substr($chosenDB, 0, -1));?> Date</th>
-    <!-- <th>shipTo</th> -->
-    <th width="110px">$Total</th>
-    <?php if ($chosenDB == "invoices"){ echo '<th width="50px">Paid</th>';} ?>
-    <?php if ($chosenDB == "invoices"){ echo '<th width="80px">Inv No.</th>';} else {echo '<th width="80px">Est No.</th>';} ?>
-    
-    <?php if ($chosenDB == "invoices"){ echo '<th width="70px">PO No.</th>';} ?>
-    
-    <th>Bill To</th>
-    <th>Created</th>
+    <?php if($permissions['type'] == "administrator") { echo'<th style="vertical-align:middle" width="70px">Delete</th>';} ?>
+    <form action="./index.php?page=<?php echo $page;?>" id="filteringForm" method="post">
+    <input style="display:none" type="text" name="submit" value ="<?php echo $page;?>"></input>
+        <th style="width:155px"><input style="width:115px" type="month" id="invoiceDate" name="invoiceDate"></th>
+        <!-- Original Invoice Date Header -->
+        <!-- <th width="125px"><?php echo ucfirst(substr($chosenDB, 0, -1));?> Date</th> -->
+        <!-- <th>shipTo</th> -->
+        <th style="width:110px; vertical-align:middle">$Total</th>
+        <?php if ($chosenDB == "invoices"){ echo '<th width="50px" style="vertical-align:middle">Paid</th>';} ?>
+        <?php if ($chosenDB == "invoices"){ echo '<th width="80px"><input type="text" placeholder="Inv No." style="width:60px" ></th>';} else {echo '<th width="80px">Est No.</th>';} ?>
+        
+        <?php if ($chosenDB == "invoices"){ echo '<th width="80px"><input type="text" placeholder="PO No." style="width:60px" ></th>';} ?>
+        
+        <th style="vertical-align:middle">
+        <select name="bill_business_name" id="bill_business_name">
+                <option value="">Choose Business...</option>
+        </select>
+        </th>
+        <th style="vertical-align:middle">
+            <select name="bill_business_name" id="bill_business_name">
+                    <option value="">Choose User...</option>
+            </select>
+        </th>
+    </form>
     <!-- <th>shipDate</th> -->
     <!-- <th>Part1 Item</th> -->
     <!-- <th>part1Quantity</th> -->
@@ -104,16 +128,8 @@ console.log(postedData)
   </tr>
 
 <?php
-    // SQL query
-    $strSQL = "SELECT * FROM ".$chosenDB." ORDER BY invoices_id DESC";
-    
-    // Execute the query
-    $rs = mysqli_query($conn, $strSQL);
-    // print_r($rs);
-    // echo "<br>";
-
-
-    foreach ($rs as $dbValuesOne) {
+$invoicesQuery = mysqli_query($conn, $invoicesSQL);
+    foreach ($invoicesQuery as $dbValuesOne) {
         echo '<tr>';
 
 
@@ -144,7 +160,7 @@ console.log(postedData)
 
             // Sending an invoice via email
             echo '<td class="tdCenter">';
-                echo '<a href="./index.php?page=Email-Invoices&id='.$dbValuesOne['invoices_id'].'">';
+                echo '<a href="./index.php?page=Email-'.ucfirst($chosenDB).'&id='.$dbValuesOne['invoices_id'].'">';
                     echo '<img src="./icons/email.png" alt="Email" width="30" height="30">';
                 echo '</a>';
             echo "</td>";
@@ -165,17 +181,14 @@ console.log(postedData)
             //     echo '</a>';
             // echo "</td>";
 
-            // Invoice Date 
-            echo "<td>";
-
-// left off here
-            $dueDate = date('m/d/Y', strtotime(($dbValuesOne['invoiceDate'] + '1 day')));
-            console_log($dueDate);
-                echo date('m/d/Y', strtotime($dbValuesOne['invoiceDate']));
-            echo "</td>";
+            // Invoice Date m/d/Y
+            $dueDate = date('Ymd', strtotime(($dbValuesOne['invoiceDate']. ' + 10 days')));
+            if(!$dbValuesOne['paid']) {if(date("Ymd") >=$dueDate) {echo '<td style="color:red; font-weight: bold">';} else {echo "<td>";}} else {echo "<td>";}
+                    echo date('m/d/Y', strtotime($dbValuesOne['invoiceDate']));
+                echo "</td>";
 
             // Total amount on bill
-            echo "<td>$";
+            if(!$dbValuesOne['paid']) {if(date("Ymd") >=$dueDate) {echo '<td style="color:red; font-weight: bold">';} else {echo "<td>";}} else {echo "<td>";}
                 print_r($dbValuesOne['finalPrice']);
             echo "</td>";
 
@@ -198,24 +211,24 @@ console.log(postedData)
             // echo "</td>";
 
             // Invoice NO
-            echo '<td class="tdCenter">';
+            if(!$dbValuesOne['paid']) {if(date("Ymd") >=$dueDate) {echo '<td class="tdCenter" style="color:red; font-weight: bold">';} else {echo '<td class="tdCenter">';}} else {echo '<td class="tdCenter">';}
                 print_r($dbValuesOne['invoices_id']);
             echo "</td>";
 
             if ($chosenDB == "invoices"){
             // PO NO
-            echo '<td class="tdCenter">';
+            if(!$dbValuesOne['paid']) {if(date("Ymd") >=$dueDate) {echo '<td class="tdCenter" style="color:red; font-weight: bold">';} else {echo '<td class="tdCenter">';}} else {echo '<td class="tdCenter">';}
                 print_r($dbValuesOne['po_no']);
             echo "</td>";
             }
 
             // Bill To 
-            echo "<td>";
+            if(!$dbValuesOne['paid']) {if(date("Ymd") >=$dueDate) {echo '<td style="color:red; font-weight: bold">';} else {echo "<td>";}} else {echo "<td>";}
                 print_r($dbValuesOne['bill_business_name']);
             echo "</td>";
 
             // Bill To 
-            echo "<td>";
+            if(!$dbValuesOne['paid']) {if(date("Ymd") >=$dueDate) {echo '<td style="color:red; font-weight: bold">';} else {echo "<td>";}} else {echo "<td>";}
                 echo ucfirst($dbValuesOne['created']);
             echo "</td>";
 
@@ -229,3 +242,4 @@ console.log(postedData)
 
 </table>
 </div>
+<script src="./JS/View-Invoices.js"></script>

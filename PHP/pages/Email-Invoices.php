@@ -1,10 +1,14 @@
 <?php
+$getdata = $_GET;
+console_log(strtolower(explode('-', $getdata['page'])[1]));
+
+
 $usersSQL = "SELECT email FROM users WHERE users_id = '".$_SESSION["users_id"]."'";
 $users = mysqli_query($conn, $usersSQL);
 foreach ($users as $dbValues) {}
 
 $id = htmlspecialchars($_GET["id"]);
-$invoicesSQL = "SELECT * FROM invoices WHERE invoices_id = '".$id."'";
+$invoicesSQL = "SELECT * FROM ".strtolower(explode('-', $getdata['page'])[1])." WHERE invoices_id = '".$id."'";
 $invoices = mysqli_query($conn, $invoicesSQL);
 $invoiceArray[] = array();
 foreach ($invoices as $invoiceValues) {
@@ -16,7 +20,7 @@ foreach ($invoices as $invoiceValues) {
 <div class="container bg-secondary-subtle" style="overflow-y: auto; overflow-x: hidden">
     <div class="justify-content-center">
 
-        <h4 class="mb-3">Email Invoice</h4>
+        <h4 class="mb-3">Email <?php echo substr(explode('-', $getdata['page'])[1], 0, -1);?></h4>
         <form class="needs-validation" novalidate action="./index.php?page=View-Invoices" method="post">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">From:</span>
@@ -64,7 +68,7 @@ foreach ($invoices as $invoiceValues) {
             <hr class="my-4">
             <!-- <input class="btn btn-primary btn-lg m-2" id="submitButton" name="submit" type="submit" value ="<?php echo $id && $pin ? "Modify Invoice" : "Create Invoice"; ?>"></input> -->
             <!-- <input type="button" value="Send Invoice" class="w-80 btn btn-primary btn-lg" onclick="sendEmail()" /></input> -->
-            <input name="submit" type="submit" value="Email Invoice" class="w-80 btn btn-primary btn-lg" onclick="sendEmail()" /></input>
+            <input name="submit" type="submit" value="Email <?php echo substr(explode('-', $getdata['page'])[1], 0, -1);?>" class="w-80 btn btn-primary btn-lg" onclick="sendEmail()" /></input>
 
         </form>
 

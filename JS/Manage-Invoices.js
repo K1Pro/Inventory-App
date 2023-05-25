@@ -1,4 +1,3 @@
-// Global variables and post-get data
 const id = urlParams.get('id') ? urlParams.get('id') : '';
 const pin = urlParams.get('pin') ? urlParams.get('pin') : '';
 const noOfItems = 15;
