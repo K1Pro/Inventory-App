@@ -1,13 +1,13 @@
 let filteringForm = document.getElementById(`filteringForm`);
-let invoiceYearSelect = document.getElementById(`invoiceYearSelect`);
+let invoiceDate = document.getElementById(`invoiceDate`);
 // let invoiceYearForm = document.getElementById(`invoiceYearForm`);
-let businessSelect = document.getElementById(`businessSelect`);
+let bill_business_name = document.getElementById(`bill_business_name`);
 // let businessSelectForm = document.getElementById(`businessSelectForm`);
 
-businessSelect.addEventListener('change', function () {
+bill_business_name.addEventListener('change', function () {
   filteringForm.requestSubmit();
 });
 
-invoiceYearSelect.addEventListener('change', function () {
+invoiceDate.addEventListener('change', function () {
   filteringForm.requestSubmit();
 });

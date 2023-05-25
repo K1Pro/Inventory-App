@@ -1,13 +1,17 @@
 <?php
 $postedData = $_POST;
-if($postedData['businessSelect'] && $postedData['invoiceYearSelect']){
-    $invoicesSQL = "SELECT * FROM invoices WHERE bill_business_name = '".$postedData['businessSelect']."' AND invoiceDate LIKE '%".$postedData['invoiceYearSelect']."%' ORDER BY invoiceDate DESC";
-console_log("both are selected");
-} else if ($postedData['businessSelect']){
-    $invoicesSQL = "SELECT * FROM invoices WHERE bill_business_name = '".$postedData['businessSelect']."' ORDER BY invoices_id DESC";
-} else if ($postedData['invoiceYearSelect']){
-    $invoicesSQL = "SELECT * FROM invoices WHERE invoiceDate LIKE '%".$postedData['invoiceYearSelect']."%' ORDER BY invoiceDate DESC";
-    // "%".$value."%"
+
+$mySQLquery = http_build_query($postedData, "", "%' AND ");
+$mySQLquery = str_replace("%26", "&", $mySQLquery);
+$mySQLquery = str_replace("+", " ", $mySQLquery);
+$mySQLquery = str_replace("=", " LIKE '%", $mySQLquery);
+
+if($postedData['bill_business_name'] || $postedData['invoiceDate']){
+    $invoicesSQL = "SELECT * FROM invoices WHERE ".$mySQLquery."%' ORDER BY invoiceDate DESC";
+// } else if ($postedData['bill_business_name']){
+//     $invoicesSQL = "SELECT * FROM invoices WHERE bill_business_name = '".$postedData['bill_business_name']."' ORDER BY invoices_id DESC";
+// } else if ($postedData['invoiceDate']){
+//     $invoicesSQL = "SELECT * FROM invoices WHERE invoiceDate LIKE '%".$postedData['invoiceDate']."%' ORDER BY invoiceDate DESC";
 }else {
     $invoicesSQL = "SELECT * FROM invoices ORDER BY invoices_id DESC";
 }
@@ -26,9 +30,9 @@ foreach ($invoicesQuery as $invoices) {
     $finalCostArray[] = $invoices['finalCost'];
 };
 
-$businessNamesSQL = "SELECT * FROM invoices ORDER BY invoices_id DESC";
-$businessNamesQuery = mysqli_query($conn, $businessNamesSQL);
-foreach ($businessNamesQuery as $invoices) {
+$bill_business_namesSQL = "SELECT * FROM invoices ORDER BY invoices_id DESC";
+$bill_business_namesQuery = mysqli_query($conn, $bill_business_namesSQL);
+foreach ($bill_business_namesQuery as $invoices) {
     $billToArray[] = $invoices['bill_business_name'];
 };
 
@@ -68,7 +72,7 @@ console.log(finalPriceData)
     <th width="90px">PO No.</th>
     <th width="140px">
     <form action="./index.php?page=View-Invoice-Report" id="filteringForm" method="post">
-        <select name="invoiceYearSelect" id="invoiceYearSelect" data-bs-theme="dark">
+        <select name="invoiceDate" id="invoiceDate" data-bs-theme="dark">
             <option value="">Choose Year...</option>
             <?php
             rsort($invoiceYearArray);
@@ -76,7 +80,7 @@ console.log(finalPriceData)
                     echo '<option value="';
                     echo $year;
                     echo '"';
-                    if ($year == $postedData['invoiceYearSelect']){echo "selected";}
+                    if ($year == $postedData['invoiceDate']){echo "selected";}
                     echo '>';
                     echo $year;
                     echo "</option>";
@@ -91,18 +95,18 @@ console.log(finalPriceData)
     <th width="50px">Paid</th>
 
     <th>
-    <!-- <form action="./index.php?page=View-Invoice-Report" id="businessSelectForm" method="post"> -->
-        <select name="businessSelect" id="businessSelect" data-bs-theme="dark">
+    <!-- <form action="./index.php?page=View-Invoice-Report" id="bill_business_nameForm" method="post"> -->
+        <select name="bill_business_name" id="bill_business_name" data-bs-theme="dark">
             <option value="">Choose Business...</option>
             <?php
             sort($billToArray);
-                foreach (array_unique($billToArray) as $businessName) {
+                foreach (array_unique($billToArray) as $bill_business_name) {
                     echo '<option value="';
-                    echo $businessName;
+                    echo $bill_business_name;
                     echo '"';
-                    if ($businessName == $postedData['businessSelect']){echo "selected";}
+                    if ($bill_business_name == $postedData['bill_business_name']){echo "selected";}
                     echo '>';
-                    echo $businessName;
+                    echo $bill_business_name;
                     echo "</option>";
                 }
             ?>
