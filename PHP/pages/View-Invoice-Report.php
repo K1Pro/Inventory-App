@@ -8,10 +8,6 @@ $mySQLquery = str_replace("=", " LIKE '%", $mySQLquery);
 
 if($postedData['bill_business_name'] || $postedData['invoiceDate']){
     $invoicesSQL = "SELECT * FROM invoices WHERE ".$mySQLquery."%' ORDER BY invoiceDate DESC";
-// } else if ($postedData['bill_business_name']){
-//     $invoicesSQL = "SELECT * FROM invoices WHERE bill_business_name = '".$postedData['bill_business_name']."' ORDER BY invoices_id DESC";
-// } else if ($postedData['invoiceDate']){
-//     $invoicesSQL = "SELECT * FROM invoices WHERE invoiceDate LIKE '%".$postedData['invoiceDate']."%' ORDER BY invoiceDate DESC";
 }else {
     $invoicesSQL = "SELECT * FROM invoices ORDER BY invoices_id DESC";
 }
@@ -33,13 +29,13 @@ foreach ($invoicesQuery as $invoices) {
 $bill_business_namesSQL = "SELECT * FROM invoices ORDER BY invoices_id DESC";
 $bill_business_namesQuery = mysqli_query($conn, $bill_business_namesSQL);
 foreach ($bill_business_namesQuery as $invoices) {
-    $billToArray[] = $invoices['bill_business_name'];
+    $bill_business_nameArray[] = $invoices['bill_business_name'];
 };
 
-$invoiceYearSQL = "SELECT * FROM invoices ORDER BY invoices_id DESC";
-$invoiceYearQuery = mysqli_query($conn, $invoiceYearSQL);
-foreach ($invoiceYearQuery as $invoices) {
-    $invoiceYearArray[] = substr($invoices['invoiceDate'], 0, 4);
+$invoiceDateSQL = "SELECT * FROM invoices ORDER BY invoices_id DESC";
+$invoiceDateQuery = mysqli_query($conn, $invoiceDateSQL);
+foreach ($invoiceDateQuery as $invoices) {
+    $invoiceDateArray[] = substr($invoices['invoiceDate'], 0, 4);
 };
 
 ?>
@@ -47,19 +43,19 @@ foreach ($invoiceYearQuery as $invoices) {
 const postedData = <?php echo json_encode($postedData); ?>;
 console.log(postedData)
 
-const invoicesData = <?php echo json_encode($invoiceYearArray); ?>;
+const invoicesData = <?php echo json_encode($invoiceDateArray); ?>;
 console.log(invoicesData)
 
 const finalPriceData = <?php echo json_encode(number_format(array_sum($finalPriceArray), 2, '.', '')); ?>;
 console.log(finalPriceData)
 
-// const billData = <?php echo json_encode(array_unique($billToArray)); ?>;
+// const billData = <?php echo json_encode(array_unique($bill_business_nameArray)); ?>;
 // console.log(billData)
 </script>
 
 <div style="overflow-y: auto; overflow-x: auto">
 
-<table class="table table-striped">
+<table class="table table-striped" id="invoiceReportTable">
   <tr>
     <!-- <th>invoices_id</th> -->
     <!-- <th width="75px">Invoice</th>
@@ -68,21 +64,21 @@ console.log(finalPriceData)
     <th width="60px">Email</th> -->
     <!-- <th width="75px">Modify</th> -->
     <!-- <th width="70px">Delete</th> -->
-    <th width="80px">Inv No.</th>
-    <th width="90px">PO No.</th>
-    <th width="140px">
+    <th style="width:110px"><button onclick="exportData()">Download</button></th>
+    <th style="width:90px">PO No.</th>
+    <th style="width:140px">
     <form action="./index.php?page=View-Invoice-Report" id="filteringForm" method="post">
         <select name="invoiceDate" id="invoiceDate" data-bs-theme="dark">
             <option value="">Choose Year...</option>
             <?php
-            rsort($invoiceYearArray);
-                foreach (array_unique($invoiceYearArray) as $year) {
+            rsort($invoiceDateArray);
+                foreach (array_unique($invoiceDateArray) as $invoiceDate) {
                     echo '<option value="';
-                    echo $year;
+                    echo $invoiceDate;
                     echo '"';
-                    if ($year == $postedData['invoiceDate']){echo "selected";}
+                    if ($invoiceDate == $postedData['invoiceDate']){echo "selected";}
                     echo '>';
-                    echo $year;
+                    echo $invoiceDate;
                     echo "</option>";
                 }
             ?>
@@ -92,15 +88,15 @@ console.log(finalPriceData)
     <!-- <th>shipTo</th> -->
     <th>Paid (Total: $<?php echo $finalPriceArray ? number_format(array_sum($finalPriceArray), 2, '.', '') : "0.00"; ?>)</th>
     <th>Cost (Total: $<?php echo $finalCostArray ? number_format(array_sum($finalCostArray), 2, '.', '') : "0.00"; ?>)</th>
-    <th width="50px">Paid</th>
+    <th style="width:50px">Paid</th>
 
     <th>
     <!-- <form action="./index.php?page=View-Invoice-Report" id="bill_business_nameForm" method="post"> -->
         <select name="bill_business_name" id="bill_business_name" data-bs-theme="dark">
             <option value="">Choose Business...</option>
             <?php
-            sort($billToArray);
-                foreach (array_unique($billToArray) as $bill_business_name) {
+            sort($bill_business_nameArray);
+                foreach (array_unique($bill_business_nameArray) as $bill_business_name) {
                     echo '<option value="';
                     echo $bill_business_name;
                     echo '"';
@@ -230,3 +226,56 @@ console.log(finalPriceData)
 </table>
 </div>
 <script src="./JS/View-Invoice-Report.js"></script>
+<script>
+function exportData(){
+    const event = new Date();
+    const fileNameDate = event.toISOString().slice(0,19).replaceAll(":", "-");
+    /* Get the HTML data using Element by Id */
+    let table = document.getElementById("invoiceReportTable");
+ 
+    /* Declaring array variable */
+    let rows =[];
+ 
+      //iterate through rows of table
+    for(let i=1,row; row = table.rows[i];i++){
+        //rows would be accessed using the "row" variable assigned in the for loop
+        //Get each cell value/column from the row
+        column1 = row.cells[0].innerText;
+        column2 = row.cells[1].innerText;
+        column3 = row.cells[2].innerText;
+        column4 = row.cells[3].innerText;
+        column5 = row.cells[4].innerText;
+        column6 = row.cells[5].innerText;
+        column7 = row.cells[6].innerText;
+ 
+    /* add a new records in the array */
+        rows.push(
+            [
+                column1,
+                column2,
+                column3,
+                column4,
+                column5,
+                column6,
+                column7
+            ]
+        );
+
+        }
+        csvContent = "data:text/csv;charset=utf-8,";
+         /* add the column delimiter as comma(,) and each row splitted by new line character (\n) */
+        rows.forEach(function(rowArray){
+            row = rowArray.join(",");
+            csvContent += row + "\r\n";
+        });
+
+        /* create a hidden <a> DOM node and set its download attribute */
+        let encodedUri = encodeURI(csvContent);
+        let link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute(`download`, `${fileNameDate}-InvoiceReport.csv`);
+        document.body.appendChild(link);
+         /* download the data file named "InvoiceReport.csv" */
+        link.click();
+}
+</script>
