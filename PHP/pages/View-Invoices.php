@@ -75,7 +75,7 @@ if (explode(' ', $postedData['submit'])[0] == "Create") {
     } else{
         ?><script>snackbar(`Error`);</script><?php   
     }
-} else if($postedData['submit']=='View-Invoices'){
+} else if($postedData['submit']=='View-Invoices' || $postedData['submit']=='View-Estimates'){
     array_shift($postedData);
     $mySQLquery = http_build_query($postedData, "", "%' AND ");
     $mySQLquery = str_replace("%26", "&", $mySQLquery);
@@ -117,7 +117,7 @@ if (explode(' ', $postedData['submit'])[0] == "Create") {
     <!-- PO No. Table Header -->
     <?php if ($chosenDB == "invoices"){ echo '<th width="80px"><input id="po_no" name="po_no" type="text" placeholder="PO No." style="width:60px" data-bs-theme="dark"></th>';} ?>
     <!-- Business Name Table Header -->
-    <th style="vertical-align:middle">
+    <th style="vertical-align:middle;width:160px">
     <select name="bill_business_name" id="bill_business_name" data-bs-theme="dark">
         <option value="">Choose Business</option>
         <?php
@@ -207,7 +207,7 @@ if (explode(' ', $postedData['submit'])[0] == "Create") {
 
     // Total Sale Table Column
     if(!$dbValuesOne['paid']) {if(date("Ymd") >=$dueDate) {echo '<td style="color:red; font-weight: bold">';} else {echo "<td>";}} else {echo "<td>";}
-        print_r($dbValuesOne['finalPrice']);
+        echo "$".$dbValuesOne['finalPrice'];
     echo "</td>";
 
     // Payment Indicator Table Column

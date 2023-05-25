@@ -5,17 +5,12 @@ $customers = mysqli_query($conn, $customersSQL);
 foreach ($customers as $customerValues) {};
 ?>
 
-<!-- <div style="overflow-y: scroll"></div> -->
 <div class="container bg-secondary-subtle" style="overflow-y: auto; overflow-x: hidden">
-  <!-- <main> -->
-
     <div class="row g-5 justify-content-center">
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3 text-center"><?php echo strlen($id) ? "Modify customer" : "Create customer"; ?></h4>
         <form class="needs-validation" novalidate  action='./index.php?page=View-Customers&id=<?php echo $id; ?>' method="post">
-        <!-- action='./index.php?page=Modified-Customers&id= -->
           <div class="row g-3">
-
             <div class="col-12">
               <label for="businessName" class="form-label">Business Name</label>
               <input type="text" class="form-control" name="businessName" id="businessName" placeholder="" required value="<?php print_r($customerValues['business_name']);?>">
@@ -171,8 +166,6 @@ foreach ($customers as $customerValues) {};
         </form>
       </div>
     </div>
-  <!-- </main> -->
-
   <footer class="pt-3 text-body-secondary text-center text-small">
     <p class="mb-1">&copy; 2023 L&M Hardware</p>
     <!-- <ul class="list-inline">

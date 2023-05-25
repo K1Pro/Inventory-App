@@ -5,22 +5,15 @@ $inventory = mysqli_query($conn, $inventorySQL);
 foreach ($inventory as $inventoryValues) {};
 ?>
 
-<!-- <div style="overflow-y: scroll"></div> -->
 <div class="container bg-secondary-subtle" style="overflow-y: auto; overflow-x: hidden">
-  <!-- <main> -->
-
     <div class="row g-5 justify-content-center">
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3 text-center"><?php echo strlen($id) ? "Modify inventory part" : "Create inventory part"; ?></h4>
         <form class="needs-validation" novalidate action='./index.php?page=View-Inventory&id=<?php echo $id; ?>' method="post">
           <div class="row g-3">
-
             <div class="col-sm-4">
               <label for="itemName" class="form-label">Item Name</label>
               <input type="text" class="form-control" name="itemName" id="itemName" value="<?php print_r($inventoryValues['itemName']);?>" placeholder="" required>
-              <!-- <div class="invalid-feedback">
-                Invalid item name
-              </div> -->
             </div>
 
             <div class="col-sm-4">
@@ -124,18 +117,12 @@ foreach ($inventory as $inventoryValues) {};
                 Invalid Access Account
               </div>
             </div>
-
-
-
           </div>
-
-
           <hr class="my-4">
           <input class="w-100 btn btn-primary btn-lg" name="submit" type="submit" value ="<?php echo $id ? "Modify Inventory" : "Create Inventory"; ?>"></input>
         </form>
       </div>
     </div>
-  <!-- </main> -->
 
   <footer class="pt-3 text-body-secondary text-center text-small">
     <p class="mb-1">&copy; 2023 L&M Hardware</p>

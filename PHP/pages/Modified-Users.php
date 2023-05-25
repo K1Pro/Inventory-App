@@ -9,11 +9,6 @@
         $email =  $_REQUEST['email'] ? $_REQUEST['email'] : '';
         $phone = $_REQUEST['phone'] ? $_REQUEST['phone'] : '';
         $type = $_REQUEST['type'] ? $_REQUEST['type'] : '';
-
-        // UPDATE Customers
-        // SET ContactName = 'Alfred Schmidt', City = 'Frankfurt'
-        // WHERE CustomerID = 1;
-
         
         // Performing insert query execution
         // FInished here

@@ -15,11 +15,10 @@ foreach ($invoices as $invoiceValues) {
     $invoiceArray[] = $invoiceValues;
 }
 ?>
-
 <div class="container bg-secondary-subtle" style="overflow-y: auto; overflow-x: hidden">
     <div class="justify-content-center">
         <h4 class="mb-3">Email <?php echo substr(explode('-', $getdata['page'])[1], 0, -1);?></h4>
-        <!-- <form class="needs-validation" novalidate action="./index.php?page=View-Invoices" method="post"> -->
+        <form class="needs-validation" novalidate action="./index.php?page=View-Invoices" method="post">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">From:</span>
                 <input name="fromEmail" readonly id="fromEmail" type="text" class="form-control" placeholder="From" aria-label="From" aria-describedby="basic-addon2" value="support@landmhardware.com" required>
@@ -69,7 +68,7 @@ foreach ($invoices as $invoiceValues) {
             <hr class="my-4">
             <input name="submit" type="submit" value="Email <?php echo substr(explode('-', $getdata['page'])[1], 0, -1);?>" class="w-80 btn btn-primary btn-lg" onclick="sendEmail()" /></input>
 
-        <!-- </form> -->
+        </form>
 
     </div>
 </div>

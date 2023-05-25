@@ -2,6 +2,7 @@
     $id = htmlspecialchars($_GET["id"]);
     $pin = htmlspecialchars($_GET["pin"]);
     $action = htmlspecialchars($_GET["action"]);
+    $notVisibile = $action ? ";visibility:hidden" : "";
     console_log($action);
 ?>
 <link href="./CSS/invoice-modify.css" rel="stylesheet">
@@ -16,7 +17,6 @@
         }
         ?>
         </div>
-
         <?php
         $noOfItems =  15;
 
@@ -27,23 +27,12 @@
         $customersSQL = "SELECT * FROM customers ORDER BY business_name ASC";
         $customersQuery = mysqli_query($conn, $customersSQL);
         $customerArray[] = array();
-        foreach ($customersQuery as $customer) {
-            $customerArray[] = $customer;
-        };
+        foreach ($customersQuery as $customer) {$customerArray[] = $customer;};
 
         $inventorySQL = "SELECT * FROM inventory WHERE quantityOnHand > 0  ORDER BY descOnPurchTrans ASC";
         $inventoryQuery = mysqli_query($conn, $inventorySQL);
         $inventoryArray[] = array();
-        foreach ($inventoryQuery as $inventory) {
-            $inventoryArray[] = $inventory;
-        };
-
-        // $usersSQL = "SELECT email, phone FROM users WHERE users_id = '".$_SESSION["users_id"]."'";
-        // $usersQuery = mysqli_query($conn, $usersSQL);
-        // foreach ($usersQuery as $usersValues) {
-        //   $invoice_phone = $usersValues['phone'];
-        //   $invoice_email = $usersValues['email'];
-        // }
+        foreach ($inventoryQuery as $inventory) {$inventoryArray[] = $inventory;};
         
         echo '<div id="invoiceDateAndNo">';
             echo '<input type="date" class="fill-in" id="invoiceDate" name="invoiceDate" value="'.date('Y-m-d', strtotime($invoice['invoiceDate'])).'" style="width:82px; margin-right: 4px;" required>';
@@ -81,25 +70,25 @@
             echo '<input type="text" class="fill-in" id="bill_email" name="bill_email" value="'.$invoice['bill_email'].'" placeholder="Email" style="display: none;width:90px">';
         echo "</div>";
 
-        echo '<div id="shippingAddress">';
+        echo $action ? '<div id="shippingAddress" style="visibility:hidden">' : '<div id="shippingAddress">';
         ?><textarea class="fill-in" id="shipTo" name="shipTo" rows="5" style="width:300px;resize:none" required><?php
             echo $invoice['shipTo'];
-            // echo $invoice['shipTo'] ? $invoice['shipTo'] : "SAME AS BILL TO";
         ?></textarea><?php
         echo "</div>";      
 
         echo '<div id="invoiceOptions">';
-                echo '<input type="text" class="fill-in" name="po_no" value="'.$invoice['po_no'].'" style="text-align: center;width:91px" required>';
-                echo '<input list="termsList" class="fill-in" name="terms" value="'.$invoice['terms'].'" style="width:108px">';
+                echo '<input type="text" class="fill-in" name="po_no" value="'.$invoice['po_no'].'"';
+                echo $action ? ' style="width:91px;visibility:hidden">' : ' style="text-align: center;width:91px" required>';
+                echo '<input list="termsList" class="fill-in" name="terms" value="'.$invoice['terms'].'" style="width:108px'.$notVisibile.'">';
                     echo '<datalist id="termsList">';
                         echo '<option value="Due on receipt">';
                         echo '<option value="Net 15">';
                         echo '<option value="Net 30">';
                     echo '</datalist>';
-                echo '<input type="text" class="fill-in" name="rep" value="'.$invoice['rep'].'" style="width:78px">';
-                echo '<input type="date" class="fill-in" id="shipDate" name="shipDate" value="'.date('Y-m-d', strtotime($invoice['shipDate'])).'" style="width:90px" required>';
-                echo '<input type="text" class="fill-in" name="via" value="'.$invoice['via'].'" style="width:90px">';
-                echo '<input type="text" class="fill-in" name="fob" value="'.$invoice['fob'].'" style="width:132px">';
+                echo '<input type="text" class="fill-in" name="rep" value="'.$invoice['rep'].'" style="width:78px'.$notVisibile.'">';
+                echo '<input type="date" class="fill-in" id="shipDate" name="shipDate" value="'.date('Y-m-d', strtotime($invoice['shipDate'])).'" style="width:90px'.$notVisibile.'" required>';
+                echo '<input type="text" class="fill-in" name="via" value="'.$invoice['via'].'" style="width:90px'.$notVisibile.'">';
+                echo '<input type="text" class="fill-in" name="fob" value="'.$invoice['fob'].'" style="width:132px'.$notVisibile.'">';
                 echo '<input type="text" class="fill-in" name="project" value="'.$invoice['project'].'" style="width:114px">';
         echo "</div>";
 
@@ -155,9 +144,8 @@
             echo 'Cost:&emsp; $<input type="text" readonly class="no-outline" name="finalCost" id="finalCost" value="' . number_format($invoice['finalCost'], 2, '.', '').'">';
         echo "</div>";
 
-        if (!$action) {
         echo '<div id="phoneAndEmail">';
-            ?><textarea class="fill-in" name="invoice_phone" rows="2" style="width:195px;text-align: center;resize:none" required><?php
+            ?><textarea class="fill-in" name="invoice_phone" rows="2" style="width:195px;text-align: center;resize:none<?php echo $notVisibile;?>" required><?php
                 if($invoice['invoice_phone']) {
                     echo $invoice['invoice_phone'];
                 } else {
@@ -165,7 +153,7 @@
                     echo "630-493-1026";
                 }
             ?></textarea><?php
-            ?><textarea class="fill-in" name="invoice_email" rows="2" style="margin-left:10px; width:248px;text-align: center;resize:none" required><?php
+            ?><textarea class="fill-in" name="invoice_email" rows="2" style="margin-left:10px; width:248px;text-align: center;resize:none<?php echo $notVisibile;?>" required><?php
                 if($invoice['invoice_email']) {
                     echo $invoice['invoice_email'];
                 } else {
@@ -174,7 +162,6 @@
                 }
             ?></textarea><?php
         echo "</div>";
-        }
         ?>
 
     </form>
@@ -183,5 +170,4 @@
 const customerData = <?php echo json_encode($customerArray); ?>;
 const inventoryData = <?php echo json_encode($inventoryArray); ?>;
 </script>
-
 <script src="./JS/Manage-Invoices.js"></script>

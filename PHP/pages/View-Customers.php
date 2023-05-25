@@ -51,32 +51,18 @@ if ($postedData['submit'] == "Create Customer") {
 
 <table class="table table-striped">
   <tr>
-    <!-- <th>No.</th> -->
     <th width="75px">Modify</th>
     <?php if($permissions['type'] == "administrator") { echo'<th style="vertical-align:middle" width="70px">Delete</th>';} ?>
     <th>Business</th>
     <th>First Name</th>
-    <!-- <th>Last Name</th> -->
     <th>Address</th>
-    <!-- <th>Address 2</th> -->
-    <!-- <th>City</th> -->
-    <!-- <th>State</th> -->
-    <!-- <th>Zip</th> -->
-    <!-- <th>Country</th> -->
     <th>Phone</th>
-    <!-- <th>Fax</th> -->
     <th>Email</th>
   </tr>
 
 <?php
-    // SQL query
     $strSQL = "SELECT business_name, first_name, address, phone, email, customers_id FROM customers ORDER BY business_name ASC";
-
-    // Execute the query
     $rs = mysqli_query($conn, $strSQL);
-    // print_r($rs);
-    // echo "<br>";
-    
     foreach ($rs as $dbValues) {
         echo "<tr>";
         

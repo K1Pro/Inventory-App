@@ -5,12 +5,10 @@
   <tr>
     <th width="75px">Modify</th>
     <th width="70px">Delete</th>
-    <!-- <th>No.</th> -->
     <th>Username</th>
     <th>Email</th>
     <th>Phone</th>
     <th>Type</th>
-    <!-- <th>Password</th> -->
     <th>Created</th>
   </tr>
 
@@ -23,12 +21,8 @@ if($permissions['type'] == "administrator") {
         $deleteValue = $parts[2];
         require("./PHP/components/delete.php");
     }
-    // SQL query
     $strSQL = "SELECT username, email, phone, type, created_at, users_id FROM users";
-    // Execute the query
     $rs = mysqli_query($conn, $strSQL);
-
-    
     foreach ($rs as $dbValues) {
         echo "<tr>";
         // Link to Modifying a customer
@@ -46,15 +40,6 @@ if($permissions['type'] == "administrator") {
             echo '</form>';
         }
         echo "</td>";
-
-        // Old Delete a customer
-        // echo '<td class="tdCenter">';
-        // if ($dbValues['username'] == "larry" || $dbValues['username'] == "bartosz") {} else{
-        //     echo '<a href="./index.php?page=Delete&id='.$dbValues['users_id'].'&db=users">';
-        //         echo '<img src="./icons/delete.png" alt="Invoice" width="30" height="30">';
-        //     echo '</a>';
-        // }
-        // echo "</td>";
 
         echo "<td>";
             print_r($dbValues['username']);
@@ -80,6 +65,5 @@ if($permissions['type'] == "administrator") {
     }
 }
 ?>
-
 </table>
 </div>

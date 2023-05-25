@@ -52,33 +52,20 @@ if ($postedData['submit'] == "Create Inventory") {
 <div style="overflow-y: auto; overflow-x: auto">
 <table class="table table-striped">
   <tr>
-    <!-- <th>No.</th> -->
     <th width="75px">Modify</th>
     <?php if($permissions['type'] == "administrator") { echo'<th style="vertical-align:middle" width="70px">Delete</th>';} ?>
     <th>Item Name</th>
     <th>Subitem Of</th>
-    <!-- <th>manufacturersPart</th> -->
     <th>Desc. On Purch. Trans.</th>
-    <!-- <th>descOnSalesTrans</th> -->
     <th width="75px">Price</th>
     <th width="75px">Cost</th>
-    <!-- <th>COGSaccount</th> -->
     <th>Preferred Vendor</th>
     <th>Quantity</th>
-    <!-- <th>incomeAccount</th> -->
-    <!-- <th>assetAccount</th> -->
-    <!-- <th>reorderPoint</th> -->
   </tr>
 
 <?php
-    // SQL query
     $strSQL = "SELECT itemName, subitemOf, descOnPurchTrans, salesPrice, cost, preferredVendor, quantityOnHand, inventory_id FROM inventory ORDER BY descOnPurchTrans ASC";
-
-    // Execute the query
     $rs = mysqli_query($conn, $strSQL);
-    // print_r($rs);
-    // echo "<br>";
-    
     foreach ($rs as $dbValues) {
         echo "<tr>";
         

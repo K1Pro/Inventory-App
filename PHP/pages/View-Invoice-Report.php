@@ -14,17 +14,9 @@ if($postedData['bill_business_name'] || $postedData['invoiceDate']){
 
 $invoicesQuery = mysqli_query($conn, $invoicesSQL);
 
-foreach ($invoicesQuery as $invoices) {
-    $invoicesArray[] = $invoices;
-};
-
-foreach ($invoicesQuery as $invoices) {
-    $finalPriceArray[] = $invoices['finalPrice'];
-};
-
-foreach ($invoicesQuery as $invoices) {
-    $finalCostArray[] = $invoices['finalCost'];
-};
+foreach ($invoicesQuery as $invoices) {$invoicesArray[] = $invoices;};
+foreach ($invoicesQuery as $invoices) {$finalPriceArray[] = $invoices['finalPrice'];};
+foreach ($invoicesQuery as $invoices) {$finalCostArray[] = $invoices['finalCost'];};
 
 $bill_business_namesSQL = "SELECT * FROM invoices ORDER BY invoices_id DESC";
 $bill_business_namesQuery = mysqli_query($conn, $bill_business_namesSQL);
@@ -104,48 +96,6 @@ console.log(finalPriceData)
     foreach ($invoicesQuery as $dbValuesOne) {
         echo "<tr>";
 
-            // Link to Invoice 
-            // echo '<td class="tdCenter">';
-            //     echo '<a href="invoice_pdf.php?id='.$dbValuesOne['invoices_id'].'&pin='.$dbValuesOne['bill_zip'].'" target="_blank">'; 
-            //         echo '<img src="./icons/invoice.png" alt="Invoice" width="30" height="30">';
-            //     echo '</a>';
-            // echo "</td>";
-
-            // Link to Slip
-            // echo '<td class="tdCenter">';
-            //     echo '<a href="slip_pdf.php?id='.$dbValuesOne['invoices_id'].'&pin='.$dbValuesOne['bill_zip'].'" target="_blank">'; 
-            //         echo '<img src="./icons/slip.png" alt="Invoice" width="30" height="30">';
-            //     echo '</a>';
-            // echo "</td>";
-
-            // Modify the invoice
-            // echo '<td class="tdCenter">';
-            //     echo '<a href="./index.php?page=Manage-Invoices&id='.$dbValuesOne['invoices_id'].'&pin='.$dbValuesOne['bill_zip'].'">'; 
-            //         echo '<img src="./icons/modify.png" alt="Invoice" width="30" height="30">';
-            //     echo '</a>';
-            // echo "</td>";
-
-            // Sending an invoice via email
-            // echo '<td class="tdCenter">';
-            //     echo '<a href="./index.php?page=Email-Invoices&id='.$dbValuesOne['invoices_id'].'">';
-            //         echo '<img src="./icons/email.png" alt="Email" width="30" height="30">';
-            //     echo '</a>';
-            // echo "</td>";
-
-            // Delete an Invoice
-            // echo '<td class="tdCenter">';
-            //     echo '<form action="./index.php?page=View-Invoices" method="post">';
-            //         echo '<input class="deleteButton" type="submit" name="submit" value="Delete-invoices-'.$dbValuesOne['invoices_id'].'">';
-            //     echo '</form>';
-            // echo "</td>";
-
-            // Delete an Invoice
-            // echo '<td class="tdCenter">';
-            //     echo '<a href="./index.php?page=Delete&id='.$dbValuesOne['invoices_id'].'&db=invoices">';
-            //         echo '<img src="./icons/delete.png" alt="Delete" width="30" height="30">';
-            //     echo '</a>';
-            // echo "</td>";
-
             // Invoice NO
             echo '<td class="tdCenter">';
                 print_r($dbValuesOne['invoices_id']);
@@ -180,27 +130,13 @@ console.log(finalPriceData)
                 }
             echo "</td>";
 
-            // Payment Indicator
-            // echo '<td class="tdCenter">';
-            //     echo '<input type="checkbox">';
-            // echo "</td>";
-
             // Bill To 
             echo "<td>";
                 print_r($dbValuesOne['bill_business_name']);
             echo "</td>";
 
-            // Bill To 
-            // echo "<td>";
-            //     echo ucfirst($dbValuesOne['created']);
-            // echo "</td>";
-
         echo "</tr>";
     }
-
-    // echo "<pre>";
-    //     print_r($_POST);
-    // echo "</pre>";
 ?>
 
 </table>
