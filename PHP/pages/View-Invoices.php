@@ -68,9 +68,9 @@ if (explode(' ', $postedData['submit'])[0] == "Create") {
     require("./PHP/components/delete.php");
 } else if(strpos($postedData['submit'], 'Paid') !== false){
     $paid = explode('-', $postedData['submit']);
-    if ($paid[3] == 0) { $invoicesSQL = "UPDATE invoices SET paid = 1 WHERE invoices_id = ".$paid[2];
-    } else {            $invoicesSQL = "UPDATE invoices SET paid = 0 WHERE invoices_id = ".$paid[2];}
-    if(mysqli_query($conn, $invoicesSQL)){
+    if ($paid[3] == 0) { $paidSQL = "UPDATE invoices SET paid = '1' WHERE invoices_id = ".$paid[2];
+    } else {            $paidSQL = "UPDATE invoices SET paid = '0' WHERE invoices_id = ".$paid[2];}
+    if(mysqli_query($conn, $paidSQL)){
         ?><script>snackbar(`Payment status updated`);</script><?php   
     } else{
         ?><script>snackbar(`Error`);</script><?php   

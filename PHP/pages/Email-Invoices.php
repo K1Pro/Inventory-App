@@ -1,7 +1,7 @@
 <?php
 $getdata = $_GET;
 console_log(strtolower(explode('-', $getdata['page'])[1]));
-
+console_log(substr(explode('-', $getdata['page'])[1], 0, -1));
 
 $usersSQL = "SELECT email FROM users WHERE users_id = '".$_SESSION["users_id"]."'";
 $users = mysqli_query($conn, $usersSQL);
@@ -14,22 +14,17 @@ $invoiceArray[] = array();
 foreach ($invoices as $invoiceValues) {
     $invoiceArray[] = $invoiceValues;
 }
-
 ?>
 
 <div class="container bg-secondary-subtle" style="overflow-y: auto; overflow-x: hidden">
     <div class="justify-content-center">
-
         <h4 class="mb-3">Email <?php echo substr(explode('-', $getdata['page'])[1], 0, -1);?></h4>
-        <form class="needs-validation" novalidate action="./index.php?page=View-Invoices" method="post">
+        <!-- <form class="needs-validation" novalidate action="./index.php?page=View-Invoices" method="post"> -->
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">From:</span>
                 <input name="fromEmail" readonly id="fromEmail" type="text" class="form-control" placeholder="From" aria-label="From" aria-describedby="basic-addon2" value="support@landmhardware.com" required>
-                <?php 
-                // echo $dbValues['email']; 
-                ?>
                 <span class="input-group-text" id="basic-addon1">Subject:</span>
-                <input name="subject" id="subject" type="text" class="form-control" aria-label="Username" placeholder="Email subject" aria-describedby="basic-addon1" value="Invoice <?php echo $invoiceValues['invoices_id']; ?> from L & M Hardware, Ltd." required>
+                <input name="subject" id="subject" type="text" class="form-control" aria-label="Username" placeholder="Email subject" aria-describedby="basic-addon1" value="<?php echo substr(explode('-', $getdata['page'])[1], 0, -1) . " " . $invoiceValues['invoices_id']; ?> from L & M Hardware, Ltd." required>
             </div>
 
             <div class="input-group mb-3">
@@ -47,16 +42,22 @@ foreach ($invoices as $invoiceValues) {
                     L & M Hardware, Ltd.
                 </div>
                 <div style="background-color: #ccffff; padding: 10px; color: #000000; font-weight: bold;">
-                    Invoice# <?php echo $invoiceValues['invoices_id']; ?>&emsp;&emsp;&emsp;&emsp;&emsp;Due: <?php echo date('m/d/Y', strtotime($invoiceValues['invoiceDate']. ' + 10 days'));?>&emsp;&emsp;&emsp;&emsp;&emsp; Amount Due: $<?php echo $invoiceValues['finalPrice']; ?>
+                    <?php 
+                    echo substr(explode('-', $getdata['page'])[1], 0, -1) . "# " . $invoiceValues['invoices_id'];
+                    if (explode('-', $getdata['page'])[1] == "Invoices") {
+                        echo '&emsp;&emsp;&emsp;&emsp;&emsp;Due: '.
+                        date('m/d/Y', strtotime($invoiceValues['invoiceDate']. ' + 10 days')) .
+                        '&emsp;&emsp;&emsp;&emsp;&emsp; Amount Due: $';
+                    } else { echo '&emsp;&emsp;&emsp;&emsp;&emsp; Estimate: $';}
+                        echo $invoiceValues['finalPrice']; ?>
                 </div>
                 <div style="background-color: #ffffff; padding: 10px; color: #000000;">
-               <?php 
-                ?>
                     Dear Customer,
                     <br><br>
-                    Your invoice is attached to this email as a pdf.<br>
-                    Additionally, your invoice can be found at this link: <a href="http://landmhardware.com/inventory/invoice.php?id=<?php echo $invoiceValues['invoices_id']; ?>&pin=<?php echo $invoiceValues['bill_zip']; ?>" target="_blank">HTML</a> or <a href="http://landmhardware.com/inventory/invoice_pdf.php?id=<?php echo $invoiceValues['invoices_id']; ?>&pin=<?php echo $invoiceValues['bill_zip']; ?>" target="_blank">PDF</a><br>
-                    Please remit payment at your earliest convenience.<br>
+                    Your <?php echo substr(strtolower(explode('-', $getdata['page'])[1]), 0, -1); ?> is attached to this email as a pdf.<br>
+                    Additionally, your <?php echo substr(strtolower(explode('-', $getdata['page'])[1]), 0, -1); ?> can be found at this link: <a href="http://landmhardware.com/inventory/invoice_html.php?id=<?php echo $invoiceValues['invoices_id']; ?>&pin=<?php echo $invoiceValues['bill_zip']; ?>" target="_blank">HTML</a> or <a href="http://landmhardware.com/inventory/invoice_pdf.php?id=<?php echo $invoiceValues['invoices_id']; ?>&pin=<?php echo $invoiceValues['bill_zip']; ?>" target="_blank">PDF</a><br>
+                    <?php if (explode('-', $getdata['page'])[1] == "Invoices") {echo 
+                    'Please remit payment at your earliest convenience.<br>';}?>
                     Thank you for your business - we appreciate it very much.<br><br>
                     Sincrerely,<br><br>
                     L & M Hardware, Ltd.<br>
@@ -66,18 +67,12 @@ foreach ($invoices as $invoiceValues) {
             </div>
 
             <hr class="my-4">
-            <!-- <input class="btn btn-primary btn-lg m-2" id="submitButton" name="submit" type="submit" value ="<?php echo $id && $pin ? "Modify Invoice" : "Create Invoice"; ?>"></input> -->
-            <!-- <input type="button" value="Send Invoice" class="w-80 btn btn-primary btn-lg" onclick="sendEmail()" /></input> -->
             <input name="submit" type="submit" value="Email <?php echo substr(explode('-', $getdata['page'])[1], 0, -1);?>" class="w-80 btn btn-primary btn-lg" onclick="sendEmail()" /></input>
 
-        </form>
+        <!-- </form> -->
 
     </div>
 </div>
-
-<script>
-const invoiceData = <?php echo json_encode($invoiceArray); ?>;
-</script>
-
+<script>const invoiceData = <?php echo json_encode($invoiceArray); ?>;</script>
 <script src="./JS/smtp.js"></script>
 <script src="./JS/Email-Invoices.js"></script>
