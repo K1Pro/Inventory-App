@@ -54,7 +54,7 @@ if ($postedData['submit'] == "Create Inventory") {
   <tr>
     <!-- <th>No.</th> -->
     <th width="75px">Modify</th>
-    <th width="70px">Delete</th>
+    <?php if($permissions['type'] == "administrator") { echo'<th style="vertical-align:middle" width="70px">Delete</th>';} ?>
     <th>Item Name</th>
     <th>Subitem Of</th>
     <!-- <th>manufacturersPart</th> -->
@@ -90,6 +90,7 @@ if ($postedData['submit'] == "Create Inventory") {
         echo "</td>";
 
         // Delete an Inventory Part
+        if($permissions['type'] == "administrator") {
         echo '<td class="tdCenter">';
         if ($dbValues['descOnPurchTrans'] != "Misc") {
             echo '<form action="./index.php?page=View-Inventory" method="post">';
@@ -97,6 +98,7 @@ if ($postedData['submit'] == "Create Inventory") {
             echo '</form>';
         }
         echo "</td>";
+        }
 
         echo "<td>";
             print_r($dbValues['itemName']);

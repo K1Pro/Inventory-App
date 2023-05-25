@@ -53,7 +53,7 @@ if ($postedData['submit'] == "Create Customer") {
   <tr>
     <!-- <th>No.</th> -->
     <th width="75px">Modify</th>
-    <th width="70px">Delete</th>
+    <?php if($permissions['type'] == "administrator") { echo'<th style="vertical-align:middle" width="70px">Delete</th>';} ?>
     <th>Business</th>
     <th>First Name</th>
     <!-- <th>Last Name</th> -->
@@ -88,11 +88,13 @@ if ($postedData['submit'] == "Create Customer") {
         echo "</td>";
 
         // Delete a customer
+        if($permissions['type'] == "administrator") {
         echo '<td class="tdCenter">';
             echo '<form action="./index.php?page=View-Customers" method="post">';
                 echo '<input class="deleteButton" type="submit" name="submit" value="Delete-customers-'.$dbValues['customers_id'].'">';
             echo '</form>';
         echo "</td>";
+        }
 
         echo "<td>";
             print_r($dbValues['business_name']);

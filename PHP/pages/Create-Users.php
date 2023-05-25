@@ -164,8 +164,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
               <small class="text-body-secondary">*User cannot delete</small>
         </div>
         <div class="form-group">
-            <input type="submit" class="btn btn-primary mt-3" value="Submit">
-            <input type="reset" class="btn btn-secondary ml-2 mt-3" value="Reset">
+            <input type="submit" class="btn btn-primary mt-3" value="Submit" <?php if($permissions['type'] != "administrator") {echo "disabled";}?>>
+            <input type="reset" class="btn btn-secondary ml-2 mt-3" value="Reset" <?php if($permissions['type'] != "administrator") {echo "disabled";}?>>
         </div>
         <!-- <p>Already have an account? <a href="login.php">Login here</a>.</p> -->
     </form>

@@ -78,8 +78,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
         </div>
         <div class="form-group">
-            <input type="submit" class="btn btn-primary" value="Submit">
-            <a class="btn btn-link ml-2" href="./index.php?page=View-Home">Cancel</a>
+            <input type="submit" class="btn btn-primary" value="Submit" <?php if($permissions['type'] != "administrator") {echo "disabled";}?>>
+            <a class="btn btn-link ml-2" href="./index.php?page=View-Users">Cancel</a>
         </div>
     </form>
     </center>
