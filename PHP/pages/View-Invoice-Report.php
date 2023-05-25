@@ -49,27 +49,18 @@ console.log(invoicesData)
 const finalPriceData = <?php echo json_encode(number_format(array_sum($finalPriceArray), 2, '.', '')); ?>;
 console.log(finalPriceData)
 
-// const billData = <?php echo json_encode(array_unique($bill_business_nameArray)); ?>;
-// console.log(billData)
 </script>
 
 <div style="overflow-y: auto; overflow-x: auto">
 
 <table class="table table-striped" id="invoiceReportTable">
   <tr>
-    <!-- <th>invoices_id</th> -->
-    <!-- <th width="75px">Invoice</th>
-    <th width="50px">Slip</th>
-    <th width="75px">Modify</th>
-    <th width="60px">Email</th> -->
-    <!-- <th width="75px">Modify</th> -->
-    <!-- <th width="70px">Delete</th> -->
     <th style="width:120px"><button type="button" class="btn btn-warning" onclick="exportData()">Download</button></th>
     <th style="width:90px; vertical-align:middle">PO No.</th>
     <th style="width:140px; vertical-align:middle">
     <form action="./index.php?page=View-Invoice-Report" id="filteringForm" method="post">
         <select name="invoiceDate" id="invoiceDate" data-bs-theme="dark">
-            <option value="">Choose Year...</option>
+            <option value="">Choose Year</option>
             <?php
             rsort($invoiceDateArray);
                 foreach (array_unique($invoiceDateArray) as $invoiceDate) {
@@ -83,9 +74,7 @@ console.log(finalPriceData)
                 }
             ?>
         </select>
-    <!-- </form> -->
     </th>
-    <!-- <th>shipTo</th> -->
     <th style="vertical-align:middle">Paid (Total: $<?php echo $finalPriceArray ? number_format(array_sum($finalPriceArray), 2, '.', '') : "0.00"; ?>)</th>
     <th style="vertical-align:middle">Cost (Total: $<?php echo $finalCostArray ? number_format(array_sum($finalCostArray), 2, '.', '') : "0.00"; ?>)</th>
     <th style="width:50px; vertical-align:middle">Paid</th>
@@ -93,7 +82,7 @@ console.log(finalPriceData)
     <th style="vertical-align:middle">
     <!-- <form action="./index.php?page=View-Invoice-Report" id="bill_business_nameForm" method="post"> -->
         <select name="bill_business_name" id="bill_business_name" data-bs-theme="dark">
-            <option value="">Choose Business...</option>
+            <option value="">Choose Business</option>
             <?php
             sort($bill_business_nameArray);
                 foreach (array_unique($bill_business_nameArray) as $bill_business_name) {
@@ -109,15 +98,6 @@ console.log(finalPriceData)
         </select>
     </form>
     </th>
-    <!-- <th>Created</th> -->
-    <!-- <th>shipDate</th> -->
-    <!-- <th>Part1 Item</th> -->
-    <!-- <th>part1Quantity</th> -->
-    <!-- <th>Part2 Item</th> -->
-    <!-- <th>part2Quantity</th> -->
-    <!-- <th>Part3 Item</th> -->
-    <!-- <th>part3Quantity</th> -->
-
   </tr>
 
 <?php
