@@ -54,7 +54,7 @@ foreach ($invoices as $invoiceValues) {
                     Dear Customer,
                     <br><br>
                     Your <?php echo substr(strtolower(explode('-', $getdata['page'])[1]), 0, -1); ?> is attached to this email as a pdf.<br>
-                    Additionally, your <?php echo substr(strtolower(explode('-', $getdata['page'])[1]), 0, -1); ?> can be found at this link: <a href="http://landmhardware.com/inventory/invoice_html.php?id=<?php echo $invoiceValues['invoices_id']; ?>&pin=<?php echo $invoiceValues['bill_zip']; ?>" target="_blank">HTML</a> or <a href="http://landmhardware.com/inventory/invoice_pdf.php?id=<?php echo $invoiceValues['invoices_id']; ?>&pin=<?php echo $invoiceValues['bill_zip']; ?>" target="_blank">PDF</a><br>
+                    Additionally, your <?php echo substr(strtolower(explode('-', $getdata['page'])[1]), 0, -1); ?> can be found at this link: <a href="http://landmhardware.com/inventory/<?php echo substr(strtolower(explode('-', $getdata['page'])[1]), 0, -1); ?>_html.php?id=<?php echo $invoiceValues['invoices_id']; ?>&pin=<?php echo $invoiceValues['bill_zip']; ?>" target="_blank">HTML</a> or <a href="http://landmhardware.com/inventory/<?php echo substr(strtolower(explode('-', $getdata['page'])[1]), 0, -1); ?>_pdf.php?id=<?php echo $invoiceValues['invoices_id']; ?>&pin=<?php echo $invoiceValues['bill_zip']; ?>" target="_blank">PDF</a><br>
                     <?php if (explode('-', $getdata['page'])[1] == "Invoices") {echo 
                     'Please remit payment at your earliest convenience.<br>';}?>
                     Thank you for your business - we appreciate it very much.<br><br>

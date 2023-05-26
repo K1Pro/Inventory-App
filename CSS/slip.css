@@ -114,21 +114,32 @@
   font-weight: bold;
 }
 
+#shippingAddress {
+  position: absolute;
+  top: 220px;
+  left: 455px;
+  width: 260px;
+  height: 90px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
 #InvoicePhone {
   position: absolute;
-  top: 960px;
-  left: 45px;
-  width: 120px;
-  height: 30px;
+  top: 940px;
+  left: 65px;
+  width: 180px;
+  height: 90px;
   text-align: center;
+  font-family: 'Times New Roman', Times, serif;
 }
 #InvoiceEmail {
   position: absolute;
-  top: 960px;
-  left: 165px;
-  width: 180px;
-  height: 30px;
+  top: 940px;
+  left: 275px;
+  width: 220px;
+  height: 90px;
   text-align: center;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 #invoiceDate,
@@ -142,9 +153,9 @@
 #ItemDescription,
 #ItemSalesPrice,
 #finalAmount,
-#finalPrice,
-#InvoicePhone,
-#InvoiceEmail {
+#finalPrice
+/* #InvoicePhone,
+#InvoiceEmail  */ {
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   /* word-wrap: break-word !important; */

@@ -3,12 +3,12 @@
     $pin = htmlspecialchars($_GET["pin"]);
     $action = htmlspecialchars($_GET["action"]);
     $notVisibile = $action ? ";visibility:hidden" : "";
-    console_log($action);
+    $buttonAction = substr(explode('-', $page)[1], 0, -1);
 ?>
 <link href="./CSS/invoice-modify.css" rel="stylesheet">
 <div style="overflow-y: auto; overflow-x: auto; width:100vw">
     <form class="needs-validation" novalidate action="<?php if ($action) {echo "./index.php?page=View-Estimates";} else {echo "./index.php?page=View-Invoices";} ?>" method="post">
-        <input class="btn btn-primary btn-lg m-2" id="submitButton" name="submit" type="submit" value ="<?php if ($id && $pin) {echo "Modify Invoice";} else if ($action) {echo "Create Estimate";} else {echo "Create Invoice";} ?>"></input>
+        <input class="btn btn-primary btn-lg m-2" id="submitButton" name="submit" type="submit" value ="<?php if ($id && $pin) {echo "Modify $buttonAction";} else if ($action) {echo "Create Estimate";} else {echo "Create Invoice";} ?>"></input>
         <div id="invoice">
         <?php if ($action) {
             echo '<img src="./images/blankManageEstimate.jpg" alt="Estimate">';
@@ -20,7 +20,7 @@
         <?php
         $noOfItems =  15;
 
-        $invoicesSQL = "SELECT * FROM invoices WHERE invoices_id = '".$id."' AND bill_zip = '".$pin."'";
+        $invoicesSQL = "SELECT * FROM ".strtolower(explode('-', $page)[1])." WHERE invoices_id = '".$id."' AND bill_zip = '".$pin."'";
         $invoiceQuery = mysqli_query($conn, $invoicesSQL);
         foreach ($invoiceQuery as $invoice) {};
 
