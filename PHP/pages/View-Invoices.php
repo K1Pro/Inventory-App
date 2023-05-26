@@ -4,6 +4,7 @@ if($postedData['submit']){}
 $page = htmlspecialchars($_GET["page"]);
 $chosenDB = strtolower(explode('-', $page)[1]);
 console_log("Chosen DB:" . $chosenDB);
+console_log($postedData);
 $invoicesSQL = "SELECT * FROM ".$chosenDB." ORDER BY invoices_id DESC";
 
 $bill_business_namesSQL = "SELECT bill_business_name FROM ".$chosenDB." ORDER BY invoices_id DESC";
@@ -59,7 +60,7 @@ if (explode(' ', $postedData['submit'])[0] == "Create") {
     } else{
         ?><script>snackbar(`Error`);</script><?php  
     }
-} else if($postedData['submit']=='Email Invoice'){
+} else if($postedData['submit']=='Email Invoice' || $postedData['submit']=='Email Estimate'){
     ?><script>snackbar(`Successfully emailed invoice`);</script><?php
 } else if(strpos($postedData['submit'], 'Delete') !== false){
     $parts = explode('-', $postedData['submit']);

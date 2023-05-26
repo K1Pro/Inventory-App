@@ -112,12 +112,16 @@
 
         for ($i = 1; $i <= $noOfItems; $i++) {
             $pdf->SetXY(138,112+($i*7));
-            $pdf->Cell(26, 7, $dbValues['part'.$i.'SalesPrice'] != 0 ? "$" . $dbValues['part'.$i.'SalesPrice'] : '', 0, 0, 'R');
+            if ($dbValues['part'.$i.'ItemDesc']){
+                $pdf->Cell(26, 7, $dbValues['part'.$i.'SalesPrice'] != 0 ? "$" . $dbValues['part'.$i.'SalesPrice'] : '$0.00', 0, 0, 'R');
+            }
         }
 
         for ($i = 1; $i <= $noOfItems; $i++) {
             $pdf->SetXY(173,112+($i*7));
-            $pdf->Cell(24, 7, $dbValues['part'.$i.'SalesPrice'] != 0 ? "$" . number_format((($dbValues['part'.$i.'SalesPrice'] * $dbValues['part'.$i.'Quantity'])),2) : '', 0, 0, 'R');
+            if ($dbValues['part'.$i.'ItemDesc']){
+                $pdf->Cell(24, 7, $dbValues['part'.$i.'SalesPrice'] != 0 ? "$" . number_format((($dbValues['part'.$i.'SalesPrice'] * $dbValues['part'.$i.'Quantity'])),2) : '$0.00', 0, 0, 'R');
+            }
         }
 
         $pdf->SetXY(173,232);

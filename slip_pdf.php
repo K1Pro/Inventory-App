@@ -94,23 +94,29 @@
         $pdf->SetXY(175,103);
         $pdf->Cell(29, 8, $dbValues['project'], 0, 0, 'C');
 
+        $j = 0;
         for ($i = 1; $i <= $noOfItems; $i++) {
             if (strpos(strtolower($dbValues['part'.$i.'Item']),"freight") === false && strpos(strtolower($dbValues['part'.$i.'ItemDesc']),"freight") === false) {
-                $pdf->SetXY(13,112+($i*7));
+                $j++;
+                $pdf->SetXY(13,112+($j*7));
                 $pdf->Cell(28, 7, $dbValues['part'.$i.'Quantity'] ? $dbValues['part'.$i.'Quantity'] : '', 0, 0, 'C');
             }
         }
 
+        $j = 0;
         for ($i = 1; $i <= $noOfItems; $i++) {
             if (strpos(strtolower($dbValues['part'.$i.'Item']),"freight") === false && strpos(strtolower($dbValues['part'.$i.'ItemDesc']),"freight") === false) {
-                $pdf->SetXY(42,112+($i*7));
+                $j++;
+                $pdf->SetXY(42,112+($j*7));
                 $pdf->Cell(50, 7, $dbValues['part'.$i.'Item'], 0, 0, 'L');
             }
         }
 
+        $j = 0;
         for ($i = 1; $i <= $noOfItems; $i++) {
             if (strpos(strtolower($dbValues['part'.$i.'Item']),"freight") === false && strpos(strtolower($dbValues['part'.$i.'ItemDesc']),"freight") === false) {
-                $pdf->SetXY(91,112+($i*7));
+                $j++;
+                $pdf->SetXY(91,112+($j*7));
                 $pdf->Cell(112, 7, $dbValues['part'.$i.'ItemDesc'], 0, 0, 'L');
             }
         }
