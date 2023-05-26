@@ -1,14 +1,19 @@
 <?php
 $postedData = $_POST;
+$startDateSQL = "SELECT invoiceDate FROM invoices ORDER BY invoiceDate ASC LIMIT 1";
+$startDateQuery = mysqli_query($conn, $startDateSQL);
+foreach ($startDateQuery as $veryFirstDate) {};
 
-$mySQLquery = http_build_query($postedData, "", "%' AND ");
-$mySQLquery = str_replace("%26", "&", $mySQLquery);
-$mySQLquery = str_replace("+", " ", $mySQLquery);
-$mySQLquery = str_replace("=", " LIKE '%", $mySQLquery);
+$endDateSQL = "SELECT invoiceDate FROM invoices ORDER BY invoiceDate DESC LIMIT 1";
+$endDateQuery = mysqli_query($conn, $endDateSQL);
+foreach ($endDateQuery as $veryLastDate) {};
 
-if($postedData['bill_business_name'] || $postedData['invoiceDate']){
-    $invoicesSQL = "SELECT * FROM invoices WHERE ".$mySQLquery."%' ORDER BY invoiceDate DESC";
-}else {
+$defaultStartDate = $postedData['startDate'] ? $postedData['startDate'] : $veryFirstDate['invoiceDate'];
+$defaultEndDate = $postedData['endDate'] ? $postedData['endDate'] : $veryLastDate['invoiceDate'];
+
+if($postedData['bill_business_name'] || $postedData['startDate'] || $postedData['endDate']){
+    $invoicesSQL = "SELECT * FROM invoices WHERE bill_business_name LIKE '%".$postedData['bill_business_name']."%' AND invoiceDate BETWEEN '".$defaultStartDate."' AND '".$defaultEndDate."' ORDER BY invoiceDate DESC";
+} else {
     $invoicesSQL = "SELECT * FROM invoices ORDER BY invoices_id DESC";
 }
 
@@ -27,7 +32,7 @@ foreach ($bill_business_namesQuery as $invoices) {
 $invoiceDateSQL = "SELECT * FROM invoices ORDER BY invoices_id DESC";
 $invoiceDateQuery = mysqli_query($conn, $invoiceDateSQL);
 foreach ($invoiceDateQuery as $invoices) {
-    $invoiceDateArray[] = substr($invoices['invoiceDate'], 0, 4);
+    $invoiceDateArray[] = $invoices['invoiceDate'];
 };
 
 ?>
@@ -66,8 +71,8 @@ console.log(finalPriceData)
             //     }
             ?>
         </select> -->
-        <input style="width:100px" type="date" id="start" data-bs-theme="dark">
-        <input style="width:100px" type="date" id="end" data-bs-theme="dark">
+        <input style="width:100px" type="date" name="startDate" id="startDate" value="<?php echo $defaultStartDate; ?>" data-bs-theme="dark">
+        <input style="width:100px" type="date" name="endDate" id="endDate" value="<?php echo $defaultEndDate; ?>" data-bs-theme="dark">
     </th>
     <th style="vertical-align:middle">Paid ($<?php echo $finalPriceArray ? number_format(array_sum($finalPriceArray), 2, '.', '') : "0.00"; ?>)</th>
     <th style="vertical-align:middle">Cost ($<?php echo $finalCostArray ? number_format(array_sum($finalCostArray), 2, '.', '') : "0.00"; ?>)</th>
