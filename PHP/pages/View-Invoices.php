@@ -200,7 +200,7 @@ if (explode(' ', $postedData['submit'])[0] == "Create") {
     }
 
     // Invoice Date m/d/Y
-    $dueDate = date('Ymd', strtotime(($dbValuesOne['invoiceDate']. ' + 10 days')));
+    $dueDate = date('Ymd', strtotime(($dbValuesOne['invoiceDate']. ' + 45 days')));
     if(!$dbValuesOne['paid']) {if(date("Ymd") >=$dueDate) {echo '<td style="color:red; font-weight: bold">';} else {echo "<td>";}} else {echo "<td>";}
             echo date('m/d/Y', strtotime($dbValuesOne['invoiceDate']));
         echo "</td>";

@@ -16,6 +16,9 @@ console.log(inventoryData);
 
 // Retrieve elements
 let bill_business_name = document.getElementById(`bill_business_name`);
+let bill_business_nameSelect = document.getElementById(
+  `bill_business_nameSelect`
+);
 let bill_first_name = document.getElementById(`bill_first_name`);
 let bill_last_name = document.getElementById(`bill_last_name`);
 let bill_address = document.getElementById(`bill_address`);
@@ -118,13 +121,11 @@ if (!id && !pin) {
   document.getElementById('shipDate').value = date.slice(0, 10);
   bill_state.value = 'IL';
 
-  bill_business_name.addEventListener('change', function () {
+  bill_business_nameSelect.addEventListener('change', function () {
     if (this.value != '') {
       console.log(customerData);
       selectedBusiness = customerData.find(
-        (element) =>
-          element['customers_id'] ==
-          this.value.substring(0, this.value.indexOf('-'))
+        (element) => element['customers_id'] == this.value
       );
       bill_first_name.value = selectedBusiness.first_name;
       bill_last_name.value = selectedBusiness.last_name;
@@ -148,6 +149,7 @@ if (!id && !pin) {
       bill_phone.value = '';
       bill_fax.value = '';
       bill_email.value = '';
+      shipTo.value = '';
     }
   });
 

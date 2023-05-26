@@ -49,26 +49,29 @@ console.log(finalPriceData)
   <tr>
     <th style="width:120px"><button type="button" class="btn btn-warning" onclick="exportData()">Download</button></th>
     <th style="width:90px; vertical-align:middle">PO No.</th>
-    <th style="width:140px; vertical-align:middle">
+    <th style="width:220px;vertical-align:middle">
     <form action="./index.php?page=View-Invoice-Report" id="filteringForm" method="post">
-        <select name="invoiceDate" id="invoiceDate" data-bs-theme="dark">
+        <!-- <select name="invoiceDate" id="invoiceDate" data-bs-theme="dark">
             <option value="">Choose Year</option>
             <?php
-            rsort($invoiceDateArray);
-                foreach (array_unique($invoiceDateArray) as $invoiceDate) {
-                    echo '<option value="';
-                    echo $invoiceDate;
-                    echo '"';
-                    if ($invoiceDate == $postedData['invoiceDate']){echo "selected";}
-                    echo '>';
-                    echo $invoiceDate;
-                    echo "</option>";
-                }
+            // rsort($invoiceDateArray);
+            //     foreach (array_unique($invoiceDateArray) as $invoiceDate) {
+            //         echo '<option value="';
+            //         echo $invoiceDate;
+            //         echo '"';
+            //         if ($invoiceDate == $postedData['invoiceDate']){echo "selected";}
+            //         echo '>';
+            //         echo $invoiceDate;
+            //         echo "</option>";
+            //     }
             ?>
-        </select>
+        </select> -->
+        <input style="width:100px" type="date" id="start" data-bs-theme="dark">
+        <input style="width:100px" type="date" id="end" data-bs-theme="dark">
     </th>
-    <th style="vertical-align:middle">Paid (Total: $<?php echo $finalPriceArray ? number_format(array_sum($finalPriceArray), 2, '.', '') : "0.00"; ?>)</th>
-    <th style="vertical-align:middle">Cost (Total: $<?php echo $finalCostArray ? number_format(array_sum($finalCostArray), 2, '.', '') : "0.00"; ?>)</th>
+    <th style="vertical-align:middle">Paid ($<?php echo $finalPriceArray ? number_format(array_sum($finalPriceArray), 2, '.', '') : "0.00"; ?>)</th>
+    <th style="vertical-align:middle">Cost ($<?php echo $finalCostArray ? number_format(array_sum($finalCostArray), 2, '.', '') : "0.00"; ?>)</th>
+    <th style="vertical-align:middle">Freight ($)</th>
     <th style="width:50px; vertical-align:middle">Paid</th>
 
     <th style="vertical-align:middle">
@@ -107,7 +110,7 @@ console.log(finalPriceData)
             echo "</td>";
 
             // Invoice Date 
-            echo "<td>";
+            echo '<td class="tdCenter">';
                 echo date('m/d/Y', strtotime($dbValuesOne['invoiceDate']));
             echo "</td>";
 
@@ -119,6 +122,11 @@ console.log(finalPriceData)
             // Total cost
             echo "<td>$";
                 print_r($dbValuesOne['finalCost']);
+            echo "</td>";
+
+            // Total freight
+            echo "<td>$";
+                // print_r($dbValuesOne['finalCost']);
             echo "</td>";
 
             // Payment Indicator

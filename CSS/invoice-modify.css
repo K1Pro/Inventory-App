@@ -129,6 +129,29 @@
   /* opacity: 0.5; */
 }
 
+.billToDropdown {
+  position: relative;
+  /* width: 200px; */
+}
+
+.billToDropdown select {
+  /* width: 100%; */
+  height: 26px;
+  border-width: 2px !important;
+}
+
+.billToDropdown > * {
+  box-sizing: border-box;
+  /* height: 1.5em; */
+}
+
+.billToDropdown input {
+  position: absolute;
+  width: calc(100% - 20px);
+  margin-top: 1px;
+  /* border-right: none; */
+}
+
 .inventoryDropdown {
   position: relative;
   /* width: 200px; */
