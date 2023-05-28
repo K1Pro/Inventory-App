@@ -4,10 +4,16 @@
     $action = htmlspecialchars($_GET["action"]);
     $notVisibile = $action ? ";visibility:hidden" : "";
     $buttonAction = substr(explode('-', $page)[1], 0, -1);
+    console_log($_POST);
 ?>
 <link href="./CSS/invoice-modify.css" rel="stylesheet">
 <div style="overflow-y: auto; overflow-x: auto; width:100vw">
-    <form class="needs-validation" novalidate action="<?php if ($action) {echo "./index.php?page=View-Estimates";} else {echo "./index.php?page=View-Invoices";} ?>" method="post">
+    <form class="needs-validation" novalidate id="InvoiceForm" action="<?php 
+    if ($action) {echo "./index.php?page=View-Estimates";} else {echo "./index.php?page=View-Invoices";} 
+    ?>" method="post">
+        <!-- <input style="display:none" type="text" name="submit" value ="<?php 
+        // if ($id && $pin) {echo "Modify Invoice";} else {echo "Create Invoice";} 
+        ?>"></input> -->
         <input class="btn btn-primary btn-lg m-2" id="submitButton" name="submit" type="submit" value ="<?php if ($id && $pin) {echo "Modify $buttonAction";} else if ($action) {echo "Create Estimate";} else {echo "Create Invoice";} ?>"></input>
         <div id="invoice">
         <?php if ($action) {
@@ -45,7 +51,7 @@
             } else {
             echo '<span class="billToDropdown">';
             echo '<input class="fill-in" id="bill_business_name" name="bill_business_name" placeholder="Choose business name" type="text" />';
-            echo '<select class="fill-in" id="bill_business_nameSelect" style="width:270px" onchange="this.previousElementSibling.value=this.options[this.selectedIndex].text; this.previousElementSibling.focus()">';
+            echo '<select class="fill-in" id="bill_business_nameSelect" name="bill_business_nameSelect" style="width:270px" onchange="this.previousElementSibling.value=this.options[this.selectedIndex].text; this.previousElementSibling.focus()">';
                 echo '<option value="">Choose business name</option>';
                 foreach ($customersQuery as $customer) {
                     echo '<option value="';
@@ -142,9 +148,13 @@
         echo '<div id="finalPriceGroup">';
             echo 'Total:&emsp; $<input type="text" readonly class="no-outline" name="finalPrice" id="finalPrice" value="' . number_format($invoice['finalPrice'], 2, '.', '').'">';
         echo "</div>";
-
+//style="display:none"
         echo '<div id="finalCostGroup" style="display:none">';
             echo 'Cost:&emsp; $<input type="text" readonly class="no-outline" name="finalCost" id="finalCost" value="' . number_format($invoice['finalCost'], 2, '.', '').'">';
+        echo "</div>";
+
+        echo '<div id="finalFreightGroup" style="display:none">';
+            echo 'Freight:&emsp; $<input type="text" readonly class="no-outline" name="finalFreight" id="finalFreight" value="' . number_format($invoice['finalFreight'], 2, '.', '').'">';
         echo "</div>";
 
         echo '<div id="phoneAndEmail">';
@@ -167,7 +177,7 @@
         echo "</div>";
         ?>
 
-    </form>
+    <!-- </form> -->
 </div>
 <script>
 const customerData = <?php echo json_encode($customerArray); ?>;

@@ -1,6 +1,7 @@
 const id = urlParams.get('id') ? urlParams.get('id') : '';
 const pin = urlParams.get('pin') ? urlParams.get('pin') : '';
 const noOfItems = 15;
+let submitButton = document.getElementById(`submitButton`);
 let date = new Date().toJSON();
 id ? console.log(id) : console.log('No ID');
 pin ? console.log(pin) : console.log('No PIN');
@@ -38,10 +39,13 @@ let part1SalesPrice = document.getElementById(`part1SalesPrice`);
 let part1Cost = document.getElementById(`part1Cost`);
 let finalPrice = document.getElementById(`finalPrice`);
 let finalCost = document.getElementById(`finalCost`);
+let finalFreight = document.getElementById(`finalFreight`);
+let InvoiceForm = document.getElementById(`InvoiceForm`);
 let formattedInventoryData = [];
 let inventoryDataObjects = {};
 let selectedInventory, finalPriceValue, selectedBusiness;
 let totalPriceArray = [];
+let uniqueItemNosArray = [];
 
 function addFinalPrice() {
   // Add up Final Price
@@ -114,6 +118,32 @@ for (let i = 1; i <= 15; i++) {
       addFinalCost();
     });
 }
+let finalFreightArray = [];
+
+submitButton.addEventListener('click', function () {
+  for (let i = 1; i <= 15; i++) {
+    if (
+      document
+        .getElementById(`part${i}Item`)
+        .value.toLowerCase()
+        .includes('freight') ||
+      document
+        .getElementById(`part${i}ItemDesc`)
+        .value.toLowerCase()
+        .includes('freight')
+    ) {
+      finalFreightArray.push(
+        document.getElementById(`part${i}Quantity`).value *
+          document.getElementById(`part${i}SalesPrice`).value
+      );
+    }
+  }
+  finalFreight.setAttribute(
+    'value',
+    finalFreightArray.reduce((a, b) => a + b, 0).toFixed(2)
+  );
+  finalFreightArray = [];
+});
 
 // Validation for creating an invoice
 if (!id && !pin) {
@@ -179,11 +209,10 @@ if (!id && !pin) {
         selectedInventory = formattedInventoryData.find(
           (element) => element['descOnPurchTrans'] == this.value.toLowerCase()
         );
-        console.log(this.value.toLowerCase());
-        console.log(selectedInventory);
+        // console.log(this.value.toLowerCase());
+        // console.log(selectedInventory);
 
         if (this.value != '') {
-          console.log('test');
           invoiceItems.forEach((invoiceItem) => {
             document.getElementById(`part${i}${invoiceItem}`).disabled = false;
             document.getElementById(`part${i}${invoiceItem}`).required = true;
@@ -271,6 +300,21 @@ if (!id && !pin) {
           addFinalPrice();
           addFinalCost();
           document.getElementById(`part1ItemDesc`).required = true;
+        }
+
+        uniqueItemNosArray = [];
+        for (let i = 1; i <= 15; i++) {
+          if (document.getElementById(`part${i}ItemNo`).value) {
+            uniqueItemNosArray.push(
+              document.getElementById(`part${i}ItemNo`).value
+            );
+          }
+        }
+        if (new Set(uniqueItemNosArray).size !== uniqueItemNosArray.length) {
+          snackbar('Duplicate inventory items');
+          submitButton.disabled = true;
+        } else {
+          submitButton.disabled = false;
         }
       });
   }

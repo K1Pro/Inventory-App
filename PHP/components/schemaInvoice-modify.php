@@ -1,5 +1,5 @@
 <?php
-    $bill_id = $_POST['bill_business_name'];
+    $bill_id = $_POST['bill_business_nameSelect'];
     $bill_business_name = $_POST['bill_business_name'];
     $bill_first_name = $_POST['bill_first_name'];
     $bill_last_name = $_POST['bill_last_name'];
@@ -113,6 +113,7 @@
     $part15Cost = $_POST['part15Cost'];
     $finalPrice = $_POST['finalPrice'];
     $finalCost = $_POST['finalCost'];
+    $finalFreight = $_POST['finalFreight'];
     $invoice_phone = $_POST['invoice_phone'];
     $invoice_email = $_POST['invoice_email'];
 ?>

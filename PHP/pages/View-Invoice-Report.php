@@ -22,6 +22,7 @@ $invoicesQuery = mysqli_query($conn, $invoicesSQL);
 foreach ($invoicesQuery as $invoices) {$invoicesArray[] = $invoices;};
 foreach ($invoicesQuery as $invoices) {$finalPriceArray[] = $invoices['finalPrice'];};
 foreach ($invoicesQuery as $invoices) {$finalCostArray[] = $invoices['finalCost'];};
+foreach ($invoicesQuery as $invoices) {$finalFreightArray[] = $invoices['finalFreight'];};
 
 $bill_business_namesSQL = "SELECT * FROM invoices ORDER BY invoices_id DESC";
 $bill_business_namesQuery = mysqli_query($conn, $bill_business_namesSQL);
@@ -45,6 +46,9 @@ console.log(invoicesData)
 
 const finalPriceData = <?php echo json_encode(number_format(array_sum($finalPriceArray), 2, '.', '')); ?>;
 console.log(finalPriceData)
+
+const finalFreightData = <?php echo json_encode(number_format(array_sum($finalFreightArray), 2, '.', '')); ?>;
+console.log(finalFreightData)
 
 </script>
 
@@ -74,9 +78,9 @@ console.log(finalPriceData)
         <input style="width:100px" type="date" name="startDate" id="startDate" value="<?php echo $defaultStartDate; ?>" data-bs-theme="dark">
         <input style="width:100px" type="date" name="endDate" id="endDate" value="<?php echo $defaultEndDate; ?>" data-bs-theme="dark">
     </th>
-    <th style="vertical-align:middle">Paid ($<?php echo $finalPriceArray ? number_format(array_sum($finalPriceArray), 2, '.', '') : "0.00"; ?>)</th>
+    <th style="vertical-align:middle">Paid ($<?php echo $finalPriceArray ? number_format(array_sum($finalPriceArray), 2, '.', '') - number_format(array_sum($finalFreightArray), 2, '.', ''): "0.00"; ?>)</th>
     <th style="vertical-align:middle">Cost ($<?php echo $finalCostArray ? number_format(array_sum($finalCostArray), 2, '.', '') : "0.00"; ?>)</th>
-    <th style="vertical-align:middle">Freight ($)</th>
+    <th style="vertical-align:middle">Freight ($<?php echo $finalFreightArray ? number_format(array_sum($finalFreightArray), 2, '.', '') : "0.00"; ?>)</th>
     <th style="width:50px; vertical-align:middle">Paid</th>
 
     <th style="vertical-align:middle">
@@ -121,7 +125,7 @@ console.log(finalPriceData)
 
             // Total amount on bill
             echo "<td>$";
-                print_r($dbValuesOne['finalPrice']);
+                print_r(number_format($dbValuesOne['finalPrice'] - $dbValuesOne['finalFreight'], 2, '.', ''));
             echo "</td>";
 
             // Total cost
@@ -131,7 +135,7 @@ console.log(finalPriceData)
 
             // Total freight
             echo "<td>$";
-                // print_r($dbValuesOne['finalCost']);
+                print_r($dbValuesOne['finalFreight']);
             echo "</td>";
 
             // Payment Indicator
