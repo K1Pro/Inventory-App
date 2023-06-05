@@ -189,135 +189,136 @@ if (!id && !pin) {
   part1ItemSelect.required = true;
   part1SalesPrice.disabled = true;
   part1Cost.disabled = true;
+}
 
-  for (let i = 1; i <= 15; i++) {
-    document
-      .getElementById(`part${i}ItemSelect`)
-      .addEventListener('change', function () {
-        // Format the array's object values to be lower case
-        formattedInventoryData = [];
-        inventoryData.forEach((inventory) => {
-          inventoryDataObjects = {};
-          for (let key in inventory) {
-            key == 'descOnPurchTrans'
-              ? (inventoryDataObjects[key] = inventory[key].toLowerCase())
-              : (inventoryDataObjects[key] = inventory[key]);
-          }
-          formattedInventoryData.push(inventoryDataObjects);
-        });
-
-        selectedInventory = formattedInventoryData.find(
-          (element) => element['descOnPurchTrans'] == this.value.toLowerCase()
-        );
-        // console.log(this.value.toLowerCase());
-        // console.log(selectedInventory);
-
-        if (this.value != '') {
-          invoiceItems.forEach((invoiceItem) => {
-            document.getElementById(`part${i}${invoiceItem}`).disabled = false;
-            document.getElementById(`part${i}${invoiceItem}`).required = true;
-          });
-          // Quantity
-          document.getElementById(`part${i}Quantity`).value =
-            selectedInventory.quantityOnHand;
-          document
-            .getElementById(`part${i}Quantity`)
-            .setAttribute('max', selectedInventory.quantityOnHand);
-          // Item
-          document.getElementById(`part${i}Item`).value =
-            selectedInventory.itemName;
-          // Sales Price
-          document.getElementById(`part${i}SalesPrice`).value =
-            selectedInventory.salesPrice;
-          // Item No
-          document.getElementById(`part${i}ItemNo`).value =
-            selectedInventory.inventory_id;
-          // Cost
-          document.getElementById(`part${i}Cost`).value =
-            selectedInventory.cost;
-          // Item Total Price
-          document.getElementById(`part${i}TotalPrice`).value = Number(
-            document.getElementById(`part${i}Quantity`).value *
-              document.getElementById(`part${i}SalesPrice`).value
-          ).toFixed(2); // toLocaleString('en-US');
-          // Item Total Cost
-          document.getElementById(`part${i}TotalCost`).value = Number(
-            document.getElementById(`part${i}Quantity`).value *
-              document.getElementById(`part${i}Cost`).value
-          ).toFixed(2); // toLocaleString('en-US');
-          // Enable next item
-          document.getElementById(`part${i + 1}ItemDesc`).disabled = false;
-          document.getElementById(`part${i + 1}ItemSelect`).disabled = false;
-          // if (this.value.slice(-4) == 'Misc') {
-          //   console.log('Misc Selected');
-          //   const miscItem = document.createElement('input');
-          //   miscItem.value = 'Misc';
-          //   this.parentNode.replaceChild(miscItem, this);
-          // }
-          addFinalPrice();
-          addFinalCost();
-        } else {
-          // Quantity
-          document.getElementById(`part${i}Quantity`).disabled = true;
-          document.getElementById(`part${i}Quantity`).required = false;
-          document.getElementById(`part${i}Quantity`).value = '';
-          // Item
-          document.getElementById(`part${i}Item`).disabled = true;
-          document.getElementById(`part${i}Item`).required = false;
-          document.getElementById(`part${i}Item`).value = '';
-          // Sales Price
-          document.getElementById(`part${i}SalesPrice`).disabled = true;
-          document.getElementById(`part${i}SalesPrice`).required = false;
-          document.getElementById(`part${i}SalesPrice`).value = '';
-          // Cost
-          document.getElementById(`part${i}Cost`).disabled = true;
-          document.getElementById(`part${i}Cost`).required = false;
-          document.getElementById(`part${i}Cost`).value = '';
-          // Item No
-          document.getElementById(`part${i}ItemNo`).value = '';
-          // Item Total Price
-          document.getElementById(`part${i}TotalPrice`).value = Number(
-            document.getElementById(`part${i}Quantity`).value *
-              document.getElementById(`part${i}SalesPrice`).value
-          ).toFixed(2);
-          // Item Total Cost
-          document.getElementById(`part${i}TotalCost`).value = Number(
-            document.getElementById(`part${i}Quantity`).value *
-              document.getElementById(`part${i}Cost`).value
-          ).toFixed(2);
-          for (let j = i + 1; j <= 15; j++) {
-            document.getElementById(`part${j}ItemNo`).value = '';
-            invoiceItems.forEach((invoiceItem) => {
-              document.getElementById(`part${j}${invoiceItem}`).value = '';
-              document.getElementById(`part${j}${invoiceItem}`).disabled = true;
-              document.getElementById(
-                `part${i}${invoiceItem}`
-              ).required = false;
-            });
-            // Item Total Price
-            document.getElementById(`part${j}TotalPrice`).value = '0.00';
-          }
-          addFinalPrice();
-          addFinalCost();
-          document.getElementById(`part1ItemDesc`).required = true;
+for (let i = 1; i <= 15; i++) {
+  document
+    .getElementById(`part${i}ItemSelect`)
+    .addEventListener('change', function () {
+      // Format the array's object values to be lower case
+      formattedInventoryData = [];
+      inventoryData.forEach((inventory) => {
+        inventoryDataObjects = {};
+        for (let key in inventory) {
+          key == 'inventory_id'
+            ? (inventoryDataObjects[key] = inventory[key].toLowerCase())
+            : (inventoryDataObjects[key] = inventory[key]);
         }
-
-        uniqueItemNosArray = [];
-        for (let i = 1; i <= 15; i++) {
-          if (document.getElementById(`part${i}ItemNo`).value) {
-            uniqueItemNosArray.push(
-              document.getElementById(`part${i}ItemNo`).value
-            );
-          }
-        }
-        if (new Set(uniqueItemNosArray).size !== uniqueItemNosArray.length) {
-          snackbar('Duplicate inventory items');
-          submitButton.disabled = true;
-        } else {
-          submitButton.disabled = false;
-        }
+        formattedInventoryData.push(inventoryDataObjects);
       });
-  }
+
+      selectedInventory = formattedInventoryData.find(
+        (element) => element['inventory_id'] == this.value.toLowerCase()
+      );
+      // console.log(this.value.toLowerCase());
+      // console.log(selectedInventory);
+
+      if (this.value != '') {
+        invoiceItems.forEach((invoiceItem) => {
+          document.getElementById(`part${i}${invoiceItem}`).disabled = false;
+          document.getElementById(`part${i}${invoiceItem}`).required = true;
+        });
+        // Quantity
+        document.getElementById(`part${i}Quantity`).value =
+          selectedInventory.quantityOnHand;
+        document
+          .getElementById(`part${i}Quantity`)
+          .setAttribute('max', selectedInventory.quantityOnHand);
+        // Item
+        document.getElementById(`part${i}Item`).value =
+          selectedInventory.itemName;
+        // Sales Price
+        document.getElementById(`part${i}SalesPrice`).value =
+          selectedInventory.salesPrice;
+        // Item No
+        document.getElementById(`part${i}ItemNo`).value =
+          selectedInventory.inventory_id;
+        console.log(selectedInventory.inventory_id);
+        // Cost
+        document.getElementById(`part${i}Cost`).value = selectedInventory.cost;
+        // Item Total Price
+        document.getElementById(`part${i}TotalPrice`).value = Number(
+          document.getElementById(`part${i}Quantity`).value *
+            document.getElementById(`part${i}SalesPrice`).value
+        ).toFixed(2); // toLocaleString('en-US');
+        // Item Total Cost
+        document.getElementById(`part${i}TotalCost`).value = Number(
+          document.getElementById(`part${i}Quantity`).value *
+            document.getElementById(`part${i}Cost`).value
+        ).toFixed(2); // toLocaleString('en-US');
+        // Enable next item
+        document.getElementById(`part${i + 1}ItemDesc`).disabled = false;
+        document.getElementById(`part${i + 1}ItemSelect`).disabled = false;
+        // if (this.value.slice(-4) == 'Misc') {
+        //   console.log('Misc Selected');
+        //   const miscItem = document.createElement('input');
+        //   miscItem.value = 'Misc';
+        //   this.parentNode.replaceChild(miscItem, this);
+        // }
+        addFinalPrice();
+        addFinalCost();
+      } else {
+        // Quantity
+        document.getElementById(`part${i}Quantity`).disabled = true;
+        document.getElementById(`part${i}Quantity`).required = false;
+        document.getElementById(`part${i}Quantity`).value = '';
+        // Item
+        document.getElementById(`part${i}Item`).disabled = true;
+        document.getElementById(`part${i}Item`).required = false;
+        document.getElementById(`part${i}Item`).value = '';
+        // Sales Price
+        document.getElementById(`part${i}SalesPrice`).disabled = true;
+        document.getElementById(`part${i}SalesPrice`).required = false;
+        document.getElementById(`part${i}SalesPrice`).value = '';
+        // Cost
+        document.getElementById(`part${i}Cost`).disabled = true;
+        document.getElementById(`part${i}Cost`).required = false;
+        document.getElementById(`part${i}Cost`).value = '';
+        // Item No
+        document.getElementById(`part${i}ItemNo`).value = '';
+        // Item Total Price
+        document.getElementById(`part${i}TotalPrice`).value = Number(
+          document.getElementById(`part${i}Quantity`).value *
+            document.getElementById(`part${i}SalesPrice`).value
+        ).toFixed(2);
+        // Item Total Cost
+        document.getElementById(`part${i}TotalCost`).value = Number(
+          document.getElementById(`part${i}Quantity`).value *
+            document.getElementById(`part${i}Cost`).value
+        ).toFixed(2);
+        for (let j = i + 1; j <= 15; j++) {
+          document.getElementById(`part${j}ItemNo`).value = '';
+          invoiceItems.forEach((invoiceItem) => {
+            document.getElementById(`part${j}${invoiceItem}`).value = '';
+            document.getElementById(`part${j}${invoiceItem}`).disabled = true;
+            document.getElementById(`part${i}${invoiceItem}`).required = false;
+          });
+          // Item Total Price
+          document.getElementById(`part${j}TotalPrice`).value = '0.00';
+        }
+        addFinalPrice();
+        addFinalCost();
+        document.getElementById(`part1ItemDesc`).required = true;
+      }
+
+      uniqueItemNosArray = [];
+      for (let i = 1; i <= 15; i++) {
+        if (
+          document.getElementById(`part${i}ItemNo`).value &&
+          document.getElementById(`part${i}ItemNo`).value != '315'
+        ) {
+          uniqueItemNosArray.push(
+            document.getElementById(`part${i}ItemNo`).value
+          );
+        }
+      }
+      if (new Set(uniqueItemNosArray).size !== uniqueItemNosArray.length) {
+        snackbar('Duplicate inventory items');
+        submitButton.disabled = true;
+      } else {
+        submitButton.disabled = false;
+      }
+    });
 }
 
 // Validation for modifying an invoice
