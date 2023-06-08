@@ -46,11 +46,11 @@
         echo "</div>";
 
         echo '<div id="billingAddress">';
-            if ($id && $pin) {
-                echo '<input type="text" class="fill-in" id="bill_business_name" name="bill_business_name" value="'.$invoice['bill_business_name'].'" style="width:270px" required><br>';
-            } else {
+            // if ($id && $pin) {
+            //     echo '<input type="text" class="fill-in" id="bill_business_name" name="bill_business_name" value="'.$invoice['bill_business_name'].'" style="width:270px" required><br>';
+            // } else {
             echo '<span class="billToDropdown">';
-            echo '<input class="fill-in" id="bill_business_name" name="bill_business_name" placeholder="Choose business name" type="text" />';
+            echo '<input class="fill-in" id="bill_business_name" name="bill_business_name" value="'.$invoice['bill_business_name'].'" placeholder="Choose business name" type="text" />';
             echo '<select class="fill-in" id="bill_business_nameSelect" name="bill_business_nameSelect" style="width:270px" onchange="this.previousElementSibling.value=this.options[this.selectedIndex].text; this.previousElementSibling.focus()">';
                 echo '<option value="">Choose business name</option>';
                 foreach ($customersQuery as $customer) {
@@ -62,7 +62,7 @@
                 }
             echo '</select>';
             echo '</span><br>';
-            }
+            // }
             echo '<input type="number" class="fill-in" id="bill_id" name="bill_id" value="'.$invoice['bill_id'].'" style="display: none;width:90px">';
             echo '<input type="text" class="fill-in" id="bill_first_name" name="bill_first_name" value="'.$invoice['bill_first_name'].'" placeholder="First Name" style="display: none;width:90px">';
             echo '<input type="text" class="fill-in" id="bill_last_name" name="bill_last_name" value="'.$invoice['bill_last_name'].'" placeholder="Last Name" style="display: none;width:90px">';

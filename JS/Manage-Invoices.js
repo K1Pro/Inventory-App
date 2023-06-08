@@ -151,38 +151,6 @@ if (!id && !pin) {
   document.getElementById('shipDate').value = date.slice(0, 10);
   bill_state.value = 'IL';
 
-  bill_business_nameSelect.addEventListener('change', function () {
-    if (this.value != '') {
-      console.log(customerData);
-      selectedBusiness = customerData.find(
-        (element) => element['customers_id'] == this.value
-      );
-      bill_first_name.value = selectedBusiness.first_name;
-      bill_last_name.value = selectedBusiness.last_name;
-      bill_address.value = selectedBusiness.address;
-      bill_address2.value = selectedBusiness.address2;
-      bill_city.value = selectedBusiness.city;
-      bill_state.value = selectedBusiness.state;
-      bill_zip.value = selectedBusiness.zip;
-      bill_phone.value = selectedBusiness.phone;
-      bill_fax.value = selectedBusiness.fax;
-      bill_email.value = selectedBusiness.email;
-      shipTo.value = `${selectedBusiness.business_name}\n${selectedBusiness.address} ${selectedBusiness.address2}\n${selectedBusiness.city}, ${selectedBusiness.state} ${selectedBusiness.zip}`;
-    } else {
-      bill_first_name.value = '';
-      bill_last_name.value = '';
-      bill_address.value = '';
-      bill_address2.value = '';
-      bill_city.value = '';
-      bill_state.value = 'IL';
-      bill_zip.value = '';
-      bill_phone.value = '';
-      bill_fax.value = '';
-      bill_email.value = '';
-      shipTo.value = '';
-    }
-  });
-
   part1Quantity.disabled = true;
   part1Item.disabled = true;
   part1ItemDesc.required = true;
@@ -190,6 +158,38 @@ if (!id && !pin) {
   part1SalesPrice.disabled = true;
   part1Cost.disabled = true;
 }
+
+bill_business_nameSelect.addEventListener('change', function () {
+  if (this.value != '') {
+    console.log(customerData);
+    selectedBusiness = customerData.find(
+      (element) => element['customers_id'] == this.value
+    );
+    bill_first_name.value = selectedBusiness.first_name;
+    bill_last_name.value = selectedBusiness.last_name;
+    bill_address.value = selectedBusiness.address;
+    bill_address2.value = selectedBusiness.address2;
+    bill_city.value = selectedBusiness.city;
+    bill_state.value = selectedBusiness.state;
+    bill_zip.value = selectedBusiness.zip;
+    bill_phone.value = selectedBusiness.phone;
+    bill_fax.value = selectedBusiness.fax;
+    bill_email.value = selectedBusiness.email;
+    shipTo.value = `${selectedBusiness.business_name}\n${selectedBusiness.address} ${selectedBusiness.address2}\n${selectedBusiness.city}, ${selectedBusiness.state} ${selectedBusiness.zip}`;
+  } else {
+    bill_first_name.value = '';
+    bill_last_name.value = '';
+    bill_address.value = '';
+    bill_address2.value = '';
+    bill_city.value = '';
+    bill_state.value = 'IL';
+    bill_zip.value = '';
+    bill_phone.value = '';
+    bill_fax.value = '';
+    bill_email.value = '';
+    shipTo.value = '';
+  }
+});
 
 for (let i = 1; i <= 15; i++) {
   document
