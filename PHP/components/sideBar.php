@@ -51,6 +51,12 @@ console_log($permissions['type']);
               Customers
             </a>
           </li>
+          <li>
+            <a href="?page=View-Email-Status" class="nav-link text-white">
+              <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#email"></use></svg>
+              Email Status
+            </a>
+          </li>
           <?php if($permissions['type'] == "administrator") {echo '<li>
             <a href="?page=View-Users" class="nav-link text-white">
               <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#vcard"></use></svg>

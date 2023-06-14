@@ -251,3 +251,4 @@ if (explode(' ', $postedData['submit'])[0] == "Create") {
 </div>
 <script>const postedData = <?php echo json_encode($postedData); ?>;</script>
 <script src="./JS/View-Invoices.js"></script>
+

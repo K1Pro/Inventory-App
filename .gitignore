@@ -13,6 +13,7 @@ config.php
 login.php
 /JS/smtp.js
 /JS/Email-Invoices.js
+/JS/apiKey.js
 
 # syncing
 sync.ffs_db
