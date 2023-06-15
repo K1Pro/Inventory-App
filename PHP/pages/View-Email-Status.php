@@ -3,7 +3,7 @@
 <thead>
   <tr>
     <!-- Email Date Table Header -->
-    <th style="width:120px">Email Date</th>
+    <th style="width:190px">Email Date</th>
     <!-- Recepient Header -->
     <th>Recepient</th>
     <!-- Status Header -->
@@ -48,7 +48,7 @@ emailsFromAPI.forEach((contact) => {
   contactList.appendChild(tableRow);
   
   let firstTableData = document.createElement('td');
-  firstTableData.innerHTML = contact.eventdate.replaceAll("-", "/").slice(5,10) + "/" + contact.eventdate.replaceAll("-", "/").slice(0,4);
+  firstTableData.innerHTML = contact.eventdate.replaceAll("-", "/").slice(5,10) + "/" + contact.eventdate.replaceAll("-", "/").slice(0,4) + contact.eventdate.replaceAll("T", " ").slice(10,20);
   tableRow.appendChild(firstTableData);
 
   let secondTableData = document.createElement('td');
