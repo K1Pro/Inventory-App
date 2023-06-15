@@ -3,15 +3,15 @@
 <thead>
   <tr>
     <!-- Invoice Table Header -->
-    <th>Email Date</th>
+    <th style="width:120px">Email Date</th>
     <!-- Slip Table Header -->
     <th>Recepient</th>
     <!-- Modify Table Header -->
-    <th>Status</th>
+    <th style="width:150px">Status</th>
     <!-- Email Table Header -->
     <th>Subject</th>
     <!-- Delete Table Header -->
-    <th>Response</th>
+    <th style="width:120px">Response</th>
     <!-- Invoice Date Table Header -->
     <th>Notes</th>
     <!-- Final Sales Price Table Header -->
