@@ -50,5 +50,5 @@ if (page == 'View-Invoices') {
 
 console.log(postedData);
 postedData.invoiceDate
-  ? (invoiceDate.value = postedData.invoiceDate)
+  ? (invoiceDate.value = postedData.invoiceDate.slice(0, 7))
   : (invoiceDate.value = date.slice(0, 7));

@@ -93,7 +93,7 @@ for (let i = 1; i <= 15; i++) {
 
       // Item Total Cost
       document.getElementById(`part${i}TotalCost`).value = Number(
-        this.value * document.getElementById(`part${i}SalesCost`).value
+        this.value * document.getElementById(`part${i}Cost`).value
       ).toFixed(2);
       addFinalCost();
     });
