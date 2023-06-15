@@ -83,7 +83,7 @@ $usersRowCount = mysqli_num_rows($usersQuery);
     <tr>
       <td>
       <form action='./index.php?page=View-Email-Status' method="post">
-        <button type="submit" class="btn btn-warning">Download</button>
+        <button type="submit" class="btn btn-warning">View</button>
       </form>
       </td>
       <td>Emails</td>

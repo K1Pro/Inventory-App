@@ -43,12 +43,16 @@ console.log(emailsFromAPI)
 let contactList = document.getElementById('emailList');
 emailsFromAPI.forEach((contact) => {
   if (contact.eventtype !="ReadyToSend") {
-  console.log(contact)
+  // console.log(contact)
   let tableRow = document.createElement('tr');
   contactList.appendChild(tableRow);
+
+  let retrievedDate = new Date(contact.eventdate);
+  let adjustedChicagoTime = retrievedDate.setHours(retrievedDate.getHours() -10);
+  let ChicagoTime = new Date(adjustedChicagoTime).toJSON();
   
   let firstTableData = document.createElement('td');
-  firstTableData.innerHTML = contact.eventdate.replaceAll("-", "/").slice(5,10) + "/" + contact.eventdate.replaceAll("-", "/").slice(0,4) + contact.eventdate.replaceAll("T", " ").slice(10,20);
+  firstTableData.innerHTML = ChicagoTime.replaceAll("-", "/").slice(5,10) + "/" + ChicagoTime.replaceAll("-", "/").slice(0,4) + ChicagoTime.replaceAll("T", " ").slice(10,19);
   tableRow.appendChild(firstTableData);
 
   let secondTableData = document.createElement('td');
