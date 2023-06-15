@@ -2,24 +2,18 @@
 <table class="table table-striped">
 <thead>
   <tr>
-    <!-- Invoice Table Header -->
+    <!-- Email Date Table Header -->
     <th style="width:120px">Email Date</th>
-    <!-- Slip Table Header -->
+    <!-- Recepient Header -->
     <th>Recepient</th>
-    <!-- Modify Table Header -->
+    <!-- Status Header -->
     <th style="width:150px">Status</th>
-    <!-- Email Table Header -->
+    <!-- Subject Header -->
     <th>Subject</th>
-    <!-- Delete Table Header -->
+    <!-- Response Header -->
     <th style="width:120px">Response</th>
-    <!-- Invoice Date Table Header -->
+    <!-- Notes Header -->
     <th>Notes</th>
-    <!-- Final Sales Price Table Header -->
-    <!-- <th>7</th> -->
-    <!-- Paid Status Table Header -->
-    <!-- <th>8</th> -->
-    <!-- User Table Header -->
-    <!-- <th>9</th> -->
   </tr>
   </thead>
   <tbody id="emailList"></tbody>

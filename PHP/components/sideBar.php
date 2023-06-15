@@ -63,6 +63,12 @@ console_log($permissions['type']);
               Users
             </a>
           </li>';}?>
+          <?php if($permissions['type'] == "administrator") {echo '<li>
+            <a href="?page=View-Download" class="nav-link text-white">
+              <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#export"></use></svg>
+              Download
+            </a>
+          </li>';}?>
         </ul>
         <hr>
         <div class="dropdown">
