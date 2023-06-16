@@ -14,6 +14,8 @@ login.php
 /JS/smtp.js
 /JS/Email-Invoices.js
 /JS/apiKey.js
+/PHP/components/phpmail.php
+/PHP/components/phpmailer
 
 # syncing
 sync.ffs_db

@@ -60,8 +60,10 @@ if (explode(' ', $postedData['submit'])[0] == "Create") {
     } else{
         ?><script>snackbar(`Error`);</script><?php  
     }
-} else if($postedData['submit']=='Email Invoice' || $postedData['submit']=='Email Estimate'){
-    ?><script>snackbar(`Successfully emailed invoice`);</script><?php
+// } else if($postedData['submit']=='Email Invoice' || $postedData['submit']=='Email Estimate'){
+//     ?>
+<!-- <script>snackbar(`Successfully emailed invoice`);</script> -->
+        <?php
 } else if(strpos($postedData['submit'], 'Delete') !== false){
     $parts = explode('-', $postedData['submit']);
     $deleteDB = $parts[1];

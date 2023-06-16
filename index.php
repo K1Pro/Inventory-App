@@ -19,6 +19,10 @@ require_once "config.php";
     <div id="snackbar"></div>
     <script src="./JS/snackbar.js"></script>
     <?php
+    $getdata = $_GET;
+    if ($getdata['page'] == "View-Email-Status") {
+      require_once "./PHP/components/phpmail.php";
+    }
       // This was included in the Bootstrap Sidebars Modules, not needed for now
       // require("./HTML/Bootstrap/SideBarsThemeSymbols.html");
       // require("./HTML/Bootstrap/SideBarsTheme.html");

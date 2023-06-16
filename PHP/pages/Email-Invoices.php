@@ -18,10 +18,10 @@ foreach ($invoices as $invoiceValues) {
 <div class="container bg-secondary-subtle" style="overflow-y: auto; overflow-x: hidden">
     <div class="justify-content-center">
         <h4 class="mb-3">Email <?php echo substr(explode('-', $getdata['page'])[1], 0, -1);?></h4>
-        <!-- <form class="needs-validation" novalidate action="./index.php?page=View-<?php echo explode('-', $getdata['page'])[1];?>" method="post"> -->
+        <form class="needs-validation" novalidate action="./index.php?page=View-Email-Status" method="post">
             <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">From:</span>
-                <input name="fromEmail" readonly id="fromEmail" type="text" class="form-control" placeholder="From" aria-label="From" aria-describedby="basic-addon2" value="collinslarry646@gmail.com" required>
+                <span class="input-group-text" id="basic-addon1">Reply To:</span>
+                <input name="replyToEmail" id="replyToEmail" type="text" class="form-control" placeholder="Reply To" aria-label="ReplyTo" aria-describedby="basic-addon2" value="support@landmhardware.com" required>
                 <span class="input-group-text" id="basic-addon1">Subject:</span>
                 <input name="subject" id="subject" type="text" class="form-control" aria-label="Username" placeholder="Email subject" aria-describedby="basic-addon1" value="<?php echo substr(explode('-', $getdata['page'])[1], 0, -1) . " " . $invoiceValues['invoices_id']; ?> from L & M Hardware, Ltd." required>
             </div>
@@ -31,6 +31,11 @@ foreach ($invoices as $invoiceValues) {
                 <input name="toEmail" id="toEmail" type="text" class="form-control" placeholder="Send to this email" aria-label="Send to this email" aria-describedby="basic-addon2" value="<?php echo $invoiceValues['bill_email']; ?>" required>
                 <span class="input-group-text" id="basic-addon1">CC:</span>
                 <input name="CCEmail" id="CCEmail" type="text" class="form-control" placeholder="Send to another email" aria-label="Send to another email" aria-describedby="basic-addon2">
+                <input type="hidden" id="bill_id" name="invoices_id" value="<?php echo $invoiceValues['invoices_id']; ?>">
+                <input type="hidden" id="bill_zip" name="bill_zip" value="<?php echo $invoiceValues['bill_zip']; ?>">
+                <input type="hidden" id="email_type" name="email_type" value="<?php echo explode('-', $getdata['page'])[1]; ?>">
+                <input type="hidden" id="invoice_date" name="invoice_date" value="<?php echo date('m/d/Y', strtotime($invoiceValues['invoiceDate']. ' + 10 days')); ?>">
+                <input type="hidden" id="final_price" name="final_price" value="<?php echo $invoiceValues['finalPrice']; ?>">
             </div>
 
             <hr class="my-4">
@@ -73,5 +78,5 @@ foreach ($invoices as $invoiceValues) {
     </div>
 </div>
 <script>const invoiceData = <?php echo json_encode($invoiceArray); ?>;</script>
-<script src="./JS/smtp.js"></script>
-<script src="./JS/Email-Invoices.js"></script>
+<!-- <script src="./JS/smtp.js"></script>
+<script src="./JS/Email-Invoices.js"></script> -->
