@@ -15,6 +15,10 @@ $customersSQL = "SELECT * FROM customers;";
 $customersQuery = mysqli_query($conn, $customersSQL);
 $customersRowCount = mysqli_num_rows($customersQuery);
 
+$emailsSQL = "SELECT * FROM emails;";
+$emailsQuery = mysqli_query($conn, $emailsSQL);
+$emailsRowCount = mysqli_num_rows($emailsQuery);
+
 $usersSQL = "SELECT * FROM users;";
 $usersQuery = mysqli_query($conn, $usersSQL);
 $usersRowCount = mysqli_num_rows($usersQuery);
@@ -82,12 +86,14 @@ $usersRowCount = mysqli_num_rows($usersQuery);
     </tr>
     <tr>
       <td>
-      <form action='./index.php?page=View-Email-Status' method="post">
-        <button type="submit" class="btn btn-warning">View</button>
+      <form action="./Download.php" method="post">
+        <input type="hidden" id="emailsDownload" name="download" value="emails">
+        <button type="submit" class="btn btn-warning">Download</button>
       </form>
       </td>
       <td>Emails</td>
-      <td><span id="noEmails"></span></td>
+      <td><?php echo $emailsRowCount; ?></td>
+      <!-- <td><span id="noEmails"></span></td> -->
     </tr>
     <tr>
       <td>
@@ -102,7 +108,7 @@ $usersRowCount = mysqli_num_rows($usersQuery);
   </tbody>
 </table>
 </div>
-
+<!-- 
 <script src="./JS/apiKey.js"></script>
 <script>
 async function getJSON(url, errorMsg = 'Something went wrong') {
@@ -122,4 +128,4 @@ getJSON(apiKey).then((data) => {
   emailsFromAPI = emailsFromAPI.filter(item => !(item.eventtype == "ReadyToSend"));
   document.getElementById("noEmails").innerHTML = emailsFromAPI.length;
 });
-</script>
+</script> -->

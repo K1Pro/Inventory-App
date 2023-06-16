@@ -20,7 +20,7 @@ require_once "config.php";
     <script src="./JS/snackbar.js"></script>
     <?php
     $getdata = $_GET;
-    if ($getdata['page'] == "View-Email-Status") {
+    if ($getdata['page'] == "View-Email-Status" && $_POST['email_type']) {
       require_once "./PHP/components/phpmail.php";
     }
       // This was included in the Bootstrap Sidebars Modules, not needed for now

@@ -110,7 +110,7 @@ console.log(finalFreightData)
 
             // Invoice NO
             echo '<td class="tdCenter">';
-                print_r($dbValuesOne['invoices_id']);
+                echo '<a style="text-decoration:none" href="http://landmhardware.com/inventory/invoice_pdf.php?id='.$dbValuesOne['invoices_id'].'&pin='.$dbValuesOne['bill_zip'].'" target="_blank">'.$dbValuesOne['invoices_id'].'</a>';
             echo "</td>";
 
             // PO NO
