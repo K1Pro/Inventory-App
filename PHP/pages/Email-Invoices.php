@@ -50,7 +50,7 @@ foreach ($invoices as $invoiceValues) {
                     echo substr(explode('-', $getdata['page'])[1], 0, -1) . "# " . $invoiceValues['invoices_id'];
                     if (explode('-', $getdata['page'])[1] == "Invoices") {
                         echo '&emsp;&emsp;&emsp;&emsp;&emsp;Due: '.
-                        date('m/d/Y', strtotime($invoiceValues['invoiceDate']. ' + 10 days')) .
+                        date('m/d/Y', strtotime($invoiceValues['invoiceDate']. ' + 30 days')) .
                         '&emsp;&emsp;&emsp;&emsp;&emsp; Amount Due: $';
                     } else { echo '&emsp;&emsp;&emsp;&emsp;&emsp; Estimate: $';}
                         echo $invoiceValues['finalPrice']; ?>
