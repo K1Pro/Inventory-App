@@ -107,7 +107,12 @@
 
         for ($i = 1; $i <= $noOfItems; $i++) {
             $pdf->SetXY(70,112+($i*7));
-            $pdf->Cell(68, 7, $dbValues['part'.$i.'ItemDesc'], 0, 0, 'L');
+            if ($dbValues['part'.$i.'ItemDesc']){
+                $pdf->Cell(68, 7, $dbValues['part'.$i.'ItemDesc'], 0, 0, 'L');
+            } else {
+                $pdf->MultiCell(68, 5, "\nEnter Notes Here\nAnd more here", 0, 'L');
+                $noOfItems = $i;
+            }
         }
 
         for ($i = 1; $i <= $noOfItems; $i++) {
