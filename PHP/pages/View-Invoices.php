@@ -203,12 +203,12 @@ if (explode(' ', $postedData['submit'])[0] == "Create") {
 
     // Invoice Date m/d/Y
     $dueDate = date('Ymd', strtotime(($dbValuesOne['invoiceDate']. ' + 45 days')));
-    if(!$dbValuesOne['paid']) {if(date("Ymd") >=$dueDate) {echo '<td style="color:red; font-weight: bold">';} else {echo "<td>";}} else {echo "<td>";}
+    if(!$dbValuesOne['paid'] && $chosenDB == "invoices") {if(date("Ymd") >=$dueDate) {echo '<td style="color:red; font-weight: bold">';} else {echo "<td>";}} else {echo "<td>";}
             echo date('m/d/Y', strtotime($dbValuesOne['invoiceDate']));
         echo "</td>";
 
     // Total Sale Table Column
-    if(!$dbValuesOne['paid']) {if(date("Ymd") >=$dueDate) {echo '<td style="color:red; font-weight: bold">';} else {echo "<td>";}} else {echo "<td>";}
+    if(!$dbValuesOne['paid'] && $chosenDB == "invoices") {if(date("Ymd") >=$dueDate) {echo '<td style="color:red; font-weight: bold">';} else {echo "<td>";}} else {echo "<td>";}
         echo "$".$dbValuesOne['finalPrice'];
     echo "</td>";
 
@@ -226,7 +226,7 @@ if (explode(' ', $postedData['submit'])[0] == "Create") {
     }
 
     // Invoice Number Table Column
-    if(!$dbValuesOne['paid']) {if(date("Ymd") >=$dueDate) {echo '<td class="tdCenter" style="color:red; font-weight: bold">';} else {echo '<td class="tdCenter">';}} else {echo '<td class="tdCenter">';}
+    if(!$dbValuesOne['paid'] && $chosenDB == "invoices") {if(date("Ymd") >=$dueDate) {echo '<td class="tdCenter" style="color:red; font-weight: bold">';} else {echo '<td class="tdCenter">';}} else {echo '<td class="tdCenter">';}
         print_r($dbValuesOne['invoices_id']);
     echo "</td>";
 
@@ -238,12 +238,12 @@ if (explode(' ', $postedData['submit'])[0] == "Create") {
     }
 
     // Bill To Table Column
-    if(!$dbValuesOne['paid']) {if(date("Ymd") >=$dueDate) {echo '<td style="color:red; font-weight: bold">';} else {echo "<td>";}} else {echo "<td>";}
+    if(!$dbValuesOne['paid'] && $chosenDB == "invoices") {if(date("Ymd") >=$dueDate) {echo '<td style="color:red; font-weight: bold">';} else {echo "<td>";}} else {echo "<td>";}
         print_r($dbValuesOne['bill_business_name']);
     echo "</td>";
 
     // Created Table Column
-    if(!$dbValuesOne['paid']) {if(date("Ymd") >=$dueDate) {echo '<td style="color:red; font-weight: bold">';} else {echo "<td>";}} else {echo "<td>";}
+    if(!$dbValuesOne['paid'] && $chosenDB == "invoices") {if(date("Ymd") >=$dueDate) {echo '<td style="color:red; font-weight: bold">';} else {echo "<td>";}} else {echo "<td>";}
         echo ucfirst($dbValuesOne['created']);
     echo "</td>";
     echo "</tr>";
