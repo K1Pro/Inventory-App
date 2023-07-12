@@ -27,9 +27,11 @@ if($permissions['type'] == "administrator") {
         echo "<tr>";
         // Link to Modifying a customer
         echo '<td class="tdCenter">';
+        if ($dbValues['username'] == "bartosz") {} else{
             echo '<a href="./index.php?page=Modify-Users&id='.$dbValues['users_id'].'">';
                 echo '<img src="./icons/modify.png" alt="Invoice" width="30" height="30">';
             echo '</a>';
+        }
         echo "</td>";
 
         // Delete an Invoice
