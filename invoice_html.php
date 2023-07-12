@@ -98,7 +98,19 @@
 
             echo '<div id="ItemDescription">';
                 for ($i = 1; $i <= $noOfItems; $i++) {
-                    if ($dbValues['part'.$i.'ItemDesc']) {echo $dbValues['part'.$i.'ItemDesc'] . "<br>";} else {echo "<br>";}
+                    if ($dbValues['part'.$i.'ItemDesc']) {
+                            echo $dbValues['part'.$i.'ItemDesc'] . "<br>";
+                    } else {
+                        // echo "<br>";
+                        if ($dbValues['invoice_notes']) {
+                            echo "<pre>";
+                                echo '<div id="notes">';
+                                        echo $dbValues['invoice_notes'];
+                                echo "</div>";
+                            echo "</pre>";
+                        }
+                        $noOfItems = $i;
+                    }
                 }
             echo "</div>";
 

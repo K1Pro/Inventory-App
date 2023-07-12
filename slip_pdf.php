@@ -117,7 +117,13 @@
             if (strpos(strtolower($dbValues['part'.$i.'Item']),"freight") === false && strpos(strtolower($dbValues['part'.$i.'ItemDesc']),"freight") === false) {
                 $j++;
                 $pdf->SetXY(91,112+($j*7));
-                $pdf->Cell(112, 7, $dbValues['part'.$i.'ItemDesc'], 0, 0, 'L');
+                if ($dbValues['part'.$i.'ItemDesc']){
+                    $pdf->Cell(112, 7, $dbValues['part'.$i.'ItemDesc'], 0, 0, 'L');
+                } 
+                else {
+                    $pdf->MultiCell(112, 5, $dbValues['invoice_notes'] ? $dbValues['invoice_notes'] : '', 0, 'L');
+                    $noOfItems = $i;
+                }
             }
         }
 

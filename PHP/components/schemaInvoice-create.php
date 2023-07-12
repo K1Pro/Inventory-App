@@ -117,4 +117,5 @@
     $invoice_phone = $_POST['invoice_phone'];
     $invoice_email = $_POST['invoice_email'];
     $paid = false;
+    $invoice_notes = $_POST['invoice_notes'];
 ?>

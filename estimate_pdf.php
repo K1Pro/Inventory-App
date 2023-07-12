@@ -74,7 +74,13 @@
 
         for ($i = 1; $i <= $noOfItems; $i++) {
             $pdf->SetXY(13,112+($i*7));
-            $pdf->Cell(89, 7, $dbValues['part'.$i.'ItemDesc'], 0, 0, 'L');
+            if ($dbValues['part'.$i.'ItemDesc']){
+                $pdf->Cell(89, 7, $dbValues['part'.$i.'ItemDesc'], 0, 0, 'L');
+            }
+            else {
+                $pdf->MultiCell(89, 5, $dbValues['invoice_notes'] ? $dbValues['invoice_notes'] : '', 0, 'L');
+                $noOfItems = $i;
+            }
         }
 
         for ($i = 1; $i <= $noOfItems; $i++) {

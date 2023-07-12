@@ -92,7 +92,18 @@
 
             echo '<div id="ItemDescription">';
                 for ($i = 1; $i <= $noOfItems; $i++) {
-                    if ($dbValues['part'.$i.'ItemDesc']) {echo $dbValues['part'.$i.'ItemDesc'] . "<br>";} else {echo "<br>";}
+                    if ($dbValues['part'.$i.'ItemDesc']) {
+                        echo $dbValues['part'.$i.'ItemDesc'] . "<br>";
+                    } else {
+                        if ($dbValues['invoice_notes']) {
+                            echo "<pre>";
+                                echo '<div id="notes">';
+                                        echo $dbValues['invoice_notes'];
+                                echo "</div>";
+                            echo "</pre>";
+                        }
+                        $noOfItems = $i;
+                    }
                 }
             echo "</div>";
 
@@ -119,17 +130,17 @@
                 echo "$" . number_format($dbValues['finalPrice'], 2, '.', ',');
             echo "</div>";
 
-            echo "<pre>";
-                echo '<div id="InvoicePhone">';
-                    if ($dbValues['invoice_phone']) echo $dbValues['invoice_phone'] . "<br>";
-                echo "</div>";
-            echo "</pre>";
+            // echo "<pre>";
+            //     echo '<div id="InvoicePhone">';
+            //         if ($dbValues['invoice_phone']) echo $dbValues['invoice_phone'] . "<br>";
+            //     echo "</div>";
+            // echo "</pre>";
 
-            echo "<pre>";
-                echo '<div id="InvoiceEmail">';
-                    if ($dbValues['invoice_email']) echo $dbValues['invoice_email'] . "<br>";
-                echo "</div>";
-            echo "</pre>";
+            // echo "<pre>";
+            //     echo '<div id="InvoiceEmail">';
+            //         if ($dbValues['invoice_email']) echo $dbValues['invoice_email'] . "<br>";
+            //     echo "</div>";
+            // echo "</pre>";
         }
         
         // Close connection
