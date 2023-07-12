@@ -5,21 +5,21 @@
 
 #invoiceDateAndNo {
   position: relative;
-  top: -943px;
+  top: -1065px;
   left: 589px;
   width: 178px;
 }
 
 #billingAddress {
   position: relative;
-  top: -881px;
+  top: -1001px;
   left: 65px;
   width: 270px;
 }
 
 #shippingAddress {
   position: relative;
-  top: -982px;
+  top: -1113px;
   left: 455px;
   width: 300px;
   z-index: 1;
@@ -27,15 +27,22 @@
 
 #invoiceOptions {
   position: relative;
-  top: -914px;
+  top: -1036px;
   left: 65px;
   width: 720px;
 }
 
 #Items {
   position: relative;
-  top: -870px;
+  top: -990px;
   left: 65px;
+  width: 700px;
+}
+
+#notes {
+  position: relative;
+  top: -1010px;
+  left: 270px;
   width: 700px;
 }
 
@@ -98,7 +105,7 @@
 
 #phoneAndEmail {
   position: relative;
-  margin-top: -830px;
+  margin-top: -940px;
   left: 65px;
   width: 453px;
 }

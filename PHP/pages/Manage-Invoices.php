@@ -158,6 +158,14 @@
             echo 'Freight:&emsp; $<input type="text" readonly class="no-outline" name="finalFreight" id="finalFreight" value="' . number_format($invoice['finalFreight'], 2, '.', '').'">';
         echo "</div>";
 
+        echo '<div id="notes">';
+            ?><textarea class="fill-in" name="invoice_notes" rows="5" placeholder="Notes" style="width:248px;text-align: left;resize:none"><?php
+                if($invoice['invoice_notes']) {
+                    echo $invoice['invoice_notes'];
+                } 
+            ?></textarea><?php
+        echo "</div>";
+
         echo '<div id="phoneAndEmail">';
             ?><textarea class="fill-in" name="invoice_phone" rows="2" style="width:195px;text-align: center;resize:none<?php echo $notVisibile;?>" required><?php
                 if($invoice['invoice_phone']) {
